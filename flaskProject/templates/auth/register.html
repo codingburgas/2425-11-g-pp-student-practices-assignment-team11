@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+ {% block link %}
+            <link rel="stylesheet" href="../../static/css/home.css">
+ {% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 400px; margin-top: 60px; margin-bottom: 200px; background-color: #F4F7F7; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); color: #1F4E5F;">
+
+  <h3 class="text-center mb-4" style="color: #1F4E5F;">Register</h3>
+
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.username.label(class="form-label") }}
+      {{ form.username(class="form-control", style="border-color: #AACFD0; color: #1F4E5F; background-color: #fff;") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.password.label(class="form-label") }}
+      {{ form.password(class="form-control", style="border-color: #AACFD0; color: #1F4E5F; background-color: #fff;") }}
+    </div>
+
+    <div class="d-grid gap-2 mt-4">
+      {{ form.submit(class="btn btn-outline-dark", style="border-color: #79A8A9; background-color: #1F4E5F; color: #F4F7F7;", onmouseover="this.style.backgroundColor='transparent'; this.style.color='#1F4E5F';", onmouseout="this.style.backgroundColor='#1F4E5F'; this.style.color='#F4F7F7';") }}
+    </div>
+  </form>
+
+  <div class="text-center mt-3">
+    <a href="{{ url_for("auth.login") }}" style="color: #79A8A9; text-decoration: none;">Already have an account?</a>
+  </div>
+
+</div>
+{% endblock %}

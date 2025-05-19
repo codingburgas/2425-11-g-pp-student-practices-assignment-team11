@@ -1,11 +1,9 @@
 from flask import Flask
 
-app = Flask(__name__)
+from flaskProject import create_app
+from config import Config
 
-
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
+app = create_app(Config)
 
 
 if __name__ == '__main__':
