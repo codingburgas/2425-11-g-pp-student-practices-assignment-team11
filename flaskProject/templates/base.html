@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>BeforeAI</title>
+    <title>StudyPilot</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
 
@@ -21,7 +21,7 @@
 <nav class="navbar navbar-expand-lg" style="padding: 10px 140px 10px 50px; font-size: large;">
   <div class="container-fluid">
     <a class="navbar-brand d-flex align-items-center text-white" href="{{ url_for('main_bp.index') }}">
-      <p style="font-size: 1.8rem; font-weight: bold; margin: 0;">BeforeAI</p>
+      <p style="font-size: 1.8rem; font-weight: bold; margin: 0;">StudyPilot</p>
     </a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -36,8 +36,8 @@
             AI instruments
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{ url_for("ai.linear_regression") }}">📈 Linear Regression</a></li>
-            <li><a class="dropdown-item" href="{{ url_for("ai.perceptron_page") }}">〰 Perceptron</a></li>
+            <li><a class="dropdown-item" href="#">📈 Linear Regression</a></li>
+            <li><a class="dropdown-item" href="#">〰 Perceptron</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">🧪 Coming Soon!</a></li>
           </ul>
@@ -52,7 +52,7 @@
             {{ current_user.username }}
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{ url_for("profile.dashboard") }}">📊 Dashboard</a></li>
+            <li><a class="dropdown-item" href="#">📊 Dashboard</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="{{ url_for("auth.logout") }}" style="text-align: center">Logout</a></li>
           </ul>

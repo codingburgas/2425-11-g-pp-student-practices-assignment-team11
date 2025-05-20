@@ -10,10 +10,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(80), unique=True, nullable=False)
     __password = db.Column("password", db.String(80), nullable=False)
 
-
     is_admin = db.Column(db.Boolean, default=False)
 
-    datasets = db.relationship('TestedDataset', back_populates='user', cascade='all, delete')
 
     @property
     def password(self):

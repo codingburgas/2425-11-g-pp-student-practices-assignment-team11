@@ -1,0 +1,18 @@
+body {
+    font-family: 'Poetsen One', sans-serif;
+    color: #F4F7F7;
+    margin-top: 10px;
+}
+
+.box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80vh;
+    padding: 40px;
+    text-align: center;
+}
+
+text {
+    width: 90%;
+}
