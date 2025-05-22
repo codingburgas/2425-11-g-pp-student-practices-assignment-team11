@@ -36,6 +36,14 @@
     <div class="d-grid gap-2 mt-4">
       {{ form.submit(class="btn btn-outline-dark", style="border-color: #79A8A9; background-color: #1F4E5F; color: #F4F7F7;", onmouseover="this.style.backgroundColor='transparent'; this.style.color='#1F4E5F';", onmouseout="this.style.backgroundColor='#1F4E5F'; this.style.color='#F4F7F7';") }}
     </div>
+
+    <div class="container">
+       {% for message in get_flashed_messages() %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+       {% endfor %}
+    </div>
   </form>
 
   <div class="text-center mt-3">

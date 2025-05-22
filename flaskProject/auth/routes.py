@@ -29,11 +29,15 @@ def login():
 def register():
     form = RegistrationForm()
     if request.method == 'POST':
-        user = User(username=form.username.data, email=form.email.data, password=form.password.data)
-        db.session.add(user)
-        db.session.commit()
-        flash("the user is registered")
-        return redirect(url_for('auth.login'))
+        if "@" in form.email.data:
+            user = User(username=form.username.data, email=form.email.data, password=form.password.data)
+            db.session.add(user)
+            db.session.commit()
+            flash("the user is registered")
+            return redirect(url_for('auth.login'))
+        else:
+            flash("Invalid email")
+            return redirect(url_for('auth.register'))
     return render_template('auth/register.html', form = form, current_user=current_user)
 
 @auth_bp.route('/logout', methods=['GET', 'POST'])
