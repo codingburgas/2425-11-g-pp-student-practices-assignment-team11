@@ -1,110 +1,274 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <title>StudyPilot</title>
+  <meta charset="UTF-8" />
+  <title>StudyPilot</title>
+  <link rel="icon" href="../static/images/miniLogoTrans.png" type="image/x-icon" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <link rel="icon" href="../static/images/miniLogoTrans.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  {% block link %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}" />
+  {% endblock %}
 
-    {% block link %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
-    {% endblock %}
+  <style>
+    :root {
+      --light-bg: #F8FAFC;
+      --light-primary: #D9EAFD;
+      --light-secondary: #BCCCDC;
+      --light-accent: #9AA6B2;
+      --light-text: #1F2937;
 
+      --dark-bg: #1a1a1a;
+      --dark-primary: #2a2a2a;
+      --dark-secondary: #333;
+      --dark-accent: #888;
+      --dark-text: #f1f1f1;
+
+      --transition: all 0.3s ease;
+    }
+
+    html[data-theme="light"] {
+      background-color: var(--light-bg);
+      color: var(--light-text);
+    }
+
+    html[data-theme="dark"] {
+      background-color: var(--dark-bg);
+      color: var(--dark-text);
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: inherit;
+      transition: var(--transition);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      background-color: var(--light-primary);
+      transition: var(--transition);
+    }
+
+    html[data-theme="dark"] nav {
+      background-color: var(--dark-primary);
+    }
+
+    .navbar-brand p {
+      font-family: 'Poetsen One', sans-serif;
+      font-size: 1.8rem;
+      margin: 0;
+      color: var(--light-accent);
+      user-select: none;
+    }
+
+    html[data-theme="dark"] .navbar-brand p {
+      color: var(--dark-accent);
+    }
+
+    .nav-link,
+    .dropdown-item,
+    .theme-toggle {
+      color: inherit !important;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover,
+    .dropdown-item:hover {
+      color: var(--light-accent) !important;
+      transform: scale(1.03);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      font-size: 1.5rem;
+      margin-left: 1rem;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(15deg) scale(1.2);
+      color: var(--light-accent);
+    }
+
+    html[data-theme="dark"] .theme-toggle:hover {
+      color: var(--dark-accent);
+    }
+
+    /* Welcome Section */
+    .welcome-section {
+      background: transparent;
+      padding: 60px 20px;
+      text-align: center;
+      flex-grow: 1;
+    }
+
+    .welcome-title {
+      font-size: 3rem;
+      font-weight: bold;
+      color: var(--light-text);
+      margin-bottom: 10px;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .welcome-subtitle {
+      font-size: 1.5rem;
+      color: var(--light-accent);
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      user-select: none;
+    }
+
+    .welcome-text {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #334155; /* darker text */
+      user-select: none;
+    }
+
+    html[data-theme="dark"] .welcome-title,
+    html[data-theme="dark"] .welcome-text {
+      color: var(--dark-text);
+    }
+
+    html[data-theme="dark"] .welcome-subtitle {
+      color: var(--dark-accent);
+    }
+
+    /* Fancy CTA Button */
+    .cta-btn {
+      font-size: 1.2rem;
+      padding: 12px 32px;
+      background-color: #64748b;
+      color: #fff;
+      border: none;
+      border-radius: 40px;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      text-decoration: none;
+      font-weight: 600;
+      user-select: none;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .cta-btn:hover {
+      background-color: #4b5563;
+      transform: scale(1.05) translateY(-2px);
+    }
+
+    html[data-theme="dark"] .cta-btn {
+      background-color: #444;
+      color: #f1f1f1;
+    }
+
+    html[data-theme="dark"] .cta-btn:hover {
+      background-color: #666;
+    }
+
+    footer {
+      background-color: var(--light-secondary);
+      text-align: center;
+      padding: 20px 0;
+      border-top: 1px solid #ccc;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    html[data-theme="dark"] footer {
+      background-color: var(--dark-secondary);
+      border-color: #444;
+    }
+
+    .footer-text {
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 
-<body class="d-flex flex-column min-vh-100" style="background: linear-gradient(90deg, #1F4E5F, #79A8A9);">
+<body>
+  <nav class="navbar navbar-expand-lg px-4 py-3 shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main_bp.index') }}">
+        <p>StudyPilot</p>
+      </a>
 
-<nav class="navbar navbar-expand-lg" style="padding: 10px 140px 10px 50px; font-size: large;">
-  <div class="container-fluid">
-    <a class="navbar-brand d-flex align-items-center text-white" href="{{ url_for('main_bp.index') }}">
-      <p style="font-size: 1.8rem; font-weight: bold; margin: 0;">StudyPilot</p>
-    </a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {% if current_user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              AI instruments
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">📈 Linear Regression</a></li>
+              <li><a class="dropdown-item" href="#">〰 Perceptron</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" href="#">🧪 Coming Soon!</a></li>
+            </ul>
+          </li>
+          {% endif %}
+        </ul>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active text-white" aria-current="page" href="{{ url_for("main_bp.index") }}"></a>
-        </li>
-
-        {% if current_user.is_authenticated %}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            AI instruments
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">📈 Linear Regression</a></li>
-            <li><a class="dropdown-item" href="#">〰 Perceptron</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">🧪 Coming Soon!</a></li>
-          </ul>
-        </li>
-        {% endif %}
-      </ul>
-
-      <ul class="navbar-nav mb-2 mb-lg-0">
-        {% if current_user.is_authenticated %}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ current_user.username }}
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">📊 Dashboard</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="{{ url_for("auth.logout") }}" style="text-align: center">Logout</a></li>
-          </ul>
-        </li>
-        {% else %}
-        <li>
-          <a class="btn btn-lg"
-             style="background-color: white; margin-right: -60px; color: #79A8A9; border: none;"
-             href="{{ url_for('auth.login') }}">
-            Login
-          </a>
-        </li>
-        {% endif %}
-      </ul>
+        <ul class="navbar-nav mb-2 mb-lg-0 align-items-center">
+          <li>
+            <span class="nav-link theme-toggle" onclick="toggleTheme()" title="Toggle dark mode">
+              <i class="bi bi-moon-stars-fill"></i>
+            </span>
+          </li>
+          {% if current_user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              {{ current_user.username }}
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">📊 Dashboard</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a></li>
+            </ul>
+          </li>
+          {% else %}
+          <li class="nav-item ms-2">
+            <a class="btn btn-outline-secondary" href="{{ url_for('auth.login') }}">Login</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
+  <main class="welcome-section">
+      {% block content %}{% endblock %}
+  </main>
 
+  <footer class="mt-auto">
+    <div class="footer-text">© 2025 StudyPilot. All rights reserved.</div>
+  </footer>
 
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const newTheme = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    }
 
-<main class="flex-grow-1" style="padding: 20px;">
-    {% block content %}{% endblock %}
-</main>
-
-
-<footer class="text-center text-black mt-auto" style="background-color: #F4F7F7;">
-
-    {% if not current_user.is_authenticated %}
-    <hr style="border-color: #AACFD0; width: 60%; margin: auto;">
-    <div class="container p-4 pb-0">
-        <section>
-            <p class="d-flex justify-content-center align-items-center">
-                <span class="me-3" style="color: #1F4E5F;">Register for free:</span>
-                <a class="btn btn-outline-dark btn-rounded"
-                   style="border-color: #79A8A9; color: #1F4E5F;"
-                   onmouseover="this.style.backgroundColor='#AACFD0'; this.style.color='#1F4E5F';"
-                   onmouseout="this.style.backgroundColor='transparent'; this.style.color='#1F4E5F';"
-                   href="{{ url_for("auth.register") }}">
-                    Sign up!
-                </a>
-            </p>
-        </section>
-    </div>
-    <hr style="border-color: #AACFD0; width: 60%; margin: auto;">
-    {% endif %}
-
-    <div class="text-center p-3" style="border-top: 1px solid #AACFD0;">
-        © 2020 Copyright:
-        <a href="https://mdbootstrap.com/" style="color: #79A8A9; text-decoration: none;">MDBootstrap.com</a>
-    </div>
-</footer>
-
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      }
+    });
+  </script>
 </body>
 </html>

@@ -15,10 +15,10 @@ def create_app(config):
     db.init_app(app)
     bootstrap.init_app(app)
     login_manager.init_app(app)
-    """from .auth import models
+    from .auth import models
 
     with app.app_context():
-        db.create_all()"""
+        db.create_all()
 
     from .auth import auth_bp
     from .main import main_bp
