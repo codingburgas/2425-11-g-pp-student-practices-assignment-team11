@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container" style="max-width: 500px; margin-top: 60px;">
+  <h2>Verify Your Email</h2>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endwith %}
+  <form method="POST">
+    <button class="btn btn-primary" type="submit">Verify Email</button>
+  </form>
+</div>
+{% endblock %}

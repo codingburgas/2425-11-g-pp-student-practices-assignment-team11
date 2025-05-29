@@ -9,8 +9,14 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Log In')
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), Length(min=3, max=15, message='Username must be between 3 and 15 characters.')])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Register')
+    username = StringField("Username", validators=[DataRequired(), Length(min=3, max=25)])
+    email = StringField("Email", validators=[DataRequired(), Email()])
+    password = PasswordField("Password", validators=[DataRequired(), Length(min=6)])
+    confirm_password = PasswordField("Confirm Password", validators=[
+        DataRequired(), EqualTo('password', message='Passwords must match.')
+    ])
+    submit = SubmitField("Register")
+
+class CodeForm(FlaskForm):
+    code = StringField('Enter 6-digit Code', validators=[DataRequired(), Length(min=6, max=6)])
+    submit = SubmitField('Verify')

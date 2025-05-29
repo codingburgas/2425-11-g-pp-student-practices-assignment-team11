@@ -1,16 +1,18 @@
+import random
 import requests
 from flask import current_app
 
+def generate_verification_code():
+    return str(random.randint(100000, 999999))
 
-def send_verification_email(recipient, token):
+def send_verification_code_email(recipient, code):
     url = 'https://api.resend.com/emails'
-    subject = 'Verify your email'
-    link = f"http://127.0.0.1:5000/auth/verify_email/{token}"
+    subject = 'Your Verification Code'
 
     html = f"""
-    <h2>Email Verification</h2>
-    <p>Please click the link below to verify your email:</p>
-    <a href="{link}">{link}</a>
+    <h2>Email Verification Code</h2>
+    <p>Your verification code is:</p>
+    <h3>{code}</h3>
     """
 
     payload = {

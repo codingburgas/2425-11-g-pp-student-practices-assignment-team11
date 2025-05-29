@@ -3,16 +3,16 @@ from flask_login import login_user, logout_user, current_user
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
 
 from . import auth_bp
-from .forms import LoginForm, RegistrationForm
+from .forms import LoginForm, RegistrationForm, CodeForm
 from .models import User
-from flaskProject import login_manager
-from flaskProject import db
-from .resend_email import send_verification_email
+from flaskProject import login_manager, db
+from .resend_email import send_verification_code_email, generate_verification_code
 
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -24,37 +24,56 @@ def login():
             return redirect(url_for('main_bp.index'))
         else:
             flash('Invalid username or password')
-            return redirect(url_for('auth.login'))
-    return render_template('auth/login.html', form = form, current_user=current_user)
+    return render_template('auth/login.html', form=form)
+
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
-    if request.method == 'POST':
-        if "@" in form.email.data:
-            user = User(username=form.username.data, email=form.email.data, password=form.password.data)
-            db.session.add(user)
-            db.session.commit()
-            email = form.email.data
-            serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
-            token = serializer.dumps(email, salt='email-confirm')
-            send_verification_email(email, token)
-            return redirect(url_for('auth.login'))
-        else:
-            flash("Invalid email")
-            return redirect(url_for('auth.register'))
-    return render_template('auth/register.html', form = form, current_user=current_user)
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data, password=form.password.data)
+        db.session.add(user)
+        db.session.commit()
 
-@auth_bp.route('/verify_email/<token>')
-def verify_email(token):
-    serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
-    try:
-        email = serializer.loads(token, salt='email-confirm', max_age=3600)
-        confirmed = True
-    except (SignatureExpired, BadSignature):
-        confirmed = False
-    return render_template('auth/verify_email.html', confirmed=confirmed)
-@auth_bp.route('/logout', methods=['GET', 'POST'])
+        # Generate verification code
+        code = generate_verification_code()
+        session['verification_code'] = code
+        session['verification_email'] = form.email.data
+        send_verification_code_email(form.email.data, code)
+
+        flash('Verification code sent to your email.', 'success')
+        return redirect(url_for('auth.verify_code'))
+
+    return render_template('auth/register.html', form=form)
+
+
+@auth_bp.route('/verify_code', methods=['GET', 'POST'])
+def verify_code():
+    form = CodeForm()
+    email = session.get('verification_email')
+    code_sent = session.get('verification_code')
+
+    if not email or not code_sent:
+        flash("No verification in progress. Please register again.", "danger")
+        return redirect(url_for('auth.register'))
+
+    if form.validate_on_submit():
+        if form.code.data == code_sent:
+            user = User.query.filter_by(email=email).first()
+            if user:
+                user.is_verified = True  # Make sure this field exists in your User model
+                db.session.commit()
+                flash("Email verified successfully! You can now log in.", "success")
+                session.pop('verification_code', None)
+                session.pop('verification_email', None)
+                return redirect(url_for('auth.login'))
+        else:
+            flash("Invalid verification code.", "danger")
+
+    return render_template('auth/verify_code.html', form=form)
+
+
+@auth_bp.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('main_bp.index'))
