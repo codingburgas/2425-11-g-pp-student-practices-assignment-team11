@@ -10,7 +10,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(200), unique=True, nullable=False)
     __password = db.Column("password", db.String(80), nullable=False)
-
+    email_verified = db.Column(db.Boolean, default=False)
     is_admin = db.Column(db.Boolean, default=False)
 
 

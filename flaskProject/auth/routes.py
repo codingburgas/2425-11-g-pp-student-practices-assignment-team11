@@ -49,28 +49,35 @@ def register():
 
 @auth_bp.route('/verify_code', methods=['GET', 'POST'])
 def verify_code():
-    form = CodeForm()
-    email = session.get('verification_email')
-    code_sent = session.get('verification_code')
+    if request.method == 'POST':
+        input_code = request.form.get('code')
+        actual_code = session.get('verification_code')
+        email = session.get('verification_email')
 
-    if not email or not code_sent:
-        flash("No verification in progress. Please register again.", "danger")
-        return redirect(url_for('auth.register'))
+        if not actual_code or not email:
+            flash("Verification session expired. Please register again.", "danger")
+            return redirect(url_for('auth.register'))
 
-    if form.validate_on_submit():
-        if form.code.data == code_sent:
+        if input_code == actual_code:
             user = User.query.filter_by(email=email).first()
             if user:
-                user.is_verified = True  # Make sure this field exists in your User model
+                user.email_verified = True  # Make sure this field exists in your User model
                 db.session.commit()
-                flash("Email verified successfully! You can now log in.", "success")
+
+                # Clear verification session data
                 session.pop('verification_code', None)
                 session.pop('verification_email', None)
-                return redirect(url_for('auth.login'))
-        else:
-            flash("Invalid verification code.", "danger")
 
-    return render_template('auth/verify_code.html', form=form)
+                flash("Email verified successfully! Please log in.", "success")
+                return redirect(url_for('auth.login'))
+            else:
+                flash("User not found.", "danger")
+                return redirect(url_for('auth.register'))
+
+        else:
+            flash("Invalid verification code. Please try again.", "danger")
+
+    return render_template('auth/verify_code.html')
 
 
 @auth_bp.route('/logout')

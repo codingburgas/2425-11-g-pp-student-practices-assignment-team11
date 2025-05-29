@@ -236,10 +236,6 @@
               <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a></li>
             </ul>
           </li>
-          {% else %}
-          <li class="nav-item ms-2">
-            <a class="btn btn-outline-secondary" href="{{ url_for('auth.login') }}">Login</a>
-          </li>
           {% endif %}
         </ul>
       </div>
