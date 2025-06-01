@@ -1,3 +1,5 @@
+
+
 from flask import render_template, redirect, url_for, flash, session, request, current_app
 from flask_login import login_user, logout_user, current_user
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
@@ -19,18 +21,23 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        if user and user.verify_password(form.password.data):
-            login_user(user)
-            return redirect(url_for('main_bp.index'))
+        email_verified = user.email_verified
+        if email_verified:
+            if user and user.verify_password(form.password.data):
+                login_user(user)
+                return redirect(url_for('main_bp.index'))
+            else:
+                flash('Invalid username or password')
         else:
-            flash('Invalid username or password')
+            flash('Verified your profile')
     return render_template('auth/login.html', form=form)
 
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
-    if form.validate_on_submit():
+    #if form.validate_on_submit():
+    if request.method == 'POST':
         user = User(username=form.username.data, email=form.email.data, password=form.password.data)
         db.session.add(user)
         db.session.commit()

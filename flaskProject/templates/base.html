@@ -236,6 +236,14 @@
               <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a></li>
             </ul>
           </li>
+          {% else %}
+            <li>
+                <a class="btn btn-lg"
+                style="background-color: white; margin: 0 20px 0 20px; color: #79A8A9; border: none;"
+                href="{{ url_for('auth.login') }}">
+                    Login
+                </a>
+            </li>
           {% endif %}
         </ul>
       </div>
