@@ -1,5 +1,3 @@
-
-
 from flask import render_template, redirect, url_for, flash, session, request, current_app
 from flask_login import login_user, logout_user, current_user
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
@@ -9,7 +7,6 @@ from .forms import LoginForm, RegistrationForm, CodeForm
 from .models import User
 from flaskProject import login_manager, db
 from .resend_email import send_verification_code_email, generate_verification_code
-
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -68,10 +65,8 @@ def verify_code():
         if input_code == actual_code:
             user = User.query.filter_by(email=email).first()
             if user:
-                user.email_verified = True  # Make sure this field exists in your User model
+                user.email_verified = True
                 db.session.commit()
-
-                # Clear verification session data
                 session.pop('verification_code', None)
                 session.pop('verification_email', None)
 
