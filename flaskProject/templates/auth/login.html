@@ -1,44 +1,66 @@
 {% extends "base.html" %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
- {% block link %}
-            <link rel="stylesheet" href="../../static/css/home.css">
- {% endblock %}
+{% block link %}
+  <link rel="stylesheet" href="../../static/css/home.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+{% endblock %}
 
 {% block content %}
 <div class="container" style="max-width: 400px; margin-top: 60px; margin-bottom: 200px; background-color: #F4F7F7; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); color: #1F4E5F;">
-
   <h3 class="text-center mb-4" style="color: #1F4E5F;">Login</h3>
 
-  <form method="POST" action="">
+  <form method="POST">
     {{ form.hidden_tag() }}
 
     <div class="mb-3">
       {{ form.username.label(class="form-label") }}
-      {{ form.username(class="form-control", style="border-color: #AACFD0; color: #1F4E5F; background-color: #fff;") }}
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-person"></i></span>
+        {{ form.username(class="form-control") }}
+      </div>
     </div>
 
     <div class="mb-3">
       {{ form.password.label(class="form-label") }}
-      {{ form.password(class="form-control", style="border-color: #AACFD0; color: #1F4E5F; background-color: #fff;") }}
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+        {{ form.password(class="form-control", id="login-password") }}
+        <span class="input-group-text" style="cursor:pointer;" onclick="togglePassword()">
+          <i class="bi bi-eye" id="toggle-icon"></i>
+        </span>
+      </div>
     </div>
 
     <div class="d-grid gap-2 mt-4">
       {{ form.submit(class="btn btn-outline-dark", style="border-color: #79A8A9; background-color: #1F4E5F; color: #F4F7F7; margin-bottom: 10px", onmouseover="this.style.backgroundColor='transparent'; this.style.color='#1F4E5F';", onmouseout="this.style.backgroundColor='#1F4E5F'; this.style.color='#F4F7F7';") }}
     </div>
 
-      <div class="container">
-       {% for message in get_flashed_messages() %}
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
-       {% endfor %}
+    <div class="container">
+      {% for message in get_flashed_messages() %}
+        <div class="alert alert-success">{{ message }}</div>
+      {% endfor %}
     </div>
   </form>
 
   <div class="text-center mt-3">
     <a href="{{ url_for("auth.register") }}" style="color: #79A8A9; text-decoration: none;">Create account</a>
   </div>
-
 </div>
+
+<script>
+  function togglePassword() {
+    const input = document.getElementById("login-password");
+    const icon = document.getElementById("toggle-icon");
+    if (input.type === "password") {
+      input.type = "text";
+      icon.classList.remove("bi-eye");
+      icon.classList.add("bi-eye-slash");
+    } else {
+      input.type = "password";
+      icon.classList.remove("bi-eye-slash");
+      icon.classList.add("bi-eye");
+    }
+  }
+</script>
 {% endblock %}
