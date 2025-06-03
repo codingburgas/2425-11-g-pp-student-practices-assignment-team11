@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+ 
+{% block content %}
+<div class="text-center mt-5">
+<h1 class="display-3">403</h1>
+<p class="lead">You don't have permission to access this resource.</p>
+<a href="{{ url_for('main.home') }}" class="btn btn-primary mt-3">Go Home</a>
+</div>
+{% endblock %}

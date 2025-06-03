@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+ 
+{% block content %}
+<div class="text-center mt-5">
+<h1 class="display-3">401</h1>
+<p class="lead">You need to be authenticated to view this page.</p>
+<a href="{{ url_for('auth_bp.login') }}" class="btn btn-primary mt-3">Login</a>
+</div>
+{% endblock %}
