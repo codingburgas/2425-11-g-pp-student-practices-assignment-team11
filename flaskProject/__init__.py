@@ -23,8 +23,12 @@ def create_app(config):
     from .auth import auth_bp
     from .main import main_bp
     from .profile import profile_bp
+    from .errors import errors_bp
+    from .survey import survey_bp
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(main_bp)
     app.register_blueprint(profile_bp, url_prefix='/profile')
+    app.register_blueprint(errors_bp, url_prefix='/errors')
+    app.register_blueprint(survey_bp, url_prefix='/survey')
 
     return app

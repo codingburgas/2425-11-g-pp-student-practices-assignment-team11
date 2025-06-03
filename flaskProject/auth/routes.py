@@ -71,7 +71,7 @@ def verify_code():
                 session.pop('verification_email', None)
 
                 flash("Email verified successfully! Please log in.", "success")
-                return redirect(url_for('auth.login'))
+                return redirect(url_for('survey.internship_survey'))
             else:
                 flash("User not found.", "danger")
                 return redirect(url_for('auth.register'))

@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5 mb-5">
+<h2 class="mb-4 text-center">Internship Preferences Form</h2>
+ 
+  <form method="POST">
+    {{ form.hidden_tag() }}
+ 
+    {% for field in form if field.type != 'CSRFToken' and field.name != 'submit' %}
+<div class="mb-4">
+<label class="form-label fw-bold">{{ field.label.text }}</label>
+        {% if field.type == 'RadioField' %}
+          {% for subfield in field %}
+<div class="form-check">
+              {{ subfield(class="form-check-input") }}
+<label class="form-check-label" for="{{ subfield.id }}">{{ subfield.label.text }}</label>
+</div>
+          {% endfor %}
+        {% elif field.type == 'SelectMultipleField' %}
+          {% for subfield in field %}
+<div class="form-check">
+              {{ subfield(class="form-check-input") }}
+<label class="form-check-label" for="{{ subfield.id }}">{{ subfield.label.text }}</label>
+</div>
+          {% endfor %}
+        {% endif %}
+        {% if field.errors %}
+<div class="text-danger">{{ field.errors[0] }}</div>
+        {% endif %}
+</div>
+    {% endfor %}
+ 
+    <div class="text-center">
+      {{ form.submit(class="btn btn-primary px-4 py-2") }}
+</div>
+</form>
+</div>
+{% endblock %}
