@@ -4,9 +4,8 @@
 <img alt="GitHub contributors" src="https://img.shields.io/github/repo-size/codingburgas/2425-11-g-pp-student-practices-assignment-team11?style=flat-square">
 <img src="https://img.shields.io/github/languages/count/codingburgas/2425-11-g-pp-student-practices-assignment-team11?style=flat-square">
 </p><br>
- 
+<img align="right" src="./flaskProject/static/images/logo.png" width="400" height ="400">
 <h1 align="left">📋 Description </h1>
-<img align="right" src="./game/images/logo.png">
 <p align="left">This is a Flask-based web application designed to help students and young professionals discover internship opportunities tailored to their preferences and skills.
 
 The platform allows users to:
