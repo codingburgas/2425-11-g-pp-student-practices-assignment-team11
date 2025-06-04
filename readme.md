@@ -76,7 +76,30 @@ Explore company types (startups, medium-sized, or large corporations)</p>
 <a href="https://git-scm.com/"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" heigh=48px width=48px/></a>
 <a href="https://teams.microsoft.com/_?culture=en-us&country=us#/conversations/19:b01cf915e57b430ea93ab780c4f6b6dc@thread.v2?ctx=chat"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Microsoft_Office_Teams_%282018%E2%80%93present%29.svg/2203px-Microsoft_Office_Teams_%282018%E2%80%93present%29.svg.png" alt="Teams logo" width=48px/></a><br>
 
- 
+<h1 align="left">🛠 Modules Required</h1>
+
+<p align="left">Make sure to install the following Python modules to run the project:</p>
+
+<ul align="left">
+  <li><code>flask</code></li>
+  <li><code>flask_login</code></li>
+  <li><code>flask_sqlalchemy</code></li>
+  <li><code>flask_wtf</code></li>
+  <li><code>pyodbc</code></li>
+  <li><code>matplotlib</code></li>
+  <li><code>email_validator</code></li>
+</ul>
+
+<p align="left">You can install them by running:</p>
+
+<pre><code>pip install flask
+pip install flask_login
+pip install flask_sqlalchemy 
+pip install flask_wtf
+pip install pyodbc
+pip install matplotlib
+pip install email_validator
+</code></pre> 
  
    
 <pre align="center">git clone "https://github.com/codingburgas/2425-11-g-pp-student-practices-assignment-team11"</pre>
