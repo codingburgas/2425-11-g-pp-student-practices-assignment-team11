@@ -29,7 +29,7 @@ Explore company types (startups, medium-sized, or large corporations)</p>
 </tr>
 <tr>
 <td>Stiliyan Mishev</td>
-<td>Project Manager</td>
+<td>Designer</td>
 <td>🟦 11G</td>
 </tr>
 <tr>
@@ -44,12 +44,12 @@ Explore company types (startups, medium-sized, or large corporations)</p>
 </tr>
 <tr>
 <td>Kristiyan Kostadinov</td>
-<td>Back-end developer</td>
+<td>Project manger</td>
 <td>🟦11G</td>
 </tr>
 <tr>
 <td>Mariela Dimova</td>
-<td>Designer</td>
+<td>Back-end dev</td>
 <td>🟦11G</td>
 </tr>
 <tr>
@@ -74,6 +74,7 @@ Explore company types (startups, medium-sized, or large corporations)</p>
 <a href="https://www.microsoft.com/en-ww/microsoft-365/word"><img src="https://img.icons8.com/fluency/48/000000/microsoft-word-2019.png" alt="MS Word logo" width=48px /></a>
 <a href="https://www.microsoft.com/en-us/microsoft-365/powerpoint"><img src="https://img.icons8.com/fluency/48/000000/microsoft-powerpoint-2019.png" alt="MS PowerPoint logo" width=48px />
 <a href="https://git-scm.com/"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" heigh=48px width=48px/></a>
+<a href="https://azure.microsoft.com/"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg" alt="Azure logo" width=48px/></a>
 <a href="https://teams.microsoft.com/_?culture=en-us&country=us#/conversations/19:b01cf915e57b430ea93ab780c4f6b6dc@thread.v2?ctx=chat"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Microsoft_Office_Teams_%282018%E2%80%93present%29.svg/2203px-Microsoft_Office_Teams_%282018%E2%80%93present%29.svg.png" alt="Teams logo" width=48px/></a><br>
 
 <h1 align="left">🛠 Modules Required</h1>
