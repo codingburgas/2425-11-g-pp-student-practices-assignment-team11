@@ -1,12 +1,33 @@
 from flask import render_template, redirect, url_for, flash
+from flask_login import login_required, current_user
+from .models import Form
+from flaskProject import db
 from .forms import InternshipSurveyForm
-from . import survey_bp
+
+from flaskProject.survey import survey_bp
 
 
-@survey_bp.route('/internship_survey', methods=['GET', 'POST'])
-def internship_survey():
+@survey_bp.route('/survey', methods=['GET', 'POST'])
+@login_required
+def survey():
     form = InternshipSurveyForm()
     if form.validate_on_submit():
+        new_form = Form(
+            question1=form.industry.data,
+            question2=form.company_type.data,
+            question3=form.duration.data,
+            question4=", ".join(form.skills.data),
+            question5=form.experience.data,
+            question6=form.format.data,
+            question7=form.priority.data,
+            question8=form.teamwork.data,
+            question9=form.education.data,
+            user_id=current_user.id
+        )
+
+        db.session.add(new_form)
+        db.session.commit()
         flash("Survey submitted successfully!", "success")
-        return redirect(url_for('auth.login'))
-    return render_template('survey/survey.html', form=form)
+        return redirect(url_for('main_bp.index'))
+
+    return render_template("survey/survey.html", form=form)

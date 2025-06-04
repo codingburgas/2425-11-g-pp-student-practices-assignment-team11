@@ -22,7 +22,7 @@ def login():
         if email_verified:
             if user and user.verify_password(form.password.data):
                 login_user(user)
-                return redirect(url_for('main_bp.index'))
+                return redirect(url_for('survey.survey'))
             else:
                 flash('Invalid username or password')
         else:
