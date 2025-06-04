@@ -13,6 +13,7 @@ class User(db.Model, UserMixin):
     email_verified = db.Column(db.Boolean, default=False)
     is_admin = db.Column(db.Boolean, default=False)
 
+    datasets = db.relationship('Form', back_populates='user', cascade='all, delete')
 
     @property
     def password(self):
