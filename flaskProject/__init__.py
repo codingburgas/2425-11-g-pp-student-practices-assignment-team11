@@ -16,6 +16,7 @@ def create_app(config):
     bootstrap.init_app(app)
     login_manager.init_app(app)
     from .auth import models
+    from .survey import models
 
     with app.app_context():
         db.create_all()
