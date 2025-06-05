@@ -1,5 +1,3 @@
-from flask import Flask
-
 from flaskProject import create_app
 from .config import Config
 

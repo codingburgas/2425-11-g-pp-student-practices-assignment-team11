@@ -16,3 +16,7 @@ body {
 text {
     width: 90%;
 }
+
+.container {
+    margin-top: 10px;
+}

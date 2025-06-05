@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from .models import Form
 from flaskProject import db
@@ -27,7 +27,8 @@ def survey():
 
         db.session.add(new_form)
         db.session.commit()
-        flash("Survey submitted successfully!", "success")
-        return redirect(url_for('main_bp.index'))
+        if request.method == 'POST':
+            flash("Survey submitted successfully!", "success")
+            return redirect(url_for('main_bp.index'))
 
     return render_template("survey/survey.html", form=form)
