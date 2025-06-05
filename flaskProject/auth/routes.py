@@ -35,18 +35,26 @@ def register():
     form = RegistrationForm()
     #if form.validate_on_submit():
     if request.method == 'POST':
-        user = User(username=form.username.data, email=form.email.data, password=form.password.data)
-        db.session.add(user)
-        db.session.commit()
+        password = form.password.data
+        confirm_password = form.confirm_password.data
+        email = form.email.data
+        if password == confirm_password:
+            if'@' in email:
+                user = User(username=form.username.data, email=form.email.data, password=form.password.data )
+                db.session.add(user)
+                db.session.commit()
 
-        # Generate verification code
-        code = generate_verification_code()
-        session['verification_code'] = code
-        session['verification_email'] = form.email.data
-        send_verification_code_email(form.email.data, code)
+                code = generate_verification_code()
+                session['verification_code'] = code
+                session['verification_email'] = form.email.data
+                send_verification_code_email(form.email.data, code)
 
-        flash('Verification code sent to your email.', 'success')
-        return redirect(url_for('auth.verify_code'))
+                flash('Verification code sent to your email.', 'success')
+                return redirect(url_for('auth.verify_code'))
+            else:
+                flash('Email should contain "@"')
+        else:
+            flash('Passwords do not match')
 
     return render_template('auth/register.html', form=form)
 
