@@ -33,28 +33,41 @@ def login():
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
-    #if form.validate_on_submit():
     if request.method == 'POST':
         password = form.password.data
         confirm_password = form.confirm_password.data
         email = form.email.data
-        if password == confirm_password:
-            if'@' in email:
-                user = User(username=form.username.data, email=form.email.data, password=form.password.data )
-                db.session.add(user)
-                db.session.commit()
+        username = form.username.data
 
-                code = generate_verification_code()
-                session['verification_code'] = code
-                session['verification_email'] = form.email.data
-                send_verification_code_email(form.email.data, code)
+        if password != confirm_password:
+            flash('Passwords do not match', 'danger')
+            return render_template('auth/register.html', form=form)
 
-                flash('Verification code sent to your email.', 'success')
-                return redirect(url_for('auth.verify_code'))
-            else:
-                flash('Email should contain "@"')
-        else:
-            flash('Passwords do not match')
+        if '@' not in email:
+            flash('Email should contain "@"', 'danger')
+            return render_template('auth/register.html', form=form)
+
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            flash('This email is already registered. Please log in or use a different email.', 'danger')
+            return render_template('auth/register.html', form=form)
+
+        existing_username = User.query.filter_by(username=username).first()
+        if existing_username:
+            flash('Username already taken. Please choose a different one.', 'warning')
+            return render_template('auth/register.html', form=form)
+
+        user = User(username=username, email=email, password=password)
+        db.session.add(user)
+        db.session.commit()
+
+        code = generate_verification_code()
+        session['verification_code'] = code
+        session['verification_email'] = email
+        send_verification_code_email(email, code)
+
+        flash('Verification code sent to your email.', 'success')
+        return redirect(url_for('auth.verify_code'))
 
     return render_template('auth/register.html', form=form)
 
@@ -79,7 +92,7 @@ def verify_code():
                 session.pop('verification_email', None)
 
                 flash("Email verified successfully! Please log in.", "success")
-                return redirect(url_for('survey.internship_survey'))
+                return redirect(url_for('auth.login'))
             else:
                 flash("User not found.", "danger")
                 return redirect(url_for('auth.register'))

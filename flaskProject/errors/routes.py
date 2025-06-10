@@ -1,5 +1,6 @@
 from flask import render_template
-from pyodbc import IntegrityError
+from sqlalchemy.exc import IntegrityError
+
 
 from . import errors_bp
 
@@ -24,4 +25,5 @@ def unauthorized_error(error):
 
 @errors_bp.errorhandler(IntegrityError)
 def integrity_error(error):
-    return render_template("errors/already_registered.html"), integrity_error
+    return render_template("errors/already_registered.html"), 409
+
