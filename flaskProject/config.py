@@ -15,5 +15,5 @@ class Config:
     )
     SENDGRID_SENDER = os.environ.get(
         'SENDGRID_SENDER',
-        'no-reply@studypilot.com'
+        'tdtanev21@codingburgas.bg'
     )
