@@ -10,5 +10,6 @@ class Config:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
+    SENDGRID_API_KEY = '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'
+    print("SENDGRID_API_KEY:", os.environ.get("SENDGRID_API_KEY"))
     SENDGRID_SENDER = 'tdtanev21@codingburgas.bg'
