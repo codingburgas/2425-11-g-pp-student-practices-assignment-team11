@@ -1,4 +1,5 @@
 import random
+import traceback
 from flask import current_app
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
@@ -13,19 +14,25 @@ def send_verification_code_email(recipient, code):
     <p>Your verification code is:</p>
     <h3>{code}</h3>
     <br>
-    <p>This email was sent from <strong>studypilot-g6gbf5gmddc7g2h3.polandcentral-01.azurewebsites.net</strong></p>
+    <p>This email was sent from 
+    <strong>studypilot-g6gbf5gmddc7g2h3.polandcentral-01.azurewebsites.net</strong></p>
     """
 
+    sender_email = current_app.config['SENDGRID_SENDER']
+    api_key = current_app.config['SENDGRID_API_KEY']
+
     message = Mail(
-        from_email=current_app.config.get('SENDGRID_SENDER', 'no-reply@studypilot.com'),
+        from_email=sender_email,
         to_emails=recipient,
         subject=subject,
         html_content=html_content
     )
 
     try:
-        sg = SendGridAPIClient(current_app.config.get('SENDGRID_API_KEY', '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'))
+        sg = SendGridAPIClient(api_key)
         response = sg.send(message)
-        print(f"Email sent to {recipient}: {response.status_code}")
+        print(f"✅ Email sent to {recipient}: {response.status_code}")
     except Exception as e:
-        print(f"Failed to send email: {str(e)}")
+        print("❌ Failed to send email.")
+        print(f"Error: {e}")
+        traceback.print_exc()
