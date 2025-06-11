@@ -1,6 +1,6 @@
 from flask import Flask, render_template, flash, redirect, url_for
+from flask import render_template, redirect, url_for, flash
 from forms import CompanyRegistrationForm
-
 from . import companies_bp
 
 @companies_bp.route('/register_company', methods=['GET', 'POST'])
