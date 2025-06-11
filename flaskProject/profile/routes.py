@@ -8,6 +8,14 @@ from ..auth.models import User
 @profile_bp.route('/dashboard', methods = ['GET', 'POST'])
 def dashboard():
     return render_template('profile/dashboard.html', current_user=current_user)
+@profile_bp.route('/admin')
+def admin_dashboard():
+    if not current_user.is_authenticated or not current_user.is_admin:
+        flash('Access denied: Admins only.', 'danger')
+        return redirect(url_for('auth.login'))
+
+    users = User.query.all()
+    return render_template('profile/admin_dashboard.html', users=users)
 @profile_bp.route('/settings', methods=['GET'])
 @login_required
 def settings():
@@ -66,3 +74,5 @@ def delete_account():
     else:
         flash('User not found.', category='error')
     return redirect(url_for('auth.login'))
+
+
