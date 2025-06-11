@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-5 py-4 px-4 shadow rounded-4" style="max-width: 900px; background-color: var(--light-primary);">
+  <h2 class="mb-4 fw-bold" style="font-family: 'Poetsen One', sans-serif;">Survey Results for {{ user.username }}</h2>
+
+  {% if surveys %}
+    {% for survey in surveys %}
+      <div class="border rounded-3 p-3 mb-3" style="background-color: #f9f9f9;">
+        {% for key, value in survey.data.items() %}
+          <p><strong>{{ key.replace('_', ' ').title() }}:</strong> {{ value }}</p>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No surveys found for this user.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -2,6 +2,7 @@
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>StudyPilot</title>
   <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
 
@@ -15,7 +16,7 @@
   {% endblock %}
 
   <style>
-    :root{
+    :root {
       --light-bg: #F8FAFC;
       --light-primary: #D9EAFD;
       --light-secondary: #BCCCDC;
@@ -30,7 +31,7 @@
 
       --transition: all 0.3s ease;
     }
-`
+
     html[data-theme="light"] {
       background-color: var(--light-bg);
       color: var(--light-text);
@@ -48,6 +49,14 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      opacity: 0;
+      animation: fadeIn 0.4s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
     }
 
     nav {
@@ -68,7 +77,8 @@
     }
 
     html[data-theme="dark"] .navbar-brand p {
-      color: var(--dark-accent);
+      color: #fff;
+      text-shadow: 1px 1px 2px #000;
     }
 
     .nav-link,
@@ -101,7 +111,6 @@
       color: var(--dark-accent);
     }
 
-    /* Welcome Section */
     .welcome-section {
       background: transparent;
       padding: 60px 20px;
@@ -131,7 +140,7 @@
       margin: 0 auto 40px;
       font-size: 1.1rem;
       line-height: 1.7;
-      color: #334155; /* darker text */
+      color: #334155;
       user-select: none;
     }
 
@@ -144,7 +153,6 @@
       color: var(--dark-accent);
     }
 
-    /* Fancy CTA Button */
     .cta-btn {
       font-size: 1.2rem;
       padding: 12px 32px;
@@ -202,7 +210,12 @@
         <p>StudyPilot</p>
       </a>
 
-      <div class="collapse navbar-collapse">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           {% if current_user.is_authenticated %}
           <li class="nav-item dropdown">
@@ -210,15 +223,15 @@
               AI instruments
             </a>
             <ul class="dropdown-menu">
-                {% if not current_user.is_admin %}
+              {% if not current_user.is_admin %}
               <li><a class="dropdown-item" href="#">✉ Apply</a></li>
               <li><a class="dropdown-item" href="{{ url_for('companies.register_company') }}">➕ Register company</a></li>
-                    <li><a class="dropdown-item" href="{{ url_for('ai.recommend') }}">🎫 View suggestions</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('ai.recommend') }}">🎫 View suggestions</a></li>
               <li><a class="dropdown-item" href="#">🔍 Search others</a></li>
-                {% else %}
+              {% else %}
               <li><a class="dropdown-item" href="{{ url_for('companies.admin_companies') }}">➕ View Companies</a></li>
               <li><a class="dropdown-item" href="#">🔍 Search</a></li>
-                    {% endif %}
+              {% endif %}
             </ul>
           </li>
           {% endif %}
@@ -237,23 +250,23 @@
             </a>
             <ul class="dropdown-menu">
               {% if current_user.is_admin %}
-    <li><a class="dropdown-item" href="{{ url_for('profile.admin_dashboard') }}">📊 Dashboard</a></li>
-  {% else %}
-    <li><a class="dropdown-item" href="{{ url_for('profile.dashboard') }}">📊 Dashboard</a></li>
-  {% endif %}
-                <li><a class="dropdown-item" href="{{ url_for('profile.settings') }}">⚙ Settings</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('profile.admin_dashboard') }}">📊 Dashboard</a></li>
+              {% else %}
+              <li><a class="dropdown-item" href="{{ url_for('profile.dashboard') }}">📊 Dashboard</a></li>
+              {% endif %}
+              <li><a class="dropdown-item" href="{{ url_for('profile.settings') }}">⚙ Settings</a></li>
               <li><hr class="dropdown-divider" /></li>
               <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a></li>
             </ul>
           </li>
           {% else %}
-            <li>
-                <a class="btn btn-lg"
-                style="background-color: white; margin: 0 20px 0 20px; color: #79A8A9; border: none;"
-                href="{{ url_for('auth.login') }}">
-                    Login
-                </a>
-            </li>
+          <li>
+            <a class="btn btn-lg"
+              style="background-color: white; margin: 0 20px 0 20px; color: #79A8A9; border: none;"
+              href="{{ url_for('auth.login') }}">
+              Login
+            </a>
+          </li>
           {% endif %}
         </ul>
       </div>
@@ -261,7 +274,7 @@
   </nav>
 
   <main class="welcome-section">
-      {% block content %}{% endblock %}
+    {% block content %}{% endblock %}
   </main>
 
   <footer class="mt-auto">

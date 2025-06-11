@@ -18,15 +18,21 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        email_verified = user.email_verified
-        if email_verified:
-            if user and user.verify_password(form.password.data):
-                login_user(user)
-                return redirect(url_for('survey.survey'))
-            else:
-                flash('Invalid username or password')
+
+        if user is None:
+            flash('User not found. Please check your username or register.', 'danger')
+            return render_template('auth/login.html', form=form)
+
+        if not user.email_verified:
+            flash('Please verify your email before logging in.', 'warning')
+            return render_template('auth/login.html', form=form)
+
+        if user.verify_password(form.password.data):
+            login_user(user)
+            return redirect(url_for('survey.survey'))
         else:
-            flash('Verified your profile')
+            flash('Invalid password. Please try again.', 'danger')
+
     return render_template('auth/login.html', form=form)
 
 
