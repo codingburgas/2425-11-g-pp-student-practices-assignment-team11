@@ -1,15 +1,94 @@
 html, body {
-    height: 100%;
     margin: 0;
+    font-family: Arial, sans-serif;
 }
 
+
+
 body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    opacity: 0;
+    animation: fadeIn 0.4s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+.navbar-brand p {
+    font-family: 'Poetsen One', sans-serif;
+    font-size: 36px;
+    margin: 0;
+    color: #fff;
+    user-select: none;
+}
+
+.nav-link,
+.dropdown-item {
+    color: #333;
+}
+
+.nav-link:hover,
+.dropdown-item:hover {
+    color: #fff;
+    transform: scale(1.03);
+}
+
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+
+
+
+
+
+.video-container {
+    position: relative;
+    height: 120vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 3rem;
+    z-index: 2;
+    text-align: center;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
 
 footer {
-    background-color: #F4F7F7;
-    color: #1F4E5F;
+    background-color: #C4C8D8;
+    text-align: center;
+    padding: 20px 0;
+    user-select: none;
+    font-size: 0.9rem;
+    color: #333;
 }
