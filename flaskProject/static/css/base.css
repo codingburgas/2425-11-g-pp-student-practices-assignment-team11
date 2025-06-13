@@ -1,14 +1,10 @@
 html, body {
     margin: 0;
-    font-family: Arial, sans-serif;
 }
-
-
 
 body {
     font-family: 'Segoe UI', sans-serif;
     background-color: #f9f9f9;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     opacity: 0;
@@ -46,9 +42,6 @@ body {
     width: 100%;
     z-index: 2;
 }
-
-
-
 
 
 

@@ -1,0 +1,14 @@
+.register-form {
+    max-width: 450px;
+    max-height: 600px;
+    margin-top: -150px;
+    margin-left: 250px;
+    background-color: #F4F7F7;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: #1F4E5F;
+    z-index: 2;
+    font-size: 18px;
+    text-align: left;
+}
