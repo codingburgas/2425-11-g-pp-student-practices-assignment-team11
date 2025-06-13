@@ -1,19 +1,22 @@
 {% extends 'base.html' %}
 
  {% block link %}
-            <link rel="stylesheet" href="../../static/css/home.css">
+     <link rel="stylesheet" href="../../static/css/base.css">
+     <link rel="stylesheet" href="../../static/css/home.css">
  {% endblock %}
 
 {% block content %}
     {% if not current_user.is_authenticated %}
-    <h1 class="welcome-title">Welcome!</h1>
-    <p class="welcome-subtitle">Learn how to work with AI!</p>
-    <p class="welcome-text">
-      <strong>BeforeAI</strong> is an interactive Flask web application where users can upload their own datasets
-      with which they can train machine learning models in real-time, and visually experience how AI learns,
-      evolves, and predicts! Learn how <strong>Perceptron</strong> and <strong>Linear Regression</strong> work —
-      visually and interactively.
-    </p>
-    <a href="{{ url_for('auth.register') }}" class="cta-btn">Get Started</a>
+        <div class="box">
+            <h1 class="welcome-title">Welcome!</h1>
+            <p class="welcome-subtitle">Learn how to work with AI!</p>
+            <p class="welcome-text">
+              <strong>BeforeAI</strong> is an interactive Flask web application where users can upload their own datasets
+              with which they can train machine learning models in real-time, and visually experience how AI learns,
+              evolves, and predicts! Learn how <strong>Perceptron</strong> and <strong>Linear Regression</strong> work —
+              visually and interactively.
+            </p>
+            <a href="{{ url_for('auth.register') }}" class="cta-btn">Get Started</a>
+        </div>
     {% endif %}
 {% endblock %}

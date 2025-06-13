@@ -1,22 +1,54 @@
-body {
-    font-family: 'Poetsen One', sans-serif;
-    color: #F4F7F7;
-    margin-top: 10px;
-}
-
 .box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 80vh;
-    padding: 40px;
-    text-align: center;
+    margin-top: -200px;
+    margin-right: 900px;
 }
 
-text {
-    width: 90%;
+.welcome-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 10px;
+    user-select: none;
+    z-index: 2;
 }
 
-.container {
-    margin-top: 10px;
+.welcome-subtitle {
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    user-select: none;
+    z-index: 2;
+}
+
+.welcome-text {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #fff;
+    user-select: none;
+    z-index: 2;
+}
+
+.cta-btn {
+    font-size: 1.2rem;
+    padding: 12px 32px;
+    background-color: #fff;
+    color: #64748b;
+    border: none;
+    border-radius: 40px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+    font-weight: 600;
+    user-select: none;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cta-btn:hover {
+    background-color: #4b5563;
+    color: white;
+    transform: scale(1.05) translateY(-2px);
 }
