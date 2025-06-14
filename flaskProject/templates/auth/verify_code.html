@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
+
+{% block link %}
+  <link rel="stylesheet" href="../../static/css/base.css">
+  <link rel="stylesheet" href="../../static/css/auth.css">
+{% endblock %}
+
 {% block content %}
-<div class="container" style="max-width: 500px; margin-top: 60px;">
+<div class="verify-form">
   <h2 class="mb-4">Email Verification</h2>
 
   {% with messages = get_flashed_messages(with_categories=true) %}

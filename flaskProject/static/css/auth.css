@@ -1,4 +1,4 @@
-.register-form, .login-form {
+.register-form, .login-form, .verify-form {
     max-width: 450px;
     max-height: 600px;
     margin-top: -150px;
@@ -17,4 +17,12 @@
     max-width: 410px;
     max-height: 550px;
     padding: 60px;
+}
+
+.verify-form {
+    max-width: 500px;
+}
+
+.form-control {
+    border: black 1px;
 }
