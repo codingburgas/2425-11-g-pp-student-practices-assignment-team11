@@ -1,4 +1,4 @@
-.register-form {
+.register-form, .login-form {
     max-width: 450px;
     max-height: 600px;
     margin-top: -150px;
@@ -11,4 +11,10 @@
     z-index: 2;
     font-size: 18px;
     text-align: left;
+}
+
+.login-form {
+    max-width: 410px;
+    max-height: 550px;
+    padding: 60px;
 }
