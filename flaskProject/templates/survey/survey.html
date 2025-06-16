@@ -1,91 +1,142 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container my-5 py-4 px-4 shadow rounded-4" style="max-width: 800px; background-color: var(--light-primary); transition: var(--transition);">
-  <h2 class="mb-4 fw-bold" style="font-family: 'Poetsen One', sans-serif;">Internship Preferences</h2>
+<div class="flashcard-container container my-5 py-4 px-4 shadow rounded-4">
+  <h2 class="mb-4 fw-bold text-center" style="font-family: 'Poetsen One', sans-serif;">Internship Preferences</h2>
 
-  <form method="POST">
+  <form method="POST" id="flashcard-form">
     {{ form.hidden_tag() }}
 
-    {% for field in form if field.type != 'CSRFToken' and field.name != 'submit' %}
-      <div class="mb-4">
-        <label class="form-label fw-semibold">{{ field.label.text }}</label>
-
-        {% if field.type == 'RadioField' or field.type == 'SelectMultipleField' %}
-          <div class="ps-3">
-            {% for subfield in field %}
-              <div class="form-check mb-1">
-                {{ subfield(class="form-check-input") }}
-                <label class="form-check-label ms-1" for="{{ subfield.id }}">{{ subfield.label.text }}</label>
+    <div class="flashcards-wrapper">
+      {% for field in form if field.type != 'CSRFToken' and field.name != 'submit' %}
+        <div class="flashcard">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">{{ field.label.text }}</label>
+            {% if field.type == 'RadioField' or field.type == 'SelectMultipleField' %}
+              <div class="ps-3">
+                {% for subfield in field %}
+                  <div class="form-check mb-1">
+                    {{ subfield(class="form-check-input") }}
+                    <label class="form-check-label ms-1" for="{{ subfield.id }}">{{ subfield.label.text }}</label>
+                  </div>
+                {% endfor %}
               </div>
-            {% endfor %}
+            {% else %}
+              {{ field(class="form-control") }}
+            {% endif %}
+            {% if field.errors %}
+              <div class="text-danger small mt-1">{{ field.errors[0] }}</div>
+            {% endif %}
           </div>
+        </div>
+      {% endfor %}
+    </div>
 
-        {% else %}
-          {{ field(class="form-control") }}
-        {% endif %}
-
-        {% if field.errors %}
-          <div class="text-danger small mt-1">{{ field.errors[0] }}</div>
-        {% endif %}
-      </div>
-    {% endfor %}
-
-    <div class="mt-4">
-      {{ form.submit(class="cta-btn") }}
+    <div class="d-flex justify-content-between mt-4">
+      <button type="button" class="btn btn-outline-secondary" id="prev-btn">Previous</button>
+      <button type="button" class="btn btn-outline-primary" id="next-btn">Next</button>
+      {{ form.submit(class="btn btn-success d-none", id="submit-btn") }}
     </div>
   </form>
 </div>
 
 <style>
-  html[data-theme="dark"] .container {
-    background-color: var(--dark-primary) !important;
-  }
+.flashcard-container {
+  max-width: 600px;
+  background-color: var(--light-primary);
+  transition: var(--transition);
+  overflow: hidden;
+}
 
-  .form-label {
-    font-size: 1rem;
-  }
+.flashcards-wrapper {
+  display: flex;
+  transition: transform 0.6s ease;
+  width: 100%;
+}
 
-  .form-check-label {
-    font-weight: 500;
-  }
+.flashcard {
+  width: 100%;
+  flex-shrink: 0;
+  padding: 1rem;
+}
 
-  .form-check-input:checked {
-    background-color: #79A8A9;
-    border-color: #79A8A9;
-  }
+.form-label {
+  font-size: 1rem;
+}
 
-  .form-control {
-    border-radius: 12px;
-    padding: 10px;
-    transition: var(--transition);
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-  }
+.form-check-label {
+  font-weight: 500;
+}
 
-  html[data-theme="dark"] .form-control {
-    background-color: #2a2a2a;
-    border: 1px solid #555;
-    color: #f1f1f1;
-  }
+.form-check-input:checked {
+  background-color: #79A8A9;
+  border-color: #79A8A9;
+}
 
-  html[data-theme="dark"] .form-check-label {
-    color: var(--dark-text);
-  }
+.form-control {
+  border-radius: 12px;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+}
 
-  .form-check {
-    background-color: transparent !important;
-    border: none !important;
-  }
+html[data-theme="dark"] .flashcard-container {
+  background-color: var(--dark-primary) !important;
+}
 
-  form {
-    text-align: left;
-  }
+html[data-theme="dark"] .form-control {
+  background-color: #2a2a2a;
+  border: 1px solid #555;
+  color: #f1f1f1;
+}
 
-  .cta-btn {
-    padding: 10px 24px;
-    font-weight: bold;
-    border-radius: 10px;
-  }
+html[data-theme="dark"] .form-check-label {
+  color: var(--dark-text);
+}
+
+.form-check {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.cta-btn {
+  padding: 10px 24px;
+  font-weight: bold;
+  border-radius: 10px;
+}
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  let currentCard = 0;
+  const cards = document.querySelectorAll('.flashcard');
+  const wrapper = document.querySelector('.flashcards-wrapper');
+  const nextBtn = document.getElementById('next-btn');
+  const prevBtn = document.getElementById('prev-btn');
+  const submitBtn = document.getElementById('submit-btn');
+
+  function updateCards() {
+    wrapper.style.transform = `translateX(-${currentCard * 100}%)`;
+    prevBtn.disabled = currentCard === 0;
+    nextBtn.classList.toggle('d-none', currentCard === cards.length - 1);
+    submitBtn.classList.toggle('d-none', currentCard !== cards.length - 1);
+  }
+
+  nextBtn.addEventListener('click', () => {
+    if (currentCard < cards.length - 1) {
+      currentCard++;
+      updateCards();
+    }
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (currentCard > 0) {
+      currentCard--;
+      updateCards();
+    }
+  });
+
+  updateCards();
+});
+</script>
 {% endblock %}
