@@ -7,6 +7,8 @@ from .forms import LoginForm, RegistrationForm, CodeForm
 from .models import User
 from flaskProject import login_manager, db
 from .resend_email import send_verification_code_email, generate_verification_code
+from ..survey.models import Form
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -18,6 +20,8 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
+        user_id = User.query.get(user.id).id
+        survey = Form.query.filter_by(id=user_id).first()
 
         if user is None:
             flash('User not found. Please check your username or register.', 'danger')
@@ -29,7 +33,11 @@ def login():
 
         if user.verify_password(form.password.data):
             login_user(user)
-            return redirect(url_for('survey.survey'))
+            if survey:
+                return redirect(url_for('survey.survey'))
+            else:
+                return redirect(url_for('main_bp.index'))
+
         else:
             flash('Invalid password. Please try again.', 'danger')
 
