@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+  <h2 class="text-center fw-bold mb-5" style="font-family: 'Poetsen One', sans-serif;">Available Internship Companies</h2>
+
+  <div class="row g-4">
+    {% for company in companies %}
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card shadow-sm rounded-4 h-100 p-2 border-0">
+          <div class="d-flex align-items-center mb-2">
+            <img src="{{ url_for('static', filename='images/' ~ company.name|lower|replace(' ', '_') ~ '.png') }}"
+                 alt="{{ company.name }} logo" class="me-2 rounded" style="width: 40px; height: 40px; object-fit: contain;">
+            <h5 class="mb-0 fw-semibold" style="font-size: 1.1rem;">{{ company.name }}</h5>
+          </div>
+          <ul class="list-unstyled ps-3 mb-3" style="font-size: 0.95rem;">
+            <li><strong>Industry:</strong> {{ company.industry|capitalize }}</li>
+            <li><strong>Type:</strong> {{ company.type|capitalize }}</li>
+            <li><strong>Duration:</strong> {{ company.duration }} months</li>
+            <li><strong>Format:</strong> {{ company.format|capitalize }}</li>
+            <li><strong>Skills:</strong> {{ company.skills | join(', ') }}</li>
+          </ul>
+          <form method="POST" action="{{ url_for('companies.apply_to_company', company_name=company.name) }}">
+            <button type="submit" class="btn btn-primary w-100">Apply</button>
+          </form>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+.card {
+  background-color: var(--light-primary);
+  transition: var(--transition);
+  font-size: 0.95rem;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+html[data-theme="dark"] .card {
+  background-color: var(--dark-primary) !important;
+  color: var(--dark-text);
+  border: 1px solid #444;
+}
+</style>
+{% endblock %}

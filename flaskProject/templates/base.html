@@ -38,7 +38,7 @@
               </a>
               <ul class="dropdown-menu">
                 {% if not current_user.is_admin %}
-                <li><a class="dropdown-item" href="#">✉ Apply</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('companies.show_companies') }}">✉ Apply</a></li>
                 <li><a class="dropdown-item" href="{{ url_for('companies.register_company') }}">➕ Register company</a></li>
                 <li><a class="dropdown-item" href="{{ url_for('ai.recommend') }}">🎫 View suggestions</a></li>
                 <li><a class="dropdown-item" href="#">🔍 Search others</a></li>
@@ -105,4 +105,3 @@
 
 </body>
 </html>
-

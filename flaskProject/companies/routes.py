@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, redirect, url_for, session
+from flask import Flask, render_template, flash, redirect, url_for, session, request
 from flask import render_template, redirect, url_for, flash
 from flask_login import current_user
 
@@ -7,6 +7,36 @@ from . import companies_bp
 from .models import Company
 from .. import db
 
+companies = [
+    {"name": "Microsoft", "industry": "it", "type": "corporate", "duration": "1-3", "skills": ["programming", "data"],
+     "format": "hybrid"},
+    {"name": "Cisco", "industry": "it", "type": "corporate", "duration": "1-3", "skills": ["programming", "management"],
+     "format": "remote"},
+    {"name": "Xoriant", "industry": "it", "type": "medium", "duration": "3-6", "skills": ["programming", "management"],
+     "format": "on-site"},
+
+
+    {"name": "P&G", "industry": "marketing", "type": "corporate", "duration": "1-3", "skills": ["data", "design"],
+     "format": "hybrid"},
+    {"name": "Girls in Marketing", "industry": "marketing", "type": "startup", "duration": "<1",
+     "skills": ["design", "management"], "format": "remote"},
+    {"name": "Samsung", "industry": "marketing", "type": "corporate", "duration": ">6",
+     "skills": ["data", "management"], "format": "on-site"},
+
+    {"name": "Cargill", "industry": "finance", "type": "corporate", "duration": "3-6", "skills": ["data", "management"],
+     "format": "hybrid"},
+    {"name": "Experian", "industry": "finance", "type": "corporate", "duration": "1-3",
+     "skills": ["data", "programming"], "format": "remote"},
+    {"name": "Melexis", "industry": "finance", "type": "medium", "duration": "3-6", "skills": ["data", "management"],
+     "format": "on-site"},
+
+    {"name": "Greenwich Public Schools", "industry": "education", "type": "corporate", "duration": "<1",
+     "skills": ["management", "design"], "format": "on-site"},
+    {"name": "Teach For Bulgaria", "industry": "education", "type": "corporate", "duration": "1-3",
+     "skills": ["management", "data"], "format": "hybrid"},
+    {"name": "EdTech Bulgaria", "industry": "education", "type": "startup", "duration": "1-3",
+     "skills": ["programming", "design"], "format": "remote"},
+]
 
 @companies_bp.route('/register_company', methods=['GET', 'POST'])
 def register_company():
@@ -51,3 +81,12 @@ def admin_company_action(company_id, action):
     db.session.commit()
 
     return redirect(url_for('admin_companies'))
+
+@companies_bp.route('/show_companies')
+def show_companies():
+    return render_template('companies/show_companies.html', companies=companies)
+
+
+@companies_bp.route('/show_companies/apply/<company_name>', methods=['GET', 'POST'])
+def apply_to_company(company_name):
+    return render_template('companies/apply.html', applied_company=company_name)
