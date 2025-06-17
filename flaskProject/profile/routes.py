@@ -132,4 +132,22 @@ def delete_user(user_id):
     except Exception as e:
         print(f"Login Error: {e}")
         return redirect(url_for('errors.forbidden_error'))
-    return redirect(url_for('profile.admin_dashboard'))
+    return redirect(url_for('profile.admin_view_users'))
+
+
+# ✅ View users (non-admin and admin)
+@profile_bp.route('/users')
+@login_required
+def user_view_users():
+    users = User.query.all()
+    return render_template('profile/view_users.html', users=users)
+
+@profile_bp.route('/admin/users')
+@login_required
+def admin_view_users():
+    if not current_user.is_admin:
+        flash("Admins only", "danger")
+        return redirect(url_for('profile.dashboard'))
+    users = User.query.all()
+    return render_template('profile/view_users.html', users=users, admin=True)
+

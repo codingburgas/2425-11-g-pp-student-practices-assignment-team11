@@ -97,3 +97,11 @@ footer {
     padding: 50px;
     margin-top: 300px;
 }
+
+.card {
+  border-radius: 1rem;
+  transition: transform 0.2s ease-in-out;
+}
+.card:hover {
+  transform: scale(1.03);
+}
