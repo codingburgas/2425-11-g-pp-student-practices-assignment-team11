@@ -4,20 +4,25 @@ from wtforms.validators import DataRequired, Length
 
 
 class CompanyRegistrationForm(FlaskForm):
+    company_name = TextAreaField(
+        'Company Name',
+        validators=[DataRequired()]
+    )
     company_type = SelectField(
         'Company Type',
         choices=[('large', 'Large Corporation'), ('medium', 'Medium Company'), ('small', 'Small Company')],
         validators=[DataRequired()]
     )
-    internship_programs = SelectMultipleField(
-        'Internship Programs (at least 3)',
-        choices=[
-            ('program1', 'Program 1'),
-            ('program2', 'Program 2'),
-            ('program3', 'Program 3'),
-            ('program4', 'Program 4'),
-            ('program5', 'Program 5')
-        ],
+    internship_one = TextAreaField(
+        'Internship #1',
+        validators=[DataRequired()]
+    )
+    internship_two = TextAreaField(
+        'Internship #2',
+        validators=[DataRequired()]
+    )
+    internship_three = TextAreaField(
+        'Internship #3',
         validators=[DataRequired()]
     )
     duration = IntegerField('Duration (in months)', validators=[DataRequired()])
@@ -28,6 +33,6 @@ class CompanyRegistrationForm(FlaskForm):
     )
     requirements = TextAreaField(
         'Requirements',
-        validators=[DataRequired(), Length(min=10, max=500)]
+        validators=[DataRequired()]
     )
     submit = SubmitField('Register Company')
