@@ -12,7 +12,7 @@ class Company(db.Model):
     duration = db.Column(db.Integer, nullable=False)
     format = db.Column(db.String(20), nullable=False)
     requirements = db.Column(db.Text, nullable=False)
-    status = db.Column(db.String(20), default='pending')  # 'pending', 'approved', 'rejected'
+    status = db.Column(db.String(20), default='pending')
 
     def __repr__(self):
         return f'<Company {self.company_type}>'
