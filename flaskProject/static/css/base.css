@@ -23,14 +23,19 @@ body {
     user-select: none;
 }
 
-.nav-link,
+.nav-link{
+    font-family: 'Poetsen One', sans-serif;
+    font-size: 24px;
+    color: #fff;
+}
+
 .dropdown-item {
-    color: #333;
+    color: #000000;
 }
 
 .nav-link:hover,
 .dropdown-item:hover {
-    color: #fff;
+    color: #000000;
     transform: scale(1.03);
 }
 

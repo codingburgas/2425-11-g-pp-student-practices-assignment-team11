@@ -43,17 +43,22 @@ def register_company():
     form = CompanyRegistrationForm()
     try:
         if form.validate_on_submit():
-            company_name = form.company_name
-            company_type = form.company_type.data
-            internship_one = form.internship_one.data
-            internship_two = form.internship_two.data
-            internship_three = form.internship_three.data
-            duration = form.duration.data
-            format = form.format.data
-            requirements = form.requirements.data
+            new_form = Company(
+                company_name = form.company_name.data,
+                company_type = form.company_type.data,
+                internship_one = form.internship_one.data,
+                internship_two = form.internship_two.data,
+                internship_three = form.internship_three.data,
+                duration = form.duration.data,
+                format = form.format.data,
+                requirements = form.requirements.data
+            )
 
-            flash(f'Company registered successfully! Name: {company_name}', 'success')
-            return redirect(url_for('register_company'))
+            db.session.add(new_form)
+            db.session.commit()
+            if request.method == 'POST':
+                flash(f'Company registered successfully!', 'success')
+                return redirect(url_for('main_bp.index'))
     except Exception as e:
         print(f"Login Error: {e}")
         return redirect(url_for('errors.unauthorized_error'))

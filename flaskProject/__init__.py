@@ -17,6 +17,7 @@ def create_app(config):
     login_manager.init_app(app)
     from .auth import models
     from .survey import models
+    from .companies import models
 
     with app.app_context():
         db.create_all()
