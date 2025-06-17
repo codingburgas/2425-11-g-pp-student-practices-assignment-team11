@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{% block link %}
+     <link rel="stylesheet" href="../../static/css/survey.css">
+     <link rel="stylesheet" href="../../static/css/base.css">
+ {% endblock %}
+
 {% block content %}
 <div class="flashcard-container container my-5 py-4 px-4 shadow rounded-4">
   <h2 class="mb-4 fw-bold text-center" style="font-family: 'Poetsen One', sans-serif;">Internship Preferences</h2>
@@ -39,72 +44,6 @@
     </div>
   </form>
 </div>
-
-<style>
-.flashcard-container {
-  max-width: 600px;
-  background-color: var(--light-primary);
-  transition: var(--transition);
-  overflow: hidden;
-}
-
-.flashcards-wrapper {
-  display: flex;
-  transition: transform 0.6s ease;
-  width: 100%;
-}
-
-.flashcard {
-  width: 100%;
-  flex-shrink: 0;
-  padding: 1rem;
-}
-
-.form-label {
-  font-size: 1rem;
-}
-
-.form-check-label {
-  font-weight: 500;
-}
-
-.form-check-input:checked {
-  background-color: #79A8A9;
-  border-color: #79A8A9;
-}
-
-.form-control {
-  border-radius: 12px;
-  padding: 10px;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-}
-
-html[data-theme="dark"] .flashcard-container {
-  background-color: var(--dark-primary) !important;
-}
-
-html[data-theme="dark"] .form-control {
-  background-color: #2a2a2a;
-  border: 1px solid #555;
-  color: #f1f1f1;
-}
-
-html[data-theme="dark"] .form-check-label {
-  color: var(--dark-text);
-}
-
-.form-check {
-  background-color: transparent !important;
-  border: none !important;
-}
-
-.cta-btn {
-  padding: 10px 24px;
-  font-weight: bold;
-  border-radius: 10px;
-}
-</style>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {

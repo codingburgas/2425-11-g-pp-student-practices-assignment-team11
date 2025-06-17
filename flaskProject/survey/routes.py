@@ -11,24 +11,27 @@ from flaskProject.survey import survey_bp
 @login_required
 def survey():
     form = InternshipSurveyForm()
-    if form.validate_on_submit():
-        new_form = Form(
-            question1=form.industry.data,
-            question2=form.company_type.data,
-            question3=form.duration.data,
-            question4=", ".join(form.skills.data),
-            question5=form.experience.data,
-            question6=form.format.data,
-            question7=form.priority.data,
-            question8=form.teamwork.data,
-            question9=form.education.data,
-            user_id=current_user.id
-        )
+    try:
+        if form.validate_on_submit():
+            new_form = Form(
+                question1=form.industry.data,
+                question2=form.company_type.data,
+                question3=form.duration.data,
+                question4=", ".join(form.skills.data),
+                question5=form.experience.data,
+                question6=form.format.data,
+                question7=form.priority.data,
+                question8=form.teamwork.data,
+                question9=form.education.data,
+                user_id=current_user.id
+            )
 
-        db.session.add(new_form)
-        db.session.commit()
-        if request.method == 'POST':
-            flash("Survey submitted successfully!", "success")
-            return redirect(url_for('main_bp.index'))
-
+            db.session.add(new_form)
+            db.session.commit()
+            if request.method == 'POST':
+                flash("Survey submitted successfully!", "success")
+                return redirect(url_for('main_bp.index'))
+    except Exception as e:
+        print(f"Login Error: {e}")
+        return redirect(url_for('errors.not_found_error'))
     return render_template("survey/survey.html", form=form)

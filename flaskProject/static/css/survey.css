@@ -1,0 +1,50 @@
+.flashcard-container {
+  max-width: 600px;
+  overflow: hidden;
+    margin-right: 800px;
+}
+
+.flashcards-wrapper {
+  display: flex;
+  transition: transform 0.6s ease;
+  width: 100%;
+    font-size: 18px;
+}
+
+.flashcard {
+  width: 100%;
+  flex-shrink: 0;
+  padding: 1rem;
+}
+
+.form-label {
+  font-size: 1rem;
+}
+
+.form-check-label {
+  font-weight: 500;
+}
+
+.form-check-input:checked {
+  background-color: #79A8A9;
+  border-color: #79A8A9;
+}
+
+.form-control {
+  border-radius: 12px;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+}
+
+.form-check {
+  background-color: transparent;
+  border: none;
+}
+
+.cta-btn {
+  padding: 10px 24px;
+  font-weight: bold;
+  border-radius: 10px;
+}
+

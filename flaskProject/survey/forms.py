@@ -4,10 +4,6 @@ from wtforms.validators import InputRequired
 from wtforms.widgets import ListWidget, CheckboxInput
 
 
-class MultiCheckboxField(SelectMultipleField):
-    widget = ListWidget(prefix_label=False)
-    option_widget = CheckboxInput()
-
 
 class InternshipSurveyForm(FlaskForm):
     industry = RadioField("In which industry or field do you want to grow?", choices=[
@@ -31,12 +27,12 @@ class InternshipSurveyForm(FlaskForm):
         ('>6', 'd) More than 6 months')
     ], validators=[InputRequired()])
 
-    skills = MultiCheckboxField("What technical skills do you have? (Select all that apply)", choices=[
+    skills = RadioField("What technical skills do you have?", choices=[
         ('programming', 'a) Programming (e.g. Python, Java, C++)'),
         ('data', 'b) Data Analysis'),
         ('design', 'c) Design & Visualization'),
         ('management', 'd) Project Management')
-    ])
+    ], validators=[InputRequired()])
 
     experience = RadioField("Do you have previous internship or work experience?", choices=[
         ('yes', 'a) Yes'),

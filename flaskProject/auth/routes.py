@@ -16,96 +16,105 @@ def load_user(user_id):
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
+    try:
+        if form.validate_on_submit():
+            user = User.query.filter_by(username=form.username.data).first()
 
-        if user is None:
-            flash('User not found. Please check your username or register.', 'danger')
-            return render_template('auth/login.html', form=form)
+            if user is None:
+                flash('User not found. Please check your username or register.', 'danger')
+                return render_template('auth/login.html', form=form)
 
-        if not user.email_verified:
-            flash('Please verify your email before logging in.', 'warning')
-            return render_template('auth/login.html', form=form)
+            if not user.email_verified:
+                flash('Please verify your email before logging in.', 'warning')
+                return render_template('auth/login.html', form=form)
 
-        if user.verify_password(form.password.data):
-            login_user(user)
-            return redirect(url_for('survey.survey'))
-        else:
-            flash('Invalid password. Please try again.', 'danger')
+            if user.verify_password(form.password.data):
+                login_user(user)
+                return redirect(url_for('survey.survey'))
+            else:
+                flash('Invalid password. Please try again.', 'danger')
 
+    except Exception as e:
+        print(f"Login Error: {e}")
+        return redirect(url_for('errors.integrity_error'))
     return render_template('auth/login.html', form=form)
-
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
-    if request.method == 'POST':
-        password = form.password.data
-        confirm_password = form.confirm_password.data
-        email = form.email.data
-        username = form.username.data
+    try:
+        if request.method == 'POST':
+            password = form.password.data
+            confirm_password = form.confirm_password.data
+            email = form.email.data
+            username = form.username.data
 
-        if password != confirm_password:
-            flash('Passwords do not match', 'danger')
-            return render_template('auth/register.html', form=form)
+            if password != confirm_password:
+                flash('Passwords do not match', 'danger')
+                return render_template('auth/register.html', form=form)
 
-        if '@' not in email:
-            flash('Email should contain "@"', 'danger')
-            return render_template('auth/register.html', form=form)
+            if '@' not in email:
+                flash('Email should contain "@"', 'danger')
+                return render_template('auth/register.html', form=form)
 
-        existing_user = User.query.filter_by(email=email).first()
-        if existing_user:
-            flash('This email is already registered. Please log in or use a different email.', 'danger')
-            return render_template('auth/register.html', form=form)
+            existing_user = User.query.filter_by(email=email).first()
+            if existing_user:
+                flash('This email is already registered. Please log in or use a different email.', 'danger')
+                return render_template('auth/register.html', form=form)
 
-        existing_username = User.query.filter_by(username=username).first()
-        if existing_username:
-            flash('Username already taken. Please choose a different one.', 'warning')
-            return render_template('auth/register.html', form=form)
+            existing_username = User.query.filter_by(username=username).first()
+            if existing_username:
+                flash('Username already taken. Please choose a different one.', 'warning')
+                return render_template('auth/register.html', form=form)
 
-        user = User(username=username, email=email, password=password)
-        db.session.add(user)
-        db.session.commit()
+            user = User(username=username, email=email, password=password)
+            db.session.add(user)
+            db.session.commit()
 
-        code = generate_verification_code()
-        session['verification_code'] = code
-        session['verification_email'] = email
-        send_verification_code_email(email, code)
+            code = generate_verification_code()
+            session['verification_code'] = code
+            session['verification_email'] = email
+            send_verification_code_email(email, code)
 
-        flash('Verification code sent to your email.', 'success')
-        return redirect(url_for('auth.verify_code'))
-
+            flash('Verification code sent to your email.', 'success')
+            return redirect(url_for('auth.verify_code'))
+    except Exception as e:
+        print(f"Login Error: {e}")
+        return redirect(url_for('errors.integrity_error'))
     return render_template('auth/register.html', form=form)
 
 
 @auth_bp.route('/verify_code', methods=['GET', 'POST'])
 def verify_code():
-    if request.method == 'POST':
-        input_code = request.form.get('code')
-        actual_code = session.get('verification_code')
-        email = session.get('verification_email')
+    try:
+        if request.method == 'POST':
+            input_code = request.form.get('code')
+            actual_code = session.get('verification_code')
+            email = session.get('verification_email')
 
-        if not actual_code or not email:
-            flash("Verification session expired. Please register again.", "danger")
-            return redirect(url_for('auth.register'))
-
-        if input_code == actual_code:
-            user = User.query.filter_by(email=email).first()
-            if user:
-                user.email_verified = True
-                db.session.commit()
-                session.pop('verification_code', None)
-                session.pop('verification_email', None)
-
-                flash("Email verified successfully! Please log in.", "success")
-                return redirect(url_for('auth.login'))
-            else:
-                flash("User not found.", "danger")
+            if not actual_code or not email:
+                flash("Verification session expired. Please register again.", "danger")
                 return redirect(url_for('auth.register'))
 
-        else:
-            flash("Invalid verification code. Please try again.", "danger")
+            if input_code == actual_code:
+                user = User.query.filter_by(email=email).first()
+                if user:
+                    user.email_verified = True
+                    db.session.commit()
+                    session.pop('verification_code', None)
+                    session.pop('verification_email', None)
 
+                    flash("Email verified successfully! Please log in.", "success")
+                    return redirect(url_for('auth.login'))
+                else:
+                    flash("User not found.", "danger")
+                    return redirect(url_for('auth.register'))
+
+            else:
+                flash("Invalid verification code. Please try again.", "danger")
+    except Exception as e:
+        print(f"Login Error: {e}")
+        return redirect(url_for('errors.internal_error'))
     return render_template('auth/verify_code.html')
 
 
