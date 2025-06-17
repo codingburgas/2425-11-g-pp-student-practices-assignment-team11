@@ -4,7 +4,6 @@ from sklearn.linear_model import LogisticRegression
 from ..survey.models import Form
 from . import ai_bp
 
-# Mock company database
 companies = [
     {"name": "Microsoft", "industry": "it", "type": "corporate", "duration": "1-3", "skills": ["programming", "data"],
      "format": "hybrid"},
