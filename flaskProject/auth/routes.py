@@ -7,6 +7,8 @@ from .forms import LoginForm, RegistrationForm, CodeForm
 from .models import User
 from flaskProject import login_manager, db
 from .resend_email import send_verification_code_email, generate_verification_code
+from ..survey.models import Form
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -30,7 +32,12 @@ def login():
 
             if user.verify_password(form.password.data):
                 login_user(user)
-                return redirect(url_for('survey.survey'))
+                survey = Form.query.filter_by(id=user.id).first()
+
+                if survey:
+                    return redirect(url_for('main_bp.index'))
+                else:
+                    return redirect(url_for('survey.survey'))
             else:
                 flash('Invalid password. Please try again.', 'danger')
 
