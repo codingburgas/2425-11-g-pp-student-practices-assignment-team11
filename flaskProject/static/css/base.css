@@ -90,3 +90,10 @@ footer {
     font-size: 0.9rem;
     color: #333;
 }
+
+
+.register-form {
+    font-size: 18px;
+    padding: 50px;
+    margin-top: 300px;
+}

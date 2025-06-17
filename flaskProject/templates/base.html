@@ -20,7 +20,10 @@
 <body>
     <nav class="navbar navbar-expand-lg px-4 py-3 ">
       <div class="container-fluid">
-        <img src="../static/images/logo_transparent.png" alt="Logo" width="100" height="100">
+        <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main_bp.index') }}">
+            <img src="../static/images/logo_transparent.png" alt="Logo" width="100" height="100">
+        </a>
+
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
           aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
