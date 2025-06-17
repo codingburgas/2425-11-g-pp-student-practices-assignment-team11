@@ -77,3 +77,71 @@ def test_login_invalid_password(mock_user, mock_form, client):
     assert b'Invalid password' in response.data
 
 
+
+
+
+
+@pytest.mark.parametrize("form_data, expected_message", [
+    ({"password": "pass1", "confirm_password": "pass2", "email": "user@example.com", "username": "user"}, b'Passwords do not match'),
+    ({"password": "pass", "confirm_password": "pass", "email": "invalidemail.com", "username": "user"}, b'Email should contain "@"'),
+])
+@patch("flaskProject.auth.routes.RegistrationForm")
+def test_register_validation_errors(mock_form, client, form_data, expected_message):
+    mock_form_instance = MagicMock()
+    mock_form.return_value = mock_form_instance
+    mock_form_instance.validate_on_submit.return_value = True
+
+    mock_form_instance.password.data = form_data["password"]
+    mock_form_instance.confirm_password.data = form_data["confirm_password"]
+    mock_form_instance.email.data = form_data["email"]
+    mock_form_instance.username.data = form_data["username"]
+
+    response = client.post('/auth/register', data=form_data, follow_redirects=True)
+    assert expected_message in response.data
+
+@patch("flaskProject.auth.routes.RegistrationForm")
+@patch("flaskProject.auth.routes.User")
+def test_register_existing_email(mock_user, mock_form, client):
+    form_data = {"password": "pass", "confirm_password": "pass", "email": "user@example.com", "username": "user"}
+
+    mock_form_instance = MagicMock()
+    mock_form.return_value = mock_form_instance
+    mock_form_instance.validate_on_submit.return_value = True
+    mock_form_instance.password.data = form_data["password"]
+    mock_form_instance.confirm_password.data = form_data["confirm_password"]
+    mock_form_instance.email.data = form_data["email"]
+    mock_form_instance.username.data = form_data["username"]
+
+    # Mock that user with this email exists
+    mock_user.query.filter_by.return_value.first.return_value = True
+
+    response = client.post('/auth/register', data=form_data, follow_redirects=True)
+    assert b'This email is already registered' in response.data
+
+@patch("flaskProject.auth.routes.RegistrationForm")
+@patch("flaskProject.auth.routes.User")
+@patch("flaskProject.auth.routes.db")
+@patch("flaskProject.auth.routes.send_verification_code_email")
+def test_register_success(mock_send_email, mock_db, mock_user, mock_form, client):
+    form_data = {"password": "pass", "confirm_password": "pass", "email": "user@example.com", "username": "user"}
+
+    mock_form_instance = MagicMock()
+    mock_form.return_value = mock_form_instance
+    mock_form_instance.validate_on_submit.return_value = True
+    mock_form_instance.password.data = form_data["password"]
+    mock_form_instance.confirm_password.data = form_data["confirm_password"]
+    mock_form_instance.email.data = form_data["email"]
+    mock_form_instance.username.data = form_data["username"]
+
+    # No user with same email or username
+    mock_user.query.filter_by.side_effect = [MagicMock(first=MagicMock(return_value=None)),  # email check
+                                             MagicMock(first=MagicMock(return_value=None))]  # username check
+
+    response = client.post('/auth/register', data=form_data, follow_redirects=True)
+    assert b'Verification code sent to your email.' in response.data
+    mock_send_email.assert_called_once()
+    mock_db.session.add.assert_called_once()
+    mock_db.session.commit.assert_called_once()
+
+
+
