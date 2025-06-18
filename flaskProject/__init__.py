@@ -32,7 +32,7 @@ def create_app(config):
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(main_bp)
     app.register_blueprint(profile_bp, url_prefix='/profile')
-    app.register_blueprint(errors_bp, url_prefix='/errors')
+    app.register_blueprint(errors_bp)
     app.register_blueprint(survey_bp, url_prefix='/survey')
     app.register_blueprint(ai_bp, url_prefix='/ai')
     app.register_blueprint(companies_bp, url_prefix='/companies')

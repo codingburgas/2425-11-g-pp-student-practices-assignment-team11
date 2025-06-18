@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-  <h2>Recommended Company</h2>
-  <p>Based on your answers, we recommend you apply to: <strong>{{ company }}</strong></p>
+  <h3>Top 3 Recommended Companies</h3>
+  <ul style="font-size: 18px; text-decoration: none">
+
+    {% for company in companies %}
+      <li><strong>{{ company.name }}</strong> - {{ company.score }}%</li>
+    {% endfor %}
+  </ul>
+
+  <h4>Visual Match Overview</h4>
+  <img src="data:image/png;base64,{{ chart_image }}" alt="Match Chart" style="max-width: 600px; border: 1px solid #ccc;">
+
 {% endblock %}
