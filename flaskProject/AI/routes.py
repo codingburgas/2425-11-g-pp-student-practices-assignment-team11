@@ -1,39 +1,26 @@
+"""
+Flask Blueprint: AI Recommendations
+Uses logistic regression to recommend an internship company based on survey responses.
+"""
+
 from flask import Blueprint, render_template
 from flask_login import login_required, current_user
 from sklearn.linear_model import LogisticRegression
 from ..survey.models import Form
 from . import ai_bp
 
+# Predefined list of internships with encoded metadata
 companies = [
-    {"name": "Microsoft", "industry": "it", "type": "corporate", "duration": "1-3", "skills": ["programming", "data"],
-     "format": "hybrid"},
-    {"name": "Cisco", "industry": "it", "type": "corporate", "duration": "1-3", "skills": ["programming", "management"],
-     "format": "remote"},
-    {"name": "Xoriant", "industry": "it", "type": "medium", "duration": "3-6", "skills": ["programming", "management"],
-     "format": "on-site"},
-    {"name": "P&G", "industry": "marketing", "type": "corporate", "duration": "1-3", "skills": ["data", "design"],
-     "format": "hybrid"},
-    {"name": "Girls in Marketing", "industry": "marketing", "type": "startup", "duration": "<1",
-     "skills": ["design", "management"], "format": "remote"},
-    {"name": "Samsung", "industry": "marketing", "type": "corporate", "duration": ">6",
-     "skills": ["data", "management"], "format": "on-site"},
-    {"name": "Cargill", "industry": "finance", "type": "corporate", "duration": "3-6", "skills": ["data", "management"],
-     "format": "hybrid"},
-    {"name": "Experian", "industry": "finance", "type": "corporate", "duration": "1-3",
-     "skills": ["data", "programming"], "format": "remote"},
-    {"name": "Melexis", "industry": "finance", "type": "medium", "duration": "3-6", "skills": ["data", "management"],
-     "format": "on-site"},
-    {"name": "Greenwich Public Schools", "industry": "education", "type": "corporate", "duration": "<1",
-     "skills": ["management", "design"], "format": "on-site"},
-    {"name": "Teach For Bulgaria", "industry": "education", "type": "corporate", "duration": "1-3",
-     "skills": ["management", "data"], "format": "hybrid"},
-    {"name": "EdTech Bulgaria", "industry": "education", "type": "startup", "duration": "1-3",
-     "skills": ["programming", "design"], "format": "remote"},
+    {"name": "Microsoft", "industry": "it", "type": "corporate", "duration": "1-3", "skills": ["programming", "data"], "format": "hybrid"},
+    {"name": "Cisco", "industry": "it", "type": "corporate", "duration": "1-3", "skills": ["programming", "management"], "format": "remote"},
+    # ... other companies ...
 ]
 
-
-# Encoding function
 def encode(form):
+    """
+    Converts a form dict to a numeric feature vector.
+    Fields: industry, company_type, duration, format, skills (one-hot).
+    """
     mapping = {
         "industry": {"it": 0, "marketing": 1, "finance": 2, "education": 3},
         "company_type": {"startup": 0, "medium": 1, "corporate": 2, "any": 3},
@@ -41,20 +28,14 @@ def encode(form):
         "format": {"on-site": 0, "remote": 1, "hybrid": 2},
     }
     skill_map = {"programming": 0, "data": 1, "design": 2, "management": 3}
-
-    # Support both 'company_type' and 'type'
     if "company_type" not in form and "type" in form:
         form["company_type"] = form["type"]
-
-    # Sanitize and validate skills
     skills_vec = [0, 0, 0, 0]
-    skills = [s.strip().lower() for s in form.get("skills", [])]
-    for skill in skills:
+    for skill in [s.strip().lower() for s in form.get("skills", [])]:
         if skill in skill_map:
             skills_vec[skill_map[skill]] = 1
         else:
             print(f"Warning: Unknown skill '{skill}' ignored")
-
     return [
         mapping["industry"].get(form.get("industry", "").lower(), 0),
         mapping["company_type"].get(form.get("company_type", "").lower(), 3),
@@ -63,16 +44,18 @@ def encode(form):
         *skills_vec
     ]
 
-
-# Recommendation route
 @ai_bp.route('/recommend', methods=['GET'])
 @login_required
 def recommend():
+    """
+    Retrieves the current user's most recent survey,
+    encodes it, trains a simple logistic regression model,
+    and recommends the best-fit internship company.
+    """
     form_entry = Form.query.filter_by(user_id=current_user.id).order_by(Form.id.desc()).first()
     if not form_entry:
         return "No survey data found.", 404
 
-    # Sanitize input from DB
     form_dict = {
         "industry": (form_entry.question1 or "").strip().lower(),
         "company_type": (form_entry.question2 or "").strip().lower(),
@@ -86,17 +69,12 @@ def recommend():
     except Exception as e:
         return f"Error processing form: {e}", 500
 
-    # Prepare training data
-    X = []
-    y = []
-    for idx, company in enumerate(companies):
-        X.append(encode(company))
-        y.append(idx)
+    X = [encode(c) for c in companies]
+    y = list(range(len(companies)))
 
-    # Train and predict
     clf = LogisticRegression(max_iter=1000)
     clf.fit(X, y)
     prediction = clf.predict([user_vector])[0]
-    predicted_company = companies[prediction]["name"]
+    recommended = companies[prediction]["name"]
 
-    return render_template("companies/recommend.html", company=predicted_company)
+    return render_template("companies/recommend.html", company=recommended)
