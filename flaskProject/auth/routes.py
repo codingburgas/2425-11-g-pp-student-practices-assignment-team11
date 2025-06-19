@@ -47,6 +47,7 @@ def login():
                 flash('Invalid password. Please try again.', 'danger')
     except Exception as e:
         print(f"Login Error: {e}")
+        flash('A critical error occurred.', 'danger')
         return redirect(url_for('errors.integrity_error'))
 
     return render_template('auth/login.html', form=form)

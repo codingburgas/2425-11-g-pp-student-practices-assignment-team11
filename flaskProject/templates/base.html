@@ -57,7 +57,8 @@
             {% if current_user.is_authenticated %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                 🙍‍♂️ {{ current_user.username }}
+                  <img src="{{ url_for('static', filename='images/account.png') }}" alt="Logo">
+                 ️ {{ current_user.username }}
               </a>
               <ul class="dropdown-menu">
                 {% if current_user.is_admin %}
@@ -100,6 +101,14 @@
             {% block content %}Hi{% endblock %}
         </div>
     </div>
+
+    {% if request.endpoint in ['companies.show_companies', ''] %}
+        <section id="text" class="blue-section">
+            <div class="content">
+                {% block companies %} {% endblock %}
+            </div>
+        </section>
+    {% endif %}
 
     </main>
 
