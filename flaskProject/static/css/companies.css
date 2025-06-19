@@ -1,0 +1,36 @@
+
+#internships {
+  min-height: 100vh;
+}
+
+.box-card {
+    display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
+  gap: 3rem;
+}
+
+.internship-card {
+  background-color: #ffffff;
+    width: 400px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  font-size: 0.95rem;
+}
+
+.internship-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.internship-card h5 {
+  font-size: 1.15rem;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+}

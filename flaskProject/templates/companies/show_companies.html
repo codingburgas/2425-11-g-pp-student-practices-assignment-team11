@@ -1,19 +1,41 @@
 {% extends "base.html" %}
 
-{% block content %}
-<div class="container my-5">
-  <h2 class="text-center fw-bold mb-5" style="font-family: 'Poetsen One', sans-serif;">Available Internship Companies</h2>
+{% block link %}
+  <link rel="stylesheet" href="../../static/css/base.css">
+  <link rel="stylesheet" href="../../static/css/home.css">
+  <link rel="stylesheet" href="../../static/css/companies.css">
+{% endblock %}
 
-  <div class="row g-4">
+{% block content %}
+    <div class="box">
+            <h1 class="welcome-title">Welcome!</h1>
+            <p class="welcome-subtitle">Learn how to work with AI!</p>
+            <p class="welcome-text">
+              <strong>BeforeAI</strong> is an interactive Flask web application where users can upload their own datasets
+              with which they can train machine learning models in real-time, and visually experience how AI learns,
+              evolves, and predicts! Learn how <strong>Perceptron</strong> and <strong>Linear Regression</strong> work —
+              visually and interactively.
+            </p>
+            <a href="#text" class="scroll-button">See More ↓</a>
+        </div>
+{% endblock %}
+
+{% block companies %}
+<div id="internships" class="container-fluid py-5">
+  <h2 class="text-center fw-bold mb-5" style="font-family: 'Poetsen One', sans-serif; font-size: 2.5rem;">
+    Available Internship Companies
+  </h2>
+
+  <div class="row g-5 justify-content-center">
     {% for company in companies %}
-      <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="card shadow-sm rounded-4 h-100 p-2 border-0">
-          <div class="d-flex align-items-center mb-2">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card internship-card h-100 shadow rounded-4 border-0 p-2">
+          <div class="d-flex align-items-center mb-3">
             <img src="{{ url_for('static', filename='images/' ~ company.name|lower|replace(' ', '_') ~ '.png') }}"
-                 alt="{{ company.name }} logo" class="me-2 rounded" style="width: 40px; height: 40px; object-fit: contain;">
-            <h5 class="mb-0 fw-semibold" style="font-size: 1.1rem;">{{ company.name }}</h5>
+                 alt="{{ company.name }} logo" class="me-3 rounded" style="width: 50px; height: 50px; object-fit: contain;">
+            <h5 class="mb-0 fw-semibold">{{ company.name }}</h5>
           </div>
-          <ul class="list-unstyled ps-3 mb-3" style="font-size: 0.95rem;">
+          <ul class="list-unstyled ps-1 mb-3 small">
             <li><strong>Industry:</strong> {{ company.industry|capitalize }}</li>
             <li><strong>Type:</strong> {{ company.type|capitalize }}</li>
             <li><strong>Duration:</strong> {{ company.duration }} months</li>
@@ -29,22 +51,7 @@
   </div>
 </div>
 
-<style>
-.card {
-  background-color: var(--light-primary);
-  transition: var(--transition);
-  font-size: 0.95rem;
-}
-
-.card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-
-html[data-theme="dark"] .card {
-  background-color: var(--dark-primary) !important;
-  color: var(--dark-text);
-  border: 1px solid #444;
-}
-</style>
 {% endblock %}
+
+
+
