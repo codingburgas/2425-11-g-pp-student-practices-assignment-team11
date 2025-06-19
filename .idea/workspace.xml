@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f2d9acb-1307-444b-8855-42d608782421" name="Changes" comment="Fix the design of the navigation bar">
-      <change afterPath="$PROJECT_DIR$/flaskProject/static/css/companies.css" afterDir="false" />
+    <list default="true" id="6f2d9acb-1307-444b-8855-42d608782421" name="Changes" comment="Create the design of the page with companies">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskProject/static/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/static/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskProject/templates/companies/show_companies.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/companies/show_companies.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/static/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/static/css/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/companies/register_company.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/companies/register_company.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +139,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750338634664</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Create the design of the page with companies">
+      <option name="closed" value="true" />
+      <created>1750338911662</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1750338911662</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,10 +157,11 @@
     <MESSAGE value="Fix issues with link in navbar" />
     <MESSAGE value="Add icon to the profile" />
     <MESSAGE value="Fix the design of the navigation bar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix the design of the navigation bar" />
+    <MESSAGE value="Create the design of the page with companies" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create the design of the page with companies" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/2425_11_g_pp_student_practices_assignment_team11$2425_11_g_pp_student_practices_assignment_team11.coverage" NAME="2425-11-g-pp-student-practices-assignment-team11 Coverage Results" MODIFIED="1750256723463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/2425_11_g_pp_student_practices_assignment_team11$Flask__flaskProject_app_py_.coverage" NAME="Flask (flaskProject/app.py) Coverage Results" MODIFIED="1750338043464" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/2425_11_g_pp_student_practices_assignment_team11$Flask__flaskProject_app_py_.coverage" NAME="Flask (flaskProject/app.py) Coverage Results" MODIFIED="1750340798874" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

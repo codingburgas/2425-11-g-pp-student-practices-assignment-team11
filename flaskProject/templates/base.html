@@ -102,7 +102,7 @@
         </div>
     </div>
 
-    {% if request.endpoint in ['companies.show_companies', ''] %}
+    {% if request.endpoint in ['companies.show_companies', 'companies.register_company'] %}
         <section id="text" class="blue-section">
             <div class="content">
                 {% block companies %} {% endblock %}
