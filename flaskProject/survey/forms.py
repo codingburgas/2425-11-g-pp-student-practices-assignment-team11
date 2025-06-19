@@ -10,7 +10,8 @@ class InternshipSurveyForm(FlaskForm):
         ('it', 'a) IT & Technology'),
         ('marketing', 'b) Marketing & Advertising'),
         ('finance', 'c) Finance & Accounting'),
-        ('education', 'd) Education')
+        ('education', 'd) Education'),
+        ('other', 'e) Other')
     ], validators=[InputRequired()])
 
     company_type = RadioField("What type of company do you prefer?", choices=[
@@ -31,7 +32,8 @@ class InternshipSurveyForm(FlaskForm):
         ('programming', 'a) Programming (e.g. Python, Java, C++)'),
         ('data', 'b) Data Analysis'),
         ('design', 'c) Design & Visualization'),
-        ('management', 'd) Project Management')
+        ('management', 'd) Project Management'),
+        ('other', 'e) Other')
     ], validators=[InputRequired()])
 
     experience = RadioField("Do you have previous internship or work experience?", choices=[
@@ -61,7 +63,37 @@ class InternshipSurveyForm(FlaskForm):
     education = RadioField("What is your current level of education?", choices=[
         ('highschool', 'a) High School Student'),
         ('university', 'b) University Student'),
-        ('graduate', 'c) University Graduate')
+        ('graduate', 'c) University Graduate'),
+        ('schoolgraduate', 'd) School Graduate')
+    ], validators=[InputRequired()])
+
+    work_time = RadioField("How much time of day do you prefer to work?", choices=[
+        ('<1', 'a) Less than 1 hour'),
+        ('1-3', 'b) 1–3 hours'),
+        ('3-6', 'c) 3–6 hours'),
+        ('>6', 'd) More than 6 hours')
+    ], validators=[InputRequired()])
+
+    tasks = RadioField("What type of tasks interest you the most?", choices=[
+        ('research', 'a) Research & Development'),
+        ('client', 'b) Client Interaction'),
+        ('admin', 'c) Administrative Support'),
+        ('creative', 'd) Creative Work'),
+        ('other', 'e) Other')
+    ], validators=[InputRequired()])
+
+    mentor = RadioField("How important is the mentor during your internship?", choices=[
+        ('very', 'a) Very important'),
+        ('somewhat', 'b) Somewhat important'),
+        ('not', 'c) Not important'),
+        ('no_preference', 'd) No preference')
+    ], validators=[InputRequired()])
+
+    full_time_offer = RadioField("Are you interested in a potential full-time offer after the internship?", choices=[
+        ('yes', 'a) Yes, definitely'),
+        ('maybe', 'b) Maybe, if it suits me'),
+        ('no', 'c) No, I want only internship experience'),
+        ('not_sure', 'd) Not sure')
     ], validators=[InputRequired()])
 
     submit = SubmitField("Submit")

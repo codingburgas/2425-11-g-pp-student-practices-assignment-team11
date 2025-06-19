@@ -16,8 +16,6 @@ class Form(db.Model):
     question11 = db.Column(db.String)
     question12 = db.Column(db.String)
     question13 = db.Column(db.String)
-    question14 = db.Column(db.String)
-    question15 = db.Column(db.String)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 

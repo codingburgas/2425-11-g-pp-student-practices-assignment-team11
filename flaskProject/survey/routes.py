@@ -1,8 +1,3 @@
-"""
-Flask Blueprint: Survey Routes
-Handles survey form rendering, validation, and submission.
-"""
-
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from .models import Form
@@ -13,11 +8,6 @@ from flaskProject.survey import survey_bp
 @survey_bp.route('/survey', methods=['GET', 'POST'])
 @login_required
 def survey():
-    """
-    Handles the internship survey:
-    - GET: displays the survey form.
-    - POST: validates input, stores responses, and redirects on success.
-    """
     form = InternshipSurveyForm()
     try:
         if form.validate_on_submit():
@@ -25,12 +15,16 @@ def survey():
                 question1=form.industry.data,
                 question2=form.company_type.data,
                 question3=form.duration.data,
-                question4=", ".join(form.skills.data),
+                question4=form.skills.data,
                 question5=form.experience.data,
                 question6=form.format.data,
                 question7=form.priority.data,
                 question8=form.teamwork.data,
                 question9=form.education.data,
+                question10=form.work_time.data,
+                question11=form.tasks.data,
+                question12=form.mentor.data,
+                question13=form.full_time_offer.data,
                 user_id=current_user.id
             )
             db.session.add(new_form)
