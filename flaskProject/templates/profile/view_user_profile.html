@@ -1,6 +1,12 @@
-{% extends "content_base.html" %}
+{% extends "base.html" %}
+
+{% block link %}
+  <link rel="stylesheet" href="../../static/css/auth.css">
+  <link rel="stylesheet" href="../../static/css/base.css">
+{% endblock %}
+
 {% block content %}
-<div class="container mt-5">
+<div class="container user-info mt-5">
   <div class="card p-4 shadow-sm text-center">
     <i class="bi bi-person-circle" style="font-size: 6rem; color: #79A8A9;"></i>
     <h2 class="mt-3">{{ user.username }}</h2>
