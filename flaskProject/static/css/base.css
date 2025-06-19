@@ -33,18 +33,13 @@ body {
     color: #000000;
 }
 
-.nav-link:hover,
-.dropdown-item:hover {
-    color: #000000;
-    transform: scale(1.03);
-}
 
 
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 99%;
     z-index: 2;
 }
 
