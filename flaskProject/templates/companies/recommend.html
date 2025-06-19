@@ -1,14 +1,22 @@
 {% extends "base.html" %}
+
+{% block link %}
+  <link rel="stylesheet" href="../../static/css/base.css">
+  <link rel="stylesheet" href="../../static/css/auth.css">
+{% endblock %}
+
 {% block content %}
-  <h3>Top 3 Recommended Companies</h3>
-  <ul style="font-size: 18px; text-decoration: none">
+    <div class="recommendation">
+      <h3>Top 3 Recommended Companies</h3>
+      <ul style="font-size: 18px; text-decoration: none">
 
-    {% for company in companies %}
-      <li><strong>{{ company.name }}</strong> - {{ company.score }}%</li>
-    {% endfor %}
-  </ul>
+        {% for company in companies %}
+          <li style="list-style-type: none"><strong>{{ company.name }}</strong> - {{ company.score }}%</li>
+        {% endfor %}
+      </ul>
+        <br>
 
-  <h4>Visual Match Overview</h4>
-  <img src="data:image/png;base64,{{ chart_image }}" alt="Match Chart" style="max-width: 600px; border: 1px solid #ccc;">
-
+      <h4>Visual Match Overview</h4>
+      <img src="data:image/png;base64,{{ chart_image }}" alt="Match Chart" style="max-width: 600px; border: 1px solid #ccc;">
+    </div>
 {% endblock %}
