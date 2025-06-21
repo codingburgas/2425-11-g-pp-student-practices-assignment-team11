@@ -9,14 +9,19 @@
     {% if not current_user.is_authenticated %}
         <div class="box">
             <h1 class="welcome-title">Welcome!</h1>
-            <p class="welcome-subtitle">Learn how to work with AI!</p>
             <p class="welcome-text">
-              <strong>BeforeAI</strong> is an interactive Flask web application where users can upload their own datasets
-              with which they can train machine learning models in real-time, and visually experience how AI learns,
-              evolves, and predicts! Learn how <strong>Perceptron</strong> and <strong>Linear Regression</strong> work —
-              visually and interactively.
+              <strong>Studypilot</strong> is a Flask-based web application designed to
+                help students and young professionals discover internship opportunities
+                tailored to their preferences and skills. It provides a user-friendly
+                interface for browsing, filtering, and applying to internships across
+                various industries and locations.
             </p>
             <a href="{{ url_for('auth.register') }}" class="cta-btn">Get Started</a>
+        </div>
+    {% else %}
+        <div class="box">
+            <h1 class="welcome-title">Hello,</h1>
+            <p class="welcome-subtitle">Learn how to work with AI!</p>
         </div>
     {% endif %}
 {% endblock %}

@@ -7,7 +7,7 @@
     padding: 50px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    color: #1F4E5F;
+    color: #51668a;
     text-shadow: none;
     z-index: 2;
     font-size: 18px;
@@ -16,6 +16,7 @@
 
 .recommendation {
     background-color: transparent;
+    color: #F4F7F7;
     text-align: center;
     max-width: 600px;
     margin-top: -280px;

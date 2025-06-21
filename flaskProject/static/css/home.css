@@ -24,14 +24,14 @@
 .welcome-text {
     max-width: 700px;
     margin: 0 auto 40px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     line-height: 1.7;
     color: #fff;
     user-select: none;
     z-index: 2;
 }
 
-.cta-btn, .scroll-button {
+.cta-btn, .scroll-button, .login {
     font-size: 1.2rem;
     padding: 12px 32px;
     background-color: #fff;
@@ -48,10 +48,14 @@
     transition: all 0.3s ease;
 }
 
-.cta-btn:hover {
+.cta-btn:hover, .login:hover {
     background-color: #b4bdd0;
     color: white;
     transform: scale(1.05) translateY(-2px);
+}
+
+.login:hover {
+    background-color: #6d88b9;
 }
 
 .scroll-button {
