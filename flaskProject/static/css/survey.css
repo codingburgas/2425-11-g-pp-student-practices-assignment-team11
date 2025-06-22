@@ -1,14 +1,15 @@
 .flashcard-container {
   max-width: 600px;
   overflow: hidden;
-    margin-right: 800px;
+  margin-bottom: 1000px;
+    margin-right: 1000px;
 }
 
 .flashcards-wrapper {
   display: flex;
   transition: transform 0.6s ease;
   width: 100%;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .flashcard {
@@ -18,11 +19,14 @@
 }
 
 .form-label {
-  font-size: 1rem;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 25px;
 }
 
 .form-check-label {
   font-weight: 500;
+  text-align: left;
 }
 
 .form-check-input:checked {
@@ -40,11 +44,21 @@
 .form-check {
   background-color: transparent;
   border: none;
+  text-align: left;
 }
 
 .cta-btn {
   padding: 10px 24px;
   font-weight: bold;
   border-radius: 10px;
+}
+
+#prev-btn {
+  color: white;
+  border-color: white;
+}
+
+#prev-btn:hover {
+  border-color: #757575;
 }
 
