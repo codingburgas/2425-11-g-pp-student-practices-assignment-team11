@@ -1,39 +1,51 @@
 {% extends "base.html" %}
+
+{% block link %}
+  <link rel="stylesheet" href="../../static/css/admin.css">
+  <link rel="stylesheet" href="../../static/css/base.css">
+{% endblock %}
+
 {% block content %}
-<div class="container mt-5">
-<h1 class="mb-4">Pending Companies</h1>
-<table class="table table-striped">
-<thead>
-<tr>
-<th>ID</th>
-<th>Type</th>
-<th>Internship Programs</th>
-<th>Duration</th>
-<th>Format</th>
-<th>Requirements</th>
-<th>Actions</th>
-</tr>
-</thead>
-<tbody>
-            {% for company in companies %}
-<tr>
-<td>{{ company.id }}</td>
-<td>{{ company.company_type }}</td>
-<td>{{ company.internship_programs }}</td>
-<td>{{ company.duration }}</td>
-<td>{{ company.format }}</td>
-<td>{{ company.requirements }}</td>
-<td>
-<form method="POST" action="{{ url_for('admin_company_action', company_id=company.id, action='approve') }}" style="display:inline;">
-<button class="btn btn-success btn-sm">Approve</button>
-</form>
-<form method="POST" action="{{ url_for('admin_company_action', company_id=company.id, action='reject') }}" style="display:inline;">
-<button class="btn btn-danger btn-sm">Reject</button>
-</form>
-</td>
-</tr>
-            {% endfor %}
-</tbody>
-</table>
+<div class="companies-requests mt-5">
+    <h1 class="mb-4">Pending Companies</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Internship One</th>
+                <th>Internship Two</th>
+                <th>Internship Three</th>
+                <th>Duration</th>
+                <th>Format</th>
+                <th>Requirements</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for company in companies %}
+        <tr>
+            <td>{{ company.id }}</td>
+            <td>{{ company.company_name }}</td>
+            <td>{{ company.company_type }}</td>
+            <td>{{ company.internship_one }}</td>
+            <td>{{ company.internship_two }}</td>
+            <td>{{ company.internship_three }}</td>
+            <td>{{ company.duration }}</td>
+            <td>{{ company.format }}</td>
+            <td>{{ company.requirements }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('companies.admin_company_action', company_id=company.id, action='approve') }}" style="display:inline;">
+                <button class="btn btn-success btn-sm">Approve</button>
+                </form>
+                <form method="POST" action="{{ url_for('companies.admin_company_action', company_id=company.id, action='reject') }}" style="display:inline;">
+                <button class="btn btn-danger btn-sm">Reject</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}
