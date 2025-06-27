@@ -1,4 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>This is {{ current_user.username }}'s dashboard</h1>
+<h1>Welcome, {{ current_user.username }}!</h1>
+
+<!-- Post Form -->
+<div>
+    <h2>Create a Post</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="Title" required><br><br>
+        <textarea name="content" placeholder="What's on your mind?" required></textarea><br><br>
+        <button type="submit">Post</button>
+    </form>
+</div>
+
+<hr>
 {% endblock %}

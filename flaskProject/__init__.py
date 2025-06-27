@@ -36,5 +36,6 @@ def create_app(config):
     app.register_blueprint(survey_bp, url_prefix='/survey')
     app.register_blueprint(ai_bp, url_prefix='/ai')
     app.register_blueprint(companies_bp, url_prefix='/companies')
-
+    with app.app_context():
+        db.create_all()
     return app
