@@ -97,7 +97,7 @@ def admin_company_action(company_id, action):
     except Exception as e:
         print(f"Login Error: {e}")
         return redirect(url_for('errors.unauthorized_error'))
-    return redirect(url_for('admin_companies'))
+    return redirect(url_for('companies.admin_companies'))
 
 @companies_bp.route('/show_companies')
 def show_companies():

@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f2d9acb-1307-444b-8855-42d608782421" name="Changes" comment="Make posting system">
+    <list default="true" id="6f2d9acb-1307-444b-8855-42d608782421" name="Changes" comment="Enhance the design of the suggestions page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskProject/profile/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/profile/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskProject/profile/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/profile/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskProject/templates/companies/recommend.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/companies/recommend.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskProject/templates/profile/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/profile/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskProject/templates/profile/view_user_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/profile/view_user_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/auth/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/auth/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/companies/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/companies/routes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +154,7 @@
       <updated>1750066858269</updated>
       <workItem from="1750066859337" duration="3105000" />
       <workItem from="1750502673175" duration="9312000" />
-      <workItem from="1751191048158" duration="1299000" />
+      <workItem from="1751191048158" duration="4771000" />
     </task>
     <task id="LOCAL-00001" summary="Add icon to the profile">
       <option name="closed" value="true" />
@@ -223,7 +220,15 @@
       <option name="project" value="LOCAL" />
       <updated>1751023061192</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Enhance the design of the suggestions page">
+      <option name="closed" value="true" />
+      <created>1751192698560</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1751192698560</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,11 +244,12 @@
     <MESSAGE value="Change color and text in the website" />
     <MESSAGE value="Make the survey form look more understandable" />
     <MESSAGE value="Make posting system" />
-    <option name="LAST_COMMIT_MESSAGE" value="Make posting system" />
+    <MESSAGE value="Enhance the design of the suggestions page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Enhance the design of the suggestions page" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/2425_11_g_pp_student_practices_assignment_team11$Flask__flaskProject___init___py_.coverage" NAME="Flask (flaskProject/__init__.py) Coverage Results" MODIFIED="1751030092756" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/2425_11_g_pp_student_practices_assignment_team11$2425_11_g_pp_student_practices_assignment_team11.coverage" NAME="2425-11-g-pp-student-practices-assignment-team11 Coverage Results" MODIFIED="1750256723463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/2425_11_g_pp_student_practices_assignment_team11$Flask__flaskProject_app_py_.coverage" NAME="Flask (flaskProject/app.py) Coverage Results" MODIFIED="1751192271595" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/2425_11_g_pp_student_practices_assignment_team11$Flask__flaskProject_app_py_.coverage" NAME="Flask (flaskProject/app.py) Coverage Results" MODIFIED="1751220819421" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

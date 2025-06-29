@@ -37,8 +37,12 @@ def login():
                 flash('Please verify your email before logging in.', 'warning')
                 return render_template('auth/login.html', form=form)
 
+
+
             if user.verify_password(form.password.data):
                 login_user(user)
+                if user.is_admin:
+                    return redirect(url_for('main_bp.index'))
                 survey = Form.query.filter_by(id=user.id).first()
                 if survey:
                     return redirect(url_for('main_bp.index'))
