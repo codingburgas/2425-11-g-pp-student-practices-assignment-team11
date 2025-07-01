@@ -36,3 +36,12 @@ class CompanyRegistrationForm(FlaskForm):
         validators=[DataRequired()]
     )
     submit = SubmitField('Register Company')
+
+
+from wtforms import StringField
+from wtforms.validators import Email
+
+class ApplicationForm(FlaskForm):
+    username = StringField('Full Name', validators=[DataRequired(), Length(max=100)])
+    email = StringField('Email', validators=[DataRequired(), Email(), Length(max=120)])
+    submit = SubmitField('Submit Application')

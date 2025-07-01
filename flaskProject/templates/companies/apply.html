@@ -1,18 +1,20 @@
 {% extends "base.html" %}
-
 {% block content %}
 <div class="container my-5">
-  <h2>Apply to {{ applied_company }}</h2>
+  <h2 class="text-center mb-4">Apply to {{ applied_company }}</h2>
   <form method="POST" action="{{ url_for('companies.apply_to_company', company_name=applied_company) }}">
+    {{ form.hidden_tag() }}
     <div class="mb-3">
-      <label for="fullName" class="form-label">Full Name</label>
-      <input type="text" class="form-control" id="fullName" name="full_name" required>
+      {{ form.username.label(class="form-label") }}
+      {{ form.username(class="form-control", placeholder="Enter your full name") }}
     </div>
     <div class="mb-3">
-      <label for="email" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="email" name="email" required>
+      {{ form.email.label(class="form-label") }}
+      {{ form.email(class="form-control", placeholder="Enter your email") }}
     </div>
-    <button type="submit" class="btn btn-primary">Submit Application</button>
+    <div class="text-center">
+      {{ form.submit(class="btn btn-primary") }}
+    </div>
   </form>
 </div>
 {% endblock %}

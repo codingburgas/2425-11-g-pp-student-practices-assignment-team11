@@ -16,3 +16,14 @@ class Company(db.Model):
 
     def __repr__(self):
         return f'<Company {self.company_type}>'
+
+class Application(db.Model):
+    __tablename__ = 'applications'
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    company_name = db.Column(db.String(80), nullable=False)
+
+    def __repr__(self):
+        return f'<Application {self.username} to {self.company_name}>'

@@ -104,6 +104,21 @@ def show_companies():
     return render_template('companies/show_companies.html', companies=companies)
 
 
+from .forms import ApplicationForm
+from .models import Application
+
 @companies_bp.route('/show_companies/apply/<company_name>', methods=['GET', 'POST'])
 def apply_to_company(company_name):
-    return render_template('companies/apply.html', applied_company=company_name)
+    form = ApplicationForm()
+    if form.validate_on_submit():
+        application = Application(
+           username=form.username.data,
+            email=form.email.data,
+            company_name=company_name
+        )
+        db.session.add(application)
+        db.session.commit()
+        flash(f'Application submitted to {company_name}!', 'success')
+        return redirect(url_for('companies.show_companies'))
+    return render_template('companies/apply.html', applied_company=company_name, form=form)
+
