@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>StudyPilot</title>
   <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo_transparent.png') }}">
@@ -43,7 +43,7 @@
                 <li><a class="dropdown-item" href="{{ url_for('companies.show_companies') }}">✉ Apply</a></li>
                 <li><a class="dropdown-item" href="{{ url_for('companies.register_company') }}">➕ Register company</a></li>
                 <li><a class="dropdown-item" href="{{ url_for('ai.recommend') }}">🎫 View suggestions</a></li>
-                <li><a class="dropdown-item" href="#">🔍 Search others</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('profile.view_chats') }}">💬 Chat with others</a></li>
                 {% else %}
                 <li><a class="dropdown-item" href="{{ url_for('companies.admin_companies') }}">➕ View Companies</a></li>
                 <li><a class="dropdown-item" href="#">🔍 Search</a></li>

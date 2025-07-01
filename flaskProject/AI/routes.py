@@ -130,7 +130,6 @@ def recommend():
     plt.tight_layout()
     plt.gca().invert_yaxis()
 
-    # Convert matplotlib figure to base64-encoded PNG image
     buf = io.BytesIO()
     plt.savefig(buf, format="png")
     buf.seek(0)

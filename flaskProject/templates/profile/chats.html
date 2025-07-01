@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block link %}
+  <link rel="stylesheet" href="../../static/css/base.css">
+  <link rel="stylesheet" href="../../static/css/chats.css">
+{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Your Conversations</h2>
+
+    {% if users %}
+        <ul class="list-group mb-4">
+            {% for user in users %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        {{ user.username }}
+                    </div>
+                    <div>
+                        <a href="{{ url_for('profile.chat_with_user', user_id=user.id) }}" class="btn btn-primary btn-sm">
+                            Open Chat 💬
+                        </a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-muted">You haven't had any conversations yet.</p>
+    {% endif %}
+
+    <hr>
+
+    <h4>Start a New Chat</h4>
+    <form method="GET" action="{{ url_for('profile.search_user') }}">
+        <div class="input-group mb-3">
+            <input type="text" name="username" class="form-control" placeholder="Search by username" required>
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+    </form>
+
+    {% if search_results is defined %}
+        <h5>Search Results:</h5>
+        {% if search_results %}
+            <ul class="list-group">
+                {% for user in search_results %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ user.username }}
+                        <a href="{{ url_for('profile.chat_with_user', user_id=user.id) }}" class="btn btn-success btn-sm">
+                            Start Chat 💬
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-muted">No users found.</p>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

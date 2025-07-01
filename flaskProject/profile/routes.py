@@ -8,42 +8,14 @@ from flask_login import current_user, login_required, logout_user
 from . import profile_bp
 from .. import db
 from ..auth.models import User
-from ..profile.models import Post
+from ..survey.models import Form
+from .models import Message
 
-@profile_bp.route('/dashboard', methods=['GET', 'POST'])
+@profile_bp.route('/dashboard', methods=['GET'])
 @login_required
 def dashboard():
-    if request.method == 'POST':
-        title = request.form.get('title')
-        content = request.form.get('content')
-
-        if not title or not content:
-            flash('Title and content are required', 'danger')
-            return redirect(url_for('profile.dashboard'))
-
-        post = Post(title=title, content=content, user_id=current_user.id)
-        db.session.add(post)
-        db.session.commit()
-        flash('Post created successfully!', 'success')
-        return redirect(url_for('profile.dashboard'))
-
-    posts = Post.query.order_by(Post.id.desc()).all()
-    return render_template('profile/dashboard.html', current_user=current_user, posts=posts)
-@profile_bp.route('/admin')
-@login_required
-def admin_dashboard():
-    """Admin-only dashboard displaying all users."""
-    try:
-        if not current_user.is_admin:
-            flash('Access denied: Admins only.', 'danger')
-            return redirect(url_for('auth.login'))
-        users = User.query.all()
-    except Exception as e:
-        print(f"Admin Error: {e}")
-        return redirect(url_for('errors.forbidden_error'))
-
-    return render_template('profile/admin_dashboard.html', users=users)
-
+    """Displays the logged-in user's dashboard."""
+    return render_template('profile/dashboard.html', current_user=current_user)
 @profile_bp.route('/settings', methods=['GET'])
 @login_required
 def settings():
@@ -133,8 +105,7 @@ def view_user_profile(user_id):
     Displays a public profile page for a given user ID.
     """
     user = User.query.get_or_404(user_id)
-    user_posts = Post.query.filter_by(user_id=user.id).order_by(Post.id.desc()).all()
-    return render_template('profile/view_user_profile.html', user=user, posts=user_posts)
+    return render_template('profile/view_user_profile.html', user=user)
 
 @profile_bp.route('/admin/user/<int:user_id>/survey')
 @login_required
@@ -192,3 +163,91 @@ def admin_view_users():
 
     users = User.query.all()
     return render_template('profile/view_users.html', users=users, admin=True)
+
+
+@profile_bp.route('/chat/<int:user_id>')
+@login_required
+def chat_with_user(user_id):
+    """
+    Displays chat between current user and another user.
+    """
+    other_user = User.query.get_or_404(user_id)
+
+    messages = Message.query.filter(
+        ((Message.sender_id == current_user.id) & (Message.receiver_id == other_user.id)) |
+        ((Message.sender_id == other_user.id) & (Message.receiver_id == current_user.id))
+    ).order_by(Message.timestamp.asc()).all()
+
+    return render_template('profile/chat.html', user=other_user, messages=messages)
+
+
+
+@profile_bp.route('/search_user')
+@login_required
+def search_user():
+    username = request.args.get('username')
+    if not username:
+        flash('Please enter a username.', 'warning')
+        return redirect(url_for('profile.view_chats'))
+
+    user = User.query.filter_by(username=username).first()
+    if user and user.id != current_user.id:
+        return redirect(url_for('profile.chat_with_user', user_id=user.id))
+
+    flash('User not found.', 'danger')
+    return redirect(url_for('profile.view_chats'))
+
+
+@profile_bp.route('/chats')
+@login_required
+def view_chats():
+    """
+    Displays recent conversations and search bar.
+    """
+    # Find unique users the current user has messaged or been messaged by
+    messages = Message.query.filter(
+        (Message.sender_id == current_user.id) | (Message.receiver_id == current_user.id)
+    ).all()
+
+    user_ids = set()
+    for msg in messages:
+        if msg.sender_id != current_user.id:
+            user_ids.add(msg.sender_id)
+        if msg.receiver_id != current_user.id:
+            user_ids.add(msg.receiver_id)
+
+    users = User.query.filter(User.id.in_(user_ids)).all()
+
+    # Optional search
+    search_results = None
+    username_query = request.args.get('username')
+    if username_query:
+        search_results = User.query.filter(
+            User.username.ilike(f'%{username_query}%'),
+            User.id != current_user.id
+        ).all()
+
+    return render_template(
+        'profile/view_chats.html',
+        users=users,
+        search_results=search_results
+    )
+
+@profile_bp.route('/send_message/<int:user_id>', methods=['POST'])
+@login_required
+def send_message(user_id):
+    """
+    Handles sending a message to another user.
+    """
+    recipient = User.query.get_or_404(user_id)
+    content = request.form.get('message')
+
+    if not content:
+        flash("Message cannot be empty.", "danger")
+        return redirect(url_for('profile.chat_with_user', user_id=user_id))
+
+    new_message = Message(sender_id=current_user.id, receiver_id=recipient.id, content=content)
+    db.session.add(new_message)
+    db.session.commit()
+
+    return redirect(url_for('profile.chat_with_user', user_id=user_id))
