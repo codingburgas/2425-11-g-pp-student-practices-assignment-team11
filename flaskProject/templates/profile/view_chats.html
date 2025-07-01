@@ -41,7 +41,11 @@
             <button class="btn btn-outline-secondary" type="submit">Search</button>
         </div>
     </form>
-
+    <div class="container">
+      {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">{{ message }}</div>
+      {% endfor %}
+    </div>
     {% if search_results is defined %}
         <h5>Search Results:</h5>
         {% if search_results %}
