@@ -24,6 +24,11 @@
                 {{ wtf.quick_form(form) }}
             </form>
         </div>
+        <div class="container">
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning">{{ message }}</div>
+        {% endfor %}
+        </div>
     </div>
 
 {% endblock %}

@@ -15,6 +15,11 @@
 
 {% block companies %}
 <div id="text" class="container">
+    <div class="container">
+      {% for message in get_flashed_messages() %}
+        <div class="alert alert-success">{{ message }}</div>
+      {% endfor %}
+    </div>
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
     {% for user in users %}
     <div class="col">

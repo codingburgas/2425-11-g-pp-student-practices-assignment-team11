@@ -89,10 +89,10 @@ def admin_company_action(company_id, action):
         company = Company.query.get_or_404(company_id)
         if action == 'approve':
             company.status = 'approved'
-            flash(f'Company {company.id} approved.', 'success')
+            flash(f'Company {company.company_name} approved.', 'success')
         elif action == 'reject':
             company.status = 'rejected'
-            flash(f'Company {company.id} rejected.', 'warning')
+            flash(f'Company {company.company_name} rejected.', 'warning')
         db.session.commit()
     except Exception as e:
         print(f"Login Error: {e}")
