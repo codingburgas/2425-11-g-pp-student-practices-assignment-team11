@@ -90,7 +90,7 @@ Explore company types (startups, medium-sized, or large corporations)</p>
 
  
    
-<pre align="center">git clone "https://github.com/codingburgas/2425-11-g-pp-student-practices-assignment-team11"</pre>
-<h3 align="center"> Download our app using this link<h3>
+<pre align="center">studypilot-g6gbf5gmddc7g2h3.polandcentral-01.azurewebsites.net</pre>
+<h3 align="center"> Access our app using this link<h3>
 <hr>
 <h2 align="center">Thanks for checking out our repo, show us some ❤️ by giving our repo a ⭐️!</h2>
