@@ -251,3 +251,23 @@ def send_message(user_id):
     db.session.commit()
 
     return redirect(url_for('profile.chat_with_user', user_id=user_id))
+
+@profile_bp.route('/delete_chat/<int:user_id>', methods=['POST'])
+@login_required
+def delete_chat(user_id):
+    try:
+        other_user = User.query.get_or_404(user_id)
+
+        Message.query.filter(
+            ((Message.sender_id == current_user.id) & (Message.receiver_id == other_user.id)) |
+            ((Message.sender_id == other_user.id) & (Message.receiver_id == current_user.id))
+        ).delete(synchronize_session=False)
+
+        db.session.commit()
+        flash('Chat history deleted successfully.', 'success')
+
+    except Exception as e:
+        print(f"Delete Chat Error: {e}")
+        flash('An error occurred while deleting chat history.', 'danger')
+
+    return redirect(url_for('profile.view_chats'))
