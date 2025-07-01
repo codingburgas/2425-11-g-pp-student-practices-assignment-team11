@@ -28,8 +28,8 @@ Explore company types (startups, medium-sized, or large corporations)</p>
 <td>Grade</td>
 </tr>
 <tr>
-<td>Stiliyan Mishev</td>
-<td>Designer</td>
+<td>Kristiyan Kostadinov</td>
+<td>Project Manager</td>
 <td>🟦 11G</td>
 </tr>
 <tr>
@@ -43,13 +43,13 @@ Explore company types (startups, medium-sized, or large corporations)</p>
 <td>🟦 11G</td>
 </tr>
 <tr>
-<td>Kristiyan Kostadinov</td>
-<td>Project manger</td>
+<td>Mariela Dimova</td>
+<td>Back-end developer</td>
 <td>🟦11G</td>
 </tr>
 <tr>
-<td>Mariela Dimova</td>
-<td>Back-end dev</td>
+<td>Stiliyan Mishev</td>
+<td>Designer</td>
 <td>🟦11G</td>
 </tr>
 <tr>
@@ -59,13 +59,7 @@ Explore company types (startups, medium-sized, or large corporations)</p>
 </tr>
 </table><br>
  
-<h1 align="left">📃 Documents</h1><br>
-<ul align="left" >
-<li><a href="https://codingburgas-my.sharepoint.com/:w:/g/personal/dhnoneva22_codingburgas_bg/EZJRnu26mZ5LoxX7GJjfS9YB1BK8uydH1JXD5eyg4VBo2A?e=csjw0j">Documentation</a></li>
-<li><a href="https://codingburgas-my.sharepoint.com/:p:/g/personal/dhnoneva22_codingburgas_bg/EfA3q-Ddc4tNoLweKRmC1iQBECIOqJZStSbBoIR4jxY5xw?e=E0vgIQ">Presentation</a></li>
-<li><a href="https://codingburgas-my.sharepoint.com/:x:/g/personal/dhnoneva22_codingburgas_bg/Ea1qthjGaGhIpqQ1dznEQ6sB0v6BbABtLahBSBz2VEQiuA?e=zvd6yx">QA Table</a></li>    
-<li><a href="https://codingburgas-my.sharepoint.com/:w:/g/personal/dhnoneva22_codingburgas_bg/EYB9qNf9FXxBtVt5bBd8pp8BxT9OOprVfn3NchKvZPU3pw?e=MUFeZC">Test plan</a></li>  
-</ul>
+
  
  
 <h1 align="center">Used technologies 🗂</h1>
@@ -91,16 +85,9 @@ Explore company types (startups, medium-sized, or large corporations)</p>
   <li><code>email_validator</code></li>
 </ul>
 
-<p align="left">You can install them by running:</p>
 
-<pre><code>pip install flask
-pip install flask_login
-pip install flask_sqlalchemy 
-pip install flask_wtf
-pip install pyodbc
-pip install matplotlib
-pip install email_validator
-</code></pre> 
+
+
  
    
 <pre align="center">git clone "https://github.com/codingburgas/2425-11-g-pp-student-practices-assignment-team11"</pre>
