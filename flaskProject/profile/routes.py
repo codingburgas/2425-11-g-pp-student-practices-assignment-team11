@@ -9,13 +9,27 @@ from . import profile_bp
 from .. import db
 from ..auth.models import User
 from ..survey.models import Form
-from .models import Message
+from .models import Message, Post
 
-@profile_bp.route('/dashboard', methods=['GET'])
+@profile_bp.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
-    """Displays the logged-in user's dashboard."""
-    return render_template('profile/dashboard.html', current_user=current_user)
+    if request.method == 'POST':
+        title = request.form.get('title')
+        content = request.form.get('content')
+
+        if not title or not content:
+            flash('Title and content are required', 'danger')
+            return redirect(url_for('profile.dashboard'))
+
+        post = Post(title=title, content=content, user_id=current_user.id)
+        db.session.add(post)
+        db.session.commit()
+        flash('Post created successfully!', 'success')
+        return redirect(url_for('profile.dashboard'))
+
+    posts = Post.query.order_by(Post.id.desc()).all()
+    return render_template('profile/dashboard.html', current_user=current_user, posts=posts)
 @profile_bp.route('/settings', methods=['GET'])
 @login_required
 def settings():
@@ -101,11 +115,9 @@ def delete_account():
 @profile_bp.route('/user/<int:user_id>')
 @login_required
 def view_user_profile(user_id):
-    """
-    Displays a public profile page for a given user ID.
-    """
     user = User.query.get_or_404(user_id)
-    return render_template('profile/view_user_profile.html', user=user)
+    user_posts = Post.query.filter_by(user_id=user.id).order_by(Post.id.desc()).all()
+    return render_template('profile/view_user_profile.html', user=user, posts=user_posts)
 
 @profile_bp.route('/admin/user/<int:user_id>/survey')
 @login_required
