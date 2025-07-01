@@ -4,29 +4,60 @@
   <link rel="stylesheet" href="../../static/css/base.css">
   <link rel="stylesheet" href="../../static/css/home.css">
   <link rel="stylesheet" href="../../static/css/companies.css">
-    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/language.js') }}"></script>
 {% endblock %}
+<style>
+  .profile-picture-container {
+    width: 60px;  /* Reduced from 80px */
+    height: 60px; /* Reduced from 80px */
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #79A8A9;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
 
+  .profile-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .profile-picture:hover {
+    transform: scale(1.05);
+  }
+
+  .user-card-compact:hover .profile-picture {
+    transform: scale(1.05);
+  }
+</style>
 {% block content %}
 <div class="box">
-            <p class="welcome-subtitle">Down on this page you can see more information about all the users, which are using our website!</p>
-            <a href="#text" class="scroll-button">See More ↓</a>
-        </div>
+  <p class="welcome-subtitle">Down on this page you can see more information about all the users, which are using our website!</p>
+  <a href="#text" class="scroll-button">See More ↓</a>
+</div>
 {% endblock %}
 
 {% block companies %}
 <div id="text" class="container">
-    <div class="container">
-      {% for message in get_flashed_messages() %}
-        <div class="alert alert-success">{{ message }}</div>
-      {% endfor %}
-    </div>
+  <div class="container">
+    {% for message in get_flashed_messages() %}
+      <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+  </div>
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
     {% for user in users %}
     <div class="col">
       <div class="card text-center bg-light shadow-sm user-card-compact h-100">
         <div class="card-body d-flex flex-column" style="padding: 1.25rem;">
-          <i class="bi bi-person-circle" style="font-size: 3rem; color: #79A8A9;"></i>
+          <!-- Profile Picture -->
+          <div class="profile-picture-container mx-auto mb-3">
+            <img src="{{ url_for('static', filename='images/' ~ user.username ~ '_pfp.png') }}"
+                 onerror="this.src='{{ url_for('static', filename='images/account.png') }}'"
+                 alt="{{ user.username }}'s profile picture"
+                 class="profile-picture">
+          </div>
+
           <h6 class="card-title mt-2 mb-3" style="font-size: 0.95rem; font-weight: 600;">{{ user.username }}</h6>
 
           <div class="mt-auto">
@@ -52,4 +83,30 @@
     {% endfor %}
   </div>
 </div>
+
+<style>
+  .profile-picture-container {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #79A8A9;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .profile-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .profile-picture:hover {
+    transform: scale(1.05);
+  }
+
+  .user-card-compact:hover .profile-picture {
+    transform: scale(1.05);
+  }
+</style>
 {% endblock %}

@@ -3,30 +3,131 @@
 {% block link %}
   <link rel="stylesheet" href="../../static/css/auth.css">
   <link rel="stylesheet" href="../../static/css/base.css">
-    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+  <style>
+    .profile-picture {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #79A8A9;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .user-info {
+      max-width: 800px;
+      margin: 0 auto;
+      padding-bottom: 2rem;
+    }
+
+    .profile-picture-container {
+      margin-bottom: 1.5rem;
+    }
+
+    .user-posts {
+      margin-top: 2rem;
+    }
+
+    .posts-container {
+      height: 300px; /* Fixed height - shows about 3-4 posts at a time */
+      overflow-y: auto;
+      border: 1px solid #dee2e6;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      background-color: #f8f9fa;
+      scrollbar-width: thin; /* For Firefox */
+      scrollbar-color: #79A8A9 #f1f1f1; /* For Firefox */
+    }
+
+    .posts-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .post-item {
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(0,0,0,0.1);
+      background-color: white;
+      transition: all 0.2s ease;
+    }
+
+    .post-item:hover {
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .post-item h5 {
+      margin-bottom: 0.5rem;
+      color: #2c3e50;
+    }
+
+    .post-item p {
+      color: #495057;
+      margin-bottom: 0;
+    }
+
+    /* Custom scrollbar styling */
+    .posts-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .posts-container::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .posts-container::-webkit-scrollbar-thumb {
+      background: #79A8A9;
+      border-radius: 10px;
+    }
+
+    .posts-container::-webkit-scrollbar-thumb:hover {
+      background: #5f8b8c;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .posts-container {
+        height: 250px;
+      }
+
+      .profile-picture {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  </style>
 {% endblock %}
 
 {% block content %}
 <div class="container user-info mt-5">
   <div class="card p-4 shadow-sm text-center">
-    <i class="bi bi-person-circle" style="font-size: 6rem; color: #79A8A9;"></i>
+    <div class="profile-picture-container mx-auto">
+      <img src="{{ url_for('static', filename='images/' ~ user.username ~ '_pfp.png') }}"
+           onerror="this.src='{{ url_for('static', filename='images/account.png') }}'"
+           alt="{{ user.username }}'s profile picture"
+           class="profile-picture">
+    </div>
     <h2 class="mt-3">{{ user.username }}</h2>
     <p class="text-muted">User ID: {{ user.id }}</p>
   </div>
 
   <div class="user-posts mt-4">
-    <h3>{{ user.username }} 's Posts</h3>
+    <h3 class="mb-4">{{ user.username }}'s Posts</h3>
     {% if posts %}
-      <ul class="list-group">
-        {% for post in posts %}
-          <li class="list-group-item">
-            <h5>{{ post.title }}</h5>
-            <p>{{ post.content }}</p>
-          </li>
-        {% endfor %}
-      </ul>
+      <div class="posts-container">
+        <div class="posts-list">
+          {% for post in posts %}
+            <div class="post-item">
+              <h5>{{ post.title }}</h5>
+              <p>{{ post.content }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
     {% else %}
-      <p>This user has not created any posts yet.</p>
+      <div class="alert alert-info">This user has not created any posts yet.</div>
     {% endif %}
   </div>
 </div>

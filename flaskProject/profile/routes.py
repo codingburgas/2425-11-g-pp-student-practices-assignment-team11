@@ -10,6 +10,9 @@ from .. import db
 from ..auth.models import User
 from ..survey.models import Form
 from .models import Message, Post
+import os
+from werkzeug.utils import secure_filename
+from flask import current_app
 
 @profile_bp.route('/dashboard', methods=['GET', 'POST'])
 @login_required
@@ -30,6 +33,30 @@ def dashboard():
 
     posts = Post.query.order_by(Post.id.desc()).all()
     return render_template('profile/dashboard.html', current_user=current_user, posts=posts)
+
+
+@profile_bp.route('/upload_picture', methods=['POST'])
+def upload_picture():
+    if 'profile_picture' not in request.files:
+        flash('No file selected')
+        return redirect(url_for('profile.settings'))
+
+    file = request.files['profile_picture']
+    if file.filename == '':
+        flash('No file selected')
+        return redirect(url_for('profile.settings'))
+
+    if file:
+        # Ensure the filename is secure and has the correct extension
+        filename = secure_filename(f"{current_user.username}_pfp.png")
+        save_path = os.path.join(current_app.root_path, 'static', 'images', filename)
+
+        # Save the file
+        file.save(save_path)
+        flash('Profile picture updated successfully!')
+
+    return redirect(url_for('profile.settings'))
+
 @profile_bp.route('/settings', methods=['GET'])
 @login_required
 def settings():

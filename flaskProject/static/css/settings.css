@@ -1,6 +1,7 @@
+/* settings.css */
 .settings-container {
   max-width: 500px;
-  margin-top: -180px;
+  margin-top: -100px; /* Previously -180px, now moved down by 80px */
   margin-left: 350px;
   padding: 2.5rem;
   background: rgba(255, 255, 255, 0.15);
@@ -9,14 +10,14 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #333;
-   z-index: 2;
-    font-size: 18px;
+  z-index: 2;
+  font-size: 18px;
   animation: fadeIn 0.8s ease;
 }
 
 .settings-container h1 {
   text-align: center;
-  font-size: 2.2rem;
+  font-size: 18px;
   color: #fff;
   margin-bottom: 2rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -48,7 +49,7 @@
 }
 
 .settings-form input::placeholder {
-  color: rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .settings-form input:focus {
@@ -78,6 +79,47 @@
   transform: scale(1.02);
 }
 
+/* Profile Picture Styles */
+.profile-picture-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.profile-picture:hover {
+  transform: scale(1.03);
+}
+
+.file-upload-label {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.file-upload-label:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Delete Section Styles */
 .delete-section h3 {
   text-align: center;
   font-size: 1.2rem;
@@ -92,7 +134,7 @@
   border: none;
   width: 100%;
   padding: 0.75rem;
-  font-size: 1rem;
+  font-size: 18px;
   color: white;
   font-weight: bold;
   border-radius: 10px;
@@ -120,10 +162,12 @@
 
 @media (max-width: 768px) {
   .settings-container {
+    margin: 2rem auto;
     padding: 2rem 1.5rem;
+    max-width: 90%;
   }
 
   .settings-container h1 {
-    font-size: 1.8rem;
+    font-size: 18px;
   }
 }

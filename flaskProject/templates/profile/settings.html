@@ -3,30 +3,54 @@
 {% block link %}
   <link rel="stylesheet" href="../../static/css/base.css">
   <link rel="stylesheet" href="../../static/css/settings.css">
-    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/language.js') }}"></script>
 {% endblock %}
 
 {% block content %}
 <div class="settings-container">
   <h1>Settings</h1>
-  <form method="POST" action="{{ url_for('profile.update_username') }}" class="settings-form">
+
+  <!-- Profile Picture Section -->
+  <div class="settings-form">
+    <h3>Profile Picture</h3>
+    <div class="profile-picture-container">
+      <img src="{{ url_for('static', filename='images/' ~ current_user.username ~ '_pfp.png') }}"
+           onerror="this.src='{{ url_for('static', filename='images/account.png') }}'"
+           alt="Profile Picture" class="profile-picture">
+    </div>
+    <form method="POST" action="{{ url_for('profile.upload_picture') }}" enctype="multipart/form-data">
+      <input type="file" name="profile_picture" id="profile_picture" accept="image/*" required style="display: none;">
+      <label for="profile_picture" class="file-upload-label">Choose New Image</label>
+      <button type="submit">Upload Picture</button>
+    </form>
+  </div>
+
+  <!-- Username Update Section -->
+  <div class="settings-form">
     <h3>Update Username</h3>
-    <input type="text" name="username" placeholder="New Username" required>
-    <button type="submit">Update</button>
-  </form>
+    <form method="POST" action="{{ url_for('profile.update_username') }}">
+      <input type="text" name="username" placeholder="New Username" required>
+      <button type="submit">Update</button>
+    </form>
+  </div>
 
-  <form method="POST" action="{{ url_for('profile.change_password') }}" class="settings-form">
+  <!-- Password Change Section -->
+  <div class="settings-form">
     <h3>Change Password</h3>
-    <input type="password" name="current_password" placeholder="Current Password" required>
-    <input type="password" name="new_password" placeholder="New Password" required>
-    <button type="submit">Change Password</button>
-  </form>
+    <form method="POST" action="{{ url_for('profile.change_password') }}">
+      <input type="password" name="current_password" placeholder="Current Password" required>
+      <input type="password" name="new_password" placeholder="New Password" required>
+      <button type="submit">Change Password</button>
+    </form>
+  </div>
 
- <form method="POST" action="{{ url_for('profile.delete_account') }}">
-    <h3>Delete Account</h3>
-    <button type="submit" class="delete-button" onclick="return confirm('Are you sure? This cannot be undone!')">
+  <!-- Account Deletion Section -->
+  <div class="delete-section">
+    <form method="POST" action="{{ url_for('profile.delete_account') }}">
+      <button type="submit" class="delete-button" onclick="return confirm('Are you sure? This cannot be undone!')">
         Delete Account
-    </button>
-</form>
+      </button>
+    </form>
+  </div>
 </div>
 {% endblock %}

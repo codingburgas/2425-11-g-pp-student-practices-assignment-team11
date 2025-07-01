@@ -15,6 +15,10 @@ def create_app(config):
     db.init_app(app)
     bootstrap.init_app(app)
     login_manager.init_app(app)
+
+    app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024  # 2MB limit
+    app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.jpeg']
+    app.config['UPLOAD_PATH'] = 'static/images'
     from .auth import models
     from .survey import models
     from .companies import models
