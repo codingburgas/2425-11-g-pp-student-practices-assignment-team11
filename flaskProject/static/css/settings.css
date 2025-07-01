@@ -1,0 +1,129 @@
+.settings-container {
+  max-width: 500px;
+  margin-top: -180px;
+  margin-left: 350px;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #333;
+   z-index: 2;
+    font-size: 18px;
+  animation: fadeIn 0.8s ease;
+}
+
+.settings-container h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #fff;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.settings-form {
+  margin-bottom: 2rem;
+}
+
+.settings-form h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.settings-form input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.settings-form input::placeholder {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.settings-form input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.35);
+  border-color: #7dc6ff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.settings-form button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(to right, #00779a, #004caf);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+}
+
+.settings-form button:hover {
+  background: linear-gradient(to right, #004caf, #00779a);
+  transform: scale(1.02);
+}
+
+.delete-section h3 {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #fff;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.delete-button {
+  background: linear-gradient(to right, #ff3c3e, #f00000);
+  border: none;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(255, 0, 0, 0.3);
+}
+
+.delete-button:hover {
+  background: linear-gradient(to right, #f00000, #ff3c3e);
+  transform: scale(1.02);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .settings-container {
+    padding: 2rem 1.5rem;
+  }
+
+  .settings-container h1 {
+    font-size: 1.8rem;
+  }
+}
