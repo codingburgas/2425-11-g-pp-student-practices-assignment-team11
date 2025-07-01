@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Welcome, {{ current_user.username }}!</h1>
-
+<script src="{{ url_for('static', filename='js/language.js') }}"></script>
 <!-- Post Form -->
 <div>
     <h2>Create a Post</h2>

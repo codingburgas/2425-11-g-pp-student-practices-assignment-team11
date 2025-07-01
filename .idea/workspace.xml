@@ -4,11 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f2d9acb-1307-444b-8855-42d608782421" name="Changes" comment="Make the survey form look more understandable">
+    <list default="true" id="6f2d9acb-1307-444b-8855-42d608782421" name="Changes" comment="Enhance the design of the suggestions page">
+      <change afterPath="$PROJECT_DIR$/flaskProject/static/js/language.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskProject/profile/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/profile/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/static/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/static/css/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/auth/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/auth/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/auth/verify_code.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/auth/verify_code.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flaskProject/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskProject/templates/profile/admin_view_users.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/profile/admin_view_users.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/companies/admin_companies.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/companies/admin_companies.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/companies/apply.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/companies/apply.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/companies/recommend.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/companies/recommend.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/companies/register_company.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/companies/register_company.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/companies/show_companies.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/companies/show_companies.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/main/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/main/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/profile/admin_user_survey.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/profile/admin_user_survey.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/profile/chat.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/profile/chat.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/profile/chats.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/profile/chats.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/profile/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/profile/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/profile/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/profile/settings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/profile/view_chats.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/profile/view_chats.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/profile/view_user_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/profile/view_user_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/profile/view_users.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/profile/view_users.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskProject/templates/survey/survey.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskProject/templates/survey/survey.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,18 +37,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
+        <option value="Python Script" />
+        <option value="JavaScript File" />
       </list>
-    </option>
-  </component>
-  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
-    <envs>
-      <env key="FLASK_APP" value="app" />
-    </envs>
-    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
-    <option name="myEnvs">
-      <map>
-        <entry key="FLASK_APP" value="app" />
-      </map>
     </option>
   </component>
   <component name="Git.Settings">
@@ -45,7 +54,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/codingburgas/2425-11-g-pp-student-practices-assignment-team11.git&quot;,
-    &quot;accountId&quot;: &quot;8a363ffa-2566-44a4-a723-d002fa47414e&quot;
+    &quot;accountId&quot;: &quot;5bf21958-bb39-4a0a-b56e-51d9a07d5d05&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -58,9 +67,11 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Flask server.Flask (flaskProject/__init__.py).executor&quot;: &quot;Run&quot;,
     &quot;Flask server.Flask (flaskProject/app.py).executor&quot;: &quot;Run&quot;,
     &quot;Python.2425-11-g-pp-student-practices-assignment-team11.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/szgeorgiev21/PycharmProjects/2425-11-g-pp-student-practices-assignment-team11&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
@@ -73,16 +84,18 @@
   },
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [
-      &quot;azure&quot;
+      &quot;azure&quot;,
+      &quot;sqlserver.localdb&quot;
     ]
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\HP\Desktop\StudyPilot\2425-11-g-pp-student-practices-assignment-team11\flaskProject\static\js" />
       <recent name="C:\Users\Admin\Desktop\praktika\2425-11-g-pp-student-practices-assignment-team11\flaskProject\static\images" />
     </key>
   </component>
-  <component name="RunManager" selected="Flask server.Flask (flaskProject/app.py)">
+  <component name="RunManager">
     <configuration name="2425-11-g-pp-student-practices-assignment-team11" type="PythonConfigurationType" factoryName="Python">
       <module name="2425-11-g-pp-student-practices-assignment-team11" />
       <option name="ENV_FILES" value="" />
@@ -114,7 +127,7 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -130,7 +143,7 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -147,8 +160,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.23339.19" />
-        <option value="bundled-python-sdk-0029f7779945-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.23339.19" />
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-PY-243.21565.199" />
+        <option value="bundled-python-sdk-cab1f2013843-4ae2d6a61b08-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.21565.199" />
       </set>
     </attachedChunks>
   </component>
@@ -162,6 +175,7 @@
       <updated>1750066858269</updated>
       <workItem from="1750066859337" duration="3105000" />
       <workItem from="1750502673175" duration="9312000" />
+      <workItem from="1751191048158" duration="4771000" />
     </task>
     <task id="LOCAL-00001" summary="Add icon to the profile">
       <option name="closed" value="true" />
@@ -219,7 +233,23 @@
       <option name="project" value="LOCAL" />
       <updated>1750622151947</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Make posting system">
+      <option name="closed" value="true" />
+      <created>1751023061192</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1751023061192</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Enhance the design of the suggestions page">
+      <option name="closed" value="true" />
+      <created>1751192698560</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1751192698560</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -234,10 +264,13 @@
     <MESSAGE value="Fix problems with design" />
     <MESSAGE value="Change color and text in the website" />
     <MESSAGE value="Make the survey form look more understandable" />
-    <option name="LAST_COMMIT_MESSAGE" value="Make the survey form look more understandable" />
+    <MESSAGE value="Make posting system" />
+    <MESSAGE value="Enhance the design of the suggestions page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Enhance the design of the suggestions page" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/2425_11_g_pp_student_practices_assignment_team11$Flask__flaskProject___init___py_.coverage" NAME="Flask (flaskProject/__init__.py) Coverage Results" MODIFIED="1751030092756" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/2425_11_g_pp_student_practices_assignment_team11$2425_11_g_pp_student_practices_assignment_team11.coverage" NAME="2425-11-g-pp-student-practices-assignment-team11 Coverage Results" MODIFIED="1750256723463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/2425_11_g_pp_student_practices_assignment_team11$Flask__flaskProject_app_py_.coverage" NAME="Flask (flaskProject/app.py) Coverage Results" MODIFIED="1751285951498" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/2425_11_g_pp_student_practices_assignment_team11$Flask__flaskProject_app_py_.coverage" NAME="Flask (flaskProject/app.py) Coverage Results" MODIFIED="1751389945430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

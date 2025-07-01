@@ -2,6 +2,7 @@
 
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/apply.css') }}">
+    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
 <div class="container my-5">
   <h2 class="text-center mb-4">Apply to {{ applied_company }}</h2>
   <form method="POST" action="{{ url_for('companies.apply_to_company', company_name=applied_company) }}">

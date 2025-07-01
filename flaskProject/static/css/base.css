@@ -108,3 +108,60 @@ footer {
 .card:hover {
   transform: scale(1.03);
 }
+.language-dropdown {
+  position: relative;
+  font-size: 0.95rem;
+  user-select: none;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.language-dropdown img {
+  width: 24px;
+  height: 16px;
+  border-radius: 2px;
+  object-fit: cover;
+}
+
+.language-options {
+  position: absolute;
+  top: 130%;
+  left: 0;
+  background: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  display: none;
+  flex-direction: column;
+  min-width: 140px;
+  z-index: 200;
+}
+
+.language-options.show {
+  display: flex;
+}
+
+.language-options div {
+  padding: 10px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s;
+  font-size: 0.95rem;
+}
+
+.language-options div img {
+  width: 24px;
+  height: 16px;
+}
+
+.language-options div:hover {
+  background: #7b95bf;
+  color: white;
+}
+

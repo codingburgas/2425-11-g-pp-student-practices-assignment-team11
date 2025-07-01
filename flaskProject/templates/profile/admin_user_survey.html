@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
 <div class="container my-5 py-4 px-4 shadow rounded-4" style="max-width: 900px; background-color: var(--light-primary);">
   <h2 class="mb-4 fw-bold" style="font-family: 'Poetsen One', sans-serif;">Survey Results for {{ user.username }}</h2>
 
