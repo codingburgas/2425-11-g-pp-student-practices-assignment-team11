@@ -61,10 +61,16 @@
 </div>
 </div>
 <li class="nav-item dropdown">
-<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-<img src="{{ url_for('static', filename='images/account.png') }}" alt="Logo">
-                       {{ current_user.username }}
+<a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
+    <img src="{{ url_for('static', filename='images/' ~ current_user.username ~ '_pfp.png') }}"
+         onerror="this.src='{{ url_for('static', filename='images/account.png') }}'"
+         alt="Profile Picture"
+         class="rounded-circle me-2"
+         style="width: 30px; height: 30px; object-fit: cover;">
+    {{ current_user.username }}
 </a>
+
+
 <ul class="dropdown-menu">
                        {% if current_user.is_admin %}
 <li><a class="dropdown-item" href="{{ url_for('profile.admin_view_users') }}" data-translate="👤 Users">👤 Users</a></li>
