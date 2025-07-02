@@ -73,9 +73,11 @@
 .btn-back {
     background-color: red;
     border: none;
+    padding: 10px 20px;
 }
 
 .btn-back:hover {
     background-color: red;
     border: none;
+    padding: 10px 20px;
 }

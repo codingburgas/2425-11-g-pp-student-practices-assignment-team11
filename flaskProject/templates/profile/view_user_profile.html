@@ -5,9 +5,15 @@
   <link rel="stylesheet" href="../../static/css/base.css">
   <script src="{{ url_for('static', filename='js/language.js') }}"></script>
   <style>
+    .user-box {
+        margin-left: 330px;
+        margin-top: -100px;
+        height: 1000px;
+    }
+
     .profile-picture {
-      width: 120px;
-      height: 120px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid #79A8A9;
@@ -15,9 +21,9 @@
     }
 
     .user-info {
-      max-width: 800px;
-      margin: 0 auto;
+      max-width: 600px;
       padding-bottom: 2rem;
+        font-size: 16px;
     }
 
     .profile-picture-container {
@@ -26,10 +32,11 @@
 
     .user-posts {
       margin-top: 2rem;
+        font-size: 16px;
     }
 
     .posts-container {
-      height: 300px; /* Fixed height - shows about 3-4 posts at a time */
+      height: 150px; /* Fixed height - shows about 3-4 posts at a time */
       overflow-y: auto;
       border: 1px solid #dee2e6;
       border-radius: 0.5rem;
@@ -37,6 +44,7 @@
       background-color: #f8f9fa;
       scrollbar-width: thin; /* For Firefox */
       scrollbar-color: #79A8A9 #f1f1f1; /* For Firefox */
+        font-size: 16px;
     }
 
     .posts-list {
@@ -51,6 +59,7 @@
       border: 1px solid rgba(0,0,0,0.1);
       background-color: white;
       transition: all 0.2s ease;
+        font-size: 16px;
     }
 
     .post-item:hover {
@@ -101,7 +110,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container user-info mt-5">
+<div class="user-box container user-info mt-5">
   <div class="card p-4 shadow-sm text-center">
     <div class="profile-picture-container mx-auto">
       <img src="{{ url_for('static', filename='images/' ~ user.username ~ '_pfp.png') }}"

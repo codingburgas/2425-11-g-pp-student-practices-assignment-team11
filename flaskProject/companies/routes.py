@@ -81,7 +81,7 @@ def apply_to_company(company_name):
     company = Company.query.filter_by(company_name=company_name, status='approved').first_or_404()
     form = ApplicationForm()
 
-    if form.validate_on_submit():
+    if request.method == 'POST':
         application = Application(
             username=form.username.data,
             email=form.email.data,

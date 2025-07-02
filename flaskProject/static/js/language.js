@@ -1,4 +1,3 @@
-// static/js/language.js
 const translations = {
     en: {
         // Base.html
