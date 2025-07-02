@@ -1,4 +1,3 @@
-// static/js/language.js
 const translations = {
     en: {
         // Base.html
@@ -58,7 +57,7 @@ const translations = {
         "Studypilot is a Flask-based web application designed to help students and young professionals discover internship opportunities tailored to their preferences and skills. It provides a user-friendly interface for browsing, filtering, and applying to internships across various industries and locations.": "Studypilot is a Flask-based web application designed to help students and young professionals discover internship opportunities tailored to their preferences and skills. It provides a user-friendly interface for browsing, filtering, and applying to internships across various industries and locations.",
         "Get Started": "Get Started",
         "Hello,": "Hello,",
-        "Learn how to work with AI!": "Learn how to work with AI!",
+        "Let us help you choose your internship!": "Let us help you choose your internship!",
 
         // Admin_companies.html
         "Pending Companies": "Pending Companies",
@@ -165,7 +164,7 @@ const translations = {
         "Studypilot is a Flask-based web application designed to help students and young professionals discover internship opportunities tailored to their preferences and skills. It provides a user-friendly interface for browsing, filtering, and applying to internships across various industries and locations.": "Studypilot е уеб приложение, базирано на Flask, предназначено да помогне на студенти и млади професионалисти да открият възможности за стаж, съобразени с техните предпочитания и умения. То предоставя лесен за използване интерфейс за разглеждане, филтриране и кандидатстване за стажове в различни индустрии и местоположения.",
         "Get Started": "Започнете",
         "Hello,": "Здравейте,",
-        "Learn how to work with AI!": "Научете се да работите с AI!",
+        "Let us help you choose your internship!": "Нека ти помогнем да избереш своя стаж",
 
         // Admin_companies.html
         "Pending Companies": "Чакащи компании",
@@ -272,7 +271,7 @@ const translations = {
         "Studypilot is a Flask-based web application designed to help students and young professionals discover internship opportunities tailored to their preferences and skills. It provides a user-friendly interface for browsing, filtering, and applying to internships across various industries and locations.": "Studypilot - это веб-приложение на Flask, предназначенное для помощи студентам и молодым специалистам в поиске стажировок, соответствующих их предпочтениям и навыкам. Оно предоставляет удобный интерфейс для просмотра, фильтрации и подачи заявок на стажировки в различных отраслях и местоположениях.",
         "Get Started": "Начать",
         "Hello,": "Привет,",
-        "Learn how to work with AI!": "Научитесь работать с ИИ!",
+        "Let us help you choose your internship!": "Позвольте нам помочь вам выбрать стажировку",
 
         // Admin_companies.html
         "Pending Companies": "Ожидающие компании",
