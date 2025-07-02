@@ -34,3 +34,51 @@
   background-color: #1d4ed8;
   border-color: #1d4ed8;
 }
+
+
+
+
+
+.register-form h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+.card .form-control {
+    margin-bottom: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 10px 14px;
+}
+
+.card textarea.form-control {
+    resize: vertical;
+}
+
+.card .btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    border-radius: 8px;
+    background-color: #4267b2;
+    border: none;
+    color: white;
+    transition: background 0.3s ease;
+}
+
+.card .btn:hover {
+    background-color: #365899;
+}
+
+.alert {
+    margin-top: 20px;
+}
+
