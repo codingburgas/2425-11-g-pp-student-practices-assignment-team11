@@ -6,7 +6,7 @@
 {% endblock %}
 {% block content %}
 <div class="container mt-4">
-    <h2>Your Conversations</h2>
+    <h2 data-translate="Your Conversations">Your Conversations</h2>
 
     {% if users %}
         <ul class="list-group mb-4">
@@ -18,27 +18,27 @@
                     <div class="d-flex gap-2">
                         <a href="{{ url_for('profile.chat_with_user', user_id=user.id) }}"
                            class="btn btn-primary btn-sm"
-                           style="max-width: 135px;max-height: 31px; margin-top: 28px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                           style="max-width: 135px;max-height: 31px; margin-top: 28px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" data-transalte="Open Chat 💬">
                             Open Chat 💬
                         </a>
-                        <form method="POST" action="{{ url_for('profile.delete_chat', user_id=user.id) }}" onsubmit="return confirm('Are you sure you want to delete this chat?');">
-                            <button type="submit" class="btn btn-danger btn-sm">Delete Chat 🗑️</button>
+                        <form method="POST"  data-translation="Are you sure? This cannot be undone!" action="{{ url_for('profile.delete_chat', user_id=user.id) }}" onsubmit="return confirm('Are you sure you want to delete this chat?');">
+                            <button type="submit" class="btn btn-danger btn-sm" data-transalte="Delete Chat 🗑">Delete Chat 🗑️</button>
                         </form>
                     </div>
                 </li>
             {% endfor %}
         </ul>
     {% else %}
-        <p class="text-muted">You haven't had any conversations yet.</p>
+        <p class="text-muted" data-translate="You haven't had any conversations yet.">You haven't had any conversations yet.</p>
     {% endif %}
 
     <hr>
 
-    <h4>Start a New Chat</h4>
+    <h4 data-translate="Start a New Chat">Start a New Chat</h4>
     <form method="GET" action="{{ url_for('profile.view_chats') }}">
         <div class="input-group mb-3">
-            <input type="text" name="username" class="form-control" placeholder="Search by username" required>
-            <button class="btn btn-outline-secondary" type="submit">Search</button>
+            <input type="text" name="username" class="form-control" data-translate="Search by username" placeholder="Search by username" required>
+            <button class="btn btn-outline-secondary" type="submit" data-translate="Search">Search</button>
         </div>
     </form>
     <div class="container">
@@ -47,20 +47,20 @@
       {% endfor %}
     </div>
     {% if search_results is defined %}
-        <h5>Search Results:</h5>
+        <h5 data-translate="Search Results:">Search Results:</h5>
         {% if search_results %}
             <ul class="list-group">
                 {% for user in search_results %}
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         {{ user.username }}
-                        <a href="{{ url_for('profile.chat_with_user', user_id=user.id) }}" class="btn btn-success btn-sm">
+                        <a href="{{ url_for('profile.chat_with_user', user_id=user.id) }}" class="btn btn-success btn-sm" data-translate="Start Chat 💬">
                             Start Chat 💬
                         </a>
                     </li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p class="text-muted">No users found.</p>
+            <p class="text-muted" data-translate="No users found.">No users found.</p>
         {% endif %}
     {% endif %}
 </div>
