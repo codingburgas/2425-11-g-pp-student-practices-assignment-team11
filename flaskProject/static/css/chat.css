@@ -1,7 +1,11 @@
 .chat-container {
-    max-width: 700px;
-    margin: 0 auto;
-    margin-top: 30px;
+    max-width: 900px;
+      height: 800px;
+      margin-left: 100px;
+      margin-top: 100px;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
 }
 
 .chat-box {
@@ -16,35 +20,41 @@
 
 .message {
     margin-bottom: 15px;
-    max-width: 75%;
+    width: 30%;
     word-wrap: break-word;
+    font-size: 18px;
 }
 
 .message.sent {
-    background-color: #d1e7dd;
+    background-color: dodgerblue;
+    color: white;
     padding: 10px;
     border-radius: 10px;
     margin-left: auto;
     text-align: right;
+    font-size: 18px;
 }
 
 .message.received {
-    background-color: #f8d7da;
+    background-color: #ccc;
+    color: black;
     padding: 10px;
     border-radius: 10px;
     margin-right: auto;
     text-align: left;
+    font-size: 18px;
 }
 
 .message small {
     display: block;
-    color: #666;
-    font-size: 0.75rem;
+    color: black;
+    font-size: 8px;
     margin-top: 5px;
 }
 
 .send-form {
     display: flex;
+    font-size: 18px;
     gap: 10px;
 }
 
@@ -58,4 +68,14 @@
 .send-form button {
     padding: 10px 20px;
     border-radius: 5px;
+}
+
+.btn-back {
+    background-color: red;
+    border: none;
+}
+
+.btn-back:hover {
+    background-color: red;
+    border: none;
 }

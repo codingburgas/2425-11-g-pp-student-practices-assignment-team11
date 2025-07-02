@@ -23,7 +23,7 @@ const translations = {
         "Next": "Next",
 
         // Chat.html
-        "Chat with": "Chat with",
+        "Chat": "Chat",
         "Type your message...": "Type your message...",
         "Send": "Send",
 
@@ -130,7 +130,7 @@ const translations = {
         "Next": "Следващ",
 
         // Chat.html
-        "Chat with": "Чат с",
+        "Chat": "Чат",
         "Type your message...": "Напиши съобщение...",
         "Send": "Изпрати",
 
@@ -237,7 +237,7 @@ const translations = {
         "Next": "Далее",
 
         // Chat.html
-        "Chat with": "Чат с",
+        "Chat": "Чат",
         "Type your message...": "Введите ваше сообщение...",
         "Send": "Отправить",
 

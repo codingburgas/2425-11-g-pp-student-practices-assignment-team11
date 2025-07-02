@@ -1,30 +1,98 @@
-.chat-list {
-    max-width: 600px;
-    margin: 0 auto;
-    margin-top: 30px;
+/* Wrapper for the chat container */
+.chat-box {
+    max-width: 800px;
+    margin-left: 170px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
-.chat-card {
-    border: 1px solid #ddd;
+/* Header styling */
+h2, h4, h5 {
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    font-weight: 600;
+}
+
+/* User card */
+.list-group-item {
+    background-color: rgba(255, 255, 255, 0.15);
     border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 15px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+    margin-bottom: 10px;
+    padding: 16px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    transition: background-color 0.2s ease;
 }
 
-.chat-card:hover {
-    background-color: #f9f9f9;
+.list-group-item:hover {
+    background-color: rgba(255, 255, 255, 0.25);
 }
 
-.chat-username {
-    font-weight: bold;
-    font-size: 1.1rem;
+/* Chat buttons */
+.btn {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    font-weight: 500;
 }
 
-.chat-preview {
-    color: #666;
-    font-size: 0.9rem;
-    margin-top: 5px;
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 0.875rem;
 }
 
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #bd2130;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+/* Form input styling */
+.input-group .form-control {
+    border-radius: 10px 0 0 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.input-group .btn {
+    border-radius: 0 10px 10px 0;
+}
+
+/* Flash message */
+.alert-warning {
+    background-color: rgba(255, 193, 7, 0.9);
+    color: #212529;
+    border-radius: 8px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Muted text */
+.text-muted {
+    font-size: 1rem;
+    color: #e0e0e0 !important;
+    text-align: center;
+    margin-top: 10px;
+}

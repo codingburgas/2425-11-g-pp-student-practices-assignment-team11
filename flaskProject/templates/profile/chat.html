@@ -1,33 +1,31 @@
 {% extends 'base.html' %}
+
 {% block link %}
   <link rel="stylesheet" href="../../static/css/base.css">
   <link rel="stylesheet" href="../../static/css/chat.css">
-    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/language.js') }}"></script>
 {% endblock %}
+
 {% block content %}
-<div class="container mt-4">
-    <h3 class="mb-4" data-translate="Chat with">Chat with {{ user.username }}</h3>
-    <div class="card">
-        <div class="card-body chat-box" style="height: 400px; overflow-y: auto; background-color: #f8f9fa;">
-            {% for message in messages %}
-                <div class="d-flex mb-3 {% if message.sender_id == current_user.id %}justify-content-end{% else %}justify-content-start{% endif %}">
-                    <div class="position-relative p-2 rounded"
-                         style="max-width: 70%;
-                                background-color: {% if message.sender_id == current_user.id %}#0d6efd; color: white;{% else %}#e9ecef; color: black;{% endif %}">
-                        <div>{{ message.content }}</div>
-                        <small class="position-absolute"
-                               style="font-size: 0.65rem; bottom: 5px; right: 8px; color: {% if message.sender_id == current_user.id %}#cce5ff{% else %}#6c757d{% endif %};">
-                            {{ message.timestamp.strftime('%H:%M %d-%m-%Y') }}
-                        </small>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+<div class="chat-container">
+    <h3 class="mb-4" data-translate="Chat">Chat</h3>
+
+    <div class="chat-box">
+        {% for message in messages %}
+            <div class="message {% if message.sender_id == current_user.id %}sent{% else %}received{% endif %}">
+                <div>{{ message.content }}</div>
+                <small>{{ message.timestamp.strftime('%H:%M %d-%m-%Y') }}</small>
+            </div>
+        {% endfor %}
     </div>
 
-    <form method="POST" action="{{ url_for('profile.send_message', user_id=user.id) }}" class="d-flex mt-3">
-        <input type="text" name="message" class="form-control me-2" data-translate="Type your message..." placeholder="Type your message..." required>
-        <button class="btn btn-primary" type="submit" data-translate="Send">Send</button>
+    <form method="POST" action="{{ url_for('profile.send_message', user_id=user.id) }}" class="send-form">
+        <input type="text" name="message" placeholder="Type your message..." required data-translate="Type your message...">
+        <button type="submit" class="btn btn-primary" data-translate="Send">Send</button>
+        <a href="{{ url_for('profile.view_chats') }}">
+            <button type="button"  class="btn-back btn btn-primary" > Back </button>
+        </a>
+
     </form>
 </div>
 
