@@ -1,17 +1,18 @@
-
 {% extends 'base.html' %}
+
+{% block link %}
+  <link rel="stylesheet" href="../../static/css/base.css">
+  <link rel="stylesheet" href="../../static/css/dashboard.css">
+{% endblock %}
+
 {% block content %}
-<h1>Welcome, {{ current_user.username }}!</h1>
-<script src="{{ url_for('static', filename='js/language.js') }}"></script>
-<!-- Post Form -->
-<div>
+<div class="post-container">
+    <h1>Welcome, {{ current_user.username }}!</h1>
     <h2>Create a Post</h2>
     <form method="POST" enctype="multipart/form-data">
-        <input type="text" name="title" placeholder="Title" required><br><br>
-        <textarea name="content" placeholder="What's on your mind?" required></textarea><br><br>
-        <button type="submit">Post</button>
+        <input type="text" name="title" placeholder="Title" required>
+        <textarea name="content" placeholder="What's on your mind?" required></textarea>
+        <button class="button-post" type="submit">Post</button>
     </form>
 </div>
-
-<hr>
 {% endblock %}

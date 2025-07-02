@@ -1,0 +1,63 @@
+.post-container {
+  width: 500px;
+  margin-top: -80px;
+  margin-left: 250px;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #333;
+  z-index: 2;
+  font-size: 18px;
+  animation: fadeIn 0.8s ease;
+}
+
+.post-container h1, .post-container h2 {
+    margin-bottom: 20px;
+    color: white;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.button-post input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.35);
+  border-color: #7dc6ff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.button-post {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(to right, #00779a, #004caf);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+}
+
+.button-post:hover {
+  background: linear-gradient(to right, #004caf, #00779a);
+  transform: scale(1.02);
+}

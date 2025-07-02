@@ -6,7 +6,6 @@
   padding: 2.5rem;
   background: rgba(255, 255, 255, 0.15);
   border-radius: 20px;
-  backdrop-filter: blur(20px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #333;
@@ -27,7 +26,6 @@
   font-size: 24px;
   color: #fff;
   margin-bottom: 2rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   flex: 0;
 }
 
@@ -134,7 +132,6 @@
   color: #fff;
   margin-top: 1.5rem;
   margin-bottom: 1rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .delete-button {
