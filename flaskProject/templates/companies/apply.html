@@ -18,11 +18,7 @@
     <div class="text-center">
       {{ form.submit(class="btn btn-primary") }}
     </div>
-      <div class="container">
-      {% for message in get_flashed_messages() %}
-        <div class="alert alert-warning">{{ message }}</div>
-      {% endfor %}
-    </div>
+
   </form>
 </div>
 {% endblock %}
