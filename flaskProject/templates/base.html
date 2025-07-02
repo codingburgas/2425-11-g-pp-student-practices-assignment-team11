@@ -39,7 +39,7 @@
 <li><a class="dropdown-item" href="{{ url_for('profile.view_chats') }}" data-translate="💬 Chat with others">💬 Chat with others</a></li>
                {% else %}
 <li><a class="dropdown-item" href="{{ url_for('companies.admin_companies') }}" data-translate="➕ View Companies">➕ View Companies</a></li>
-<li><a class="dropdown-item" href="#" data-translate="🔍 Search">🔍 Search</a></li>
+<li><a class="dropdown-item" href="{{ url_for('profile.view_chats') }}" data-translate="💬 Chat with others">💬 Chat with others</a></li>
                {% endif %}
 </ul>
 </li>
