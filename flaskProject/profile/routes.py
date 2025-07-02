@@ -175,7 +175,8 @@ def delete_user(user_id):
             flash("You can't delete yourself.", 'danger')
             return redirect(url_for('profile.admin_dashboard'))
 
-        user = User.query.get_or_404(user_id)
+        #user = User.query.get_or_404(user_id)
+        user = User.query.get(user_id)
         db.session.delete(user)
         db.session.commit()
         flash(f'User {user.username} has been deleted.', 'success')
