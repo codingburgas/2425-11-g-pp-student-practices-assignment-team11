@@ -9,22 +9,6 @@ import numpy as np
 from ..survey.models import Form
 from . import ai_bp
 
-# List of company profiles to be matched against user preferences.
-companies = [
-    {"name": "Microsoft", "industry": "it", "type": "corporate", "duration": "1-3", "skills": ["programming", "data"], "format": "hybrid"},
-    {"name": "Cisco", "industry": "it", "type": "corporate", "duration": "1-3", "skills": ["programming", "management"], "format": "remote"},
-    {"name": "Xoriant", "industry": "it", "type": "medium", "duration": "3-6", "skills": ["programming", "management"], "format": "on-site"},
-    {"name": "P&G", "industry": "marketing", "type": "corporate", "duration": "1-3", "skills": ["data", "design"], "format": "hybrid"},
-    {"name": "Girls in Marketing", "industry": "marketing", "type": "startup", "duration": "<1", "skills": ["design", "management"], "format": "remote"},
-    {"name": "Samsung", "industry": "marketing", "type": "corporate", "duration": ">6", "skills": ["data", "management"], "format": "on-site"},
-    {"name": "Cargill", "industry": "finance", "type": "corporate", "duration": "3-6", "skills": ["data", "management"], "format": "hybrid"},
-    {"name": "Experian", "industry": "finance", "type": "corporate", "duration": "1-3", "skills": ["data", "programming"], "format": "remote"},
-    {"name": "Melexis", "industry": "finance", "type": "medium", "duration": "3-6", "skills": ["data", "management"], "format": "on-site"},
-    {"name": "Greenwich Public Schools", "industry": "education", "type": "corporate", "duration": "<1", "skills": ["management", "design"], "format": "on-site"},
-    {"name": "Teach For Bulgaria", "industry": "education", "type": "corporate", "duration": "1-3", "skills": ["management", "data"], "format": "hybrid"},
-    {"name": "EdTech Bulgaria", "industry": "education", "type": "startup", "duration": "1-3", "skills": ["programming", "design"], "format": "remote"},
-]
-
 
 def encode(form):
     """
@@ -64,26 +48,27 @@ def encode(form):
     ]
 
 
+from flask import render_template
+from flask_login import login_required, current_user
+from sklearn.neighbors import NearestNeighbors
+import numpy as np
+import matplotlib.pyplot as plt
+import io
+import base64
+
+from ..companies.models import Company
+from . import ai_bp
+
+
 @ai_bp.route('/recommend', methods=['GET'])
 @login_required
 def recommend():
-    """
-    Generates company recommendations based on the current user's latest survey response.
-
-    Uses k-Nearest Neighbors to find the 3 most similar companies to the user profile,
-    ranks them by similarity, and visualizes the result using a bar chart.
-
-    Returns:
-        HTML page (recommend.html) with:
-            - List of top 3 companies and match scores.
-            - Embedded matplotlib chart as base64 image.
-    """
-    # Retrieve the most recent form entry from the database
+    # 1. Get latest survey form for current user
     form_entry = Form.query.filter_by(user_id=current_user.id).order_by(Form.id.desc()).first()
     if not form_entry:
         return "No survey data found.", 404
 
-    # Map form fields into a consistent dictionary format
+    # 2. Build user feature vector
     form_dict = {
         "industry": (form_entry.question1 or "").strip().lower(),
         "company_type": (form_entry.question2 or "").strip().lower(),
@@ -97,20 +82,55 @@ def recommend():
     except Exception as e:
         return f"Error processing form: {e}", 500
 
-    # Encode all companies to match vector space
-    X = [encode(company) for company in companies]
-    names = [company["name"] for company in companies]
+    # 3. Get companies from DB and encode
+    db_companies = Company.query.filter_by(status='approved').all()
+    company_vectors = []
+    names = []
 
-    # Build and fit a kNN model to find closest matches
+    for company in db_companies:
+        try:
+            # Use internship keywords as proxy for skills
+            skills = list(set(
+                company.internship_one.lower().split() +
+                company.internship_two.lower().split() +
+                company.internship_three.lower().split()
+            ))
+
+            # Convert duration (int) to category
+            if company.duration < 1:
+                duration = "<1"
+            elif company.duration <= 3:
+                duration = "1-3"
+            elif company.duration <= 6:
+                duration = "3-6"
+            else:
+                duration = ">6"
+
+            company_dict = {
+                "industry": form_dict["industry"],  # Reuse same as user input
+                "company_type": company.company_type.lower(),
+                "duration": duration,
+                "skills": skills,
+                "format": company.format.lower()
+            }
+
+            encoded = encode(company_dict)
+            company_vectors.append(encoded)
+            names.append(company.company_name)
+        except Exception as e:
+            print(f"Skipping company {company.company_name} due to error: {e}")
+
+    if not company_vectors:
+        return "No suitable company data found.", 500
+
+    # 4. kNN model to find top 3 similar companies
     model = NearestNeighbors(n_neighbors=3, metric='euclidean')
-    model.fit(X)
+    model.fit(company_vectors)
     distances, indices = model.kneighbors([user_vector])
 
-    # Convert distances to match scores (higher is better)
-    similarities = 1 / (1 + distances[0])  # Avoid divide-by-zero
+    similarities = 1 / (1 + distances[0])
     percentages = (similarities / similarities.sum()) * 100
 
-    # Build list of top recommended companies with score
     top_companies = []
     for i, idx in enumerate(indices[0]):
         top_companies.append({
@@ -118,7 +138,7 @@ def recommend():
             "score": round(percentages[i], 2)
         })
 
-    # Create horizontal bar chart for top recommendations
+    # 5. Create chart image
     fig, ax = plt.subplots()
     ax.barh(
         [c["name"] for c in reversed(top_companies)],
@@ -136,5 +156,5 @@ def recommend():
     image_base64 = base64.b64encode(buf.read()).decode("utf-8")
     plt.close()
 
-    # Render HTML with company list and image chart
+    # 6. Render the recommend.html page
     return render_template("companies/recommend.html", companies=top_companies, chart_image=image_base64)

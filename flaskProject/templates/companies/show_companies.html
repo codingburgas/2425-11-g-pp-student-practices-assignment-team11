@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
 {% block link %}
-  <link rel="stylesheet" href="../../static/css/base.css">
-  <link rel="stylesheet" href="../../static/css/home.css">
-  <link rel="stylesheet" href="../../static/css/companies.css">
-    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/companies.css') }}">
+  <script src="{{ url_for('static', filename='js/language.js') }}"></script>
 {% endblock %}
 
 {% block content %}
-    <div class="box">
-            <h1 class="welcome-title">Welcome!</h1>
-            <p class="welcome-subtitle">Find your perfect company here!</p>
-            <a href="#text" class="scroll-button">See More ↓</a>
-        </div>
+<div class="box text-center">
+  <h1 class="welcome-title">Welcome!</h1>
+  <p class="welcome-subtitle">Find your perfect company here!</p>
+  <a href="#internships" class="scroll-button">See More ↓</a>
+</div>
 {% endblock %}
 
 {% block companies %}
@@ -23,30 +23,20 @@
 
   <div class="row g-5 justify-content-center">
     {% for company in companies %}
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-        <div class="card internship-card h-100 shadow rounded-4 border-0 p-2">
-          <div class="d-flex align-items-center mb-3">
-            <img src="{{ url_for('static', filename='images/' ~ company.name|lower|replace(' ', '_') ~ '.png') }}"
-                 alt="{{ company.name }} logo" class="me-3 rounded" style="width: 50px; height: 50px; object-fit: contain;">
-            <h5 class="mb-0 fw-semibold">{{ company.name }}</h5>
-          </div>
-          <ul class="list-unstyled ps-1 mb-3 small">
-            <li><strong>Industry:</strong> {{ company.industry|capitalize }}</li>
-            <li><strong>Type:</strong> {{ company.type|capitalize }}</li>
-            <li><strong>Duration:</strong> {{ company.duration }} months</li>
-            <li><strong>Format:</strong> {{ company.format|capitalize }}</li>
-            <li><strong>Skills:</strong> {{ company.skills | join(', ') }}</li>
-          </ul>
-          <form method="POST" action="{{ url_for('companies.apply_to_company', company_name=company.name) }}">
-            <button type="submit" class="btn btn-primary w-100">Apply</button>
-          </form>
-        </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="card internship-card h-100 shadow rounded-4 border-0 p-3">
+        <h5 class="fw-bold">{{ company.company_name }}</h5>
+        <ul class="list-unstyled small mt-3">
+          <li><strong>Company type:</strong> {{ company.company_type }}</li>
+          <li><strong>Duration:</strong> {{ company.duration }} months</li>
+          <li><strong>Format:</strong> {{ company.format|capitalize }}</li>
+        </ul>
+        <form method="GET" action="{{ url_for('companies.apply_to_company', company_name=company.company_name) }}">
+          <button type="submit" class="btn btn-primary w-100">Apply</button>
+        </form>
       </div>
+    </div>
     {% endfor %}
   </div>
 </div>
-
 {% endblock %}
-
-
-
