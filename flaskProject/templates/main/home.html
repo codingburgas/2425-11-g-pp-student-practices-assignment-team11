@@ -1,28 +1,26 @@
 {% extends 'base.html' %}
-
- {% block link %}
-     <link rel="stylesheet" href="../../static/css/base.css">
-     <link rel="stylesheet" href="../../static/css/home.css">
-     <script src="{{ url_for('static', filename='js/language.js') }}"></script>
- {% endblock %}
-
+{% block link %}
+<link rel="stylesheet" href="../../static/css/base.css">
+<link rel="stylesheet" href="../../static/css/home.css">
+<script src="{{ url_for('static', filename='js/language.js') }}"></script>
+{% endblock %}
 {% block content %}
-    {% if not current_user.is_authenticated %}
-        <div class="box">
-            <h1 class="welcome-title">Welcome!</h1>
-            <p class="welcome-text">
-              <strong>Studypilot</strong> is a Flask-based web application designed to
-                help students and young professionals discover internship opportunities
-                tailored to their preferences and skills. It provides a user-friendly
-                interface for browsing, filtering, and applying to internships across
-                various industries and locations.
-            </p>
-            <a href="{{ url_for('auth.register') }}" class="cta-btn">Get Started</a>
-        </div>
-    {% else %}
-        <div class="box">
-            <h1 class="welcome-title">Hello,</h1>
-            <p class="welcome-subtitle">Learn how to work with AI!</p>
-        </div>
-    {% endif %}
+   {% if not current_user.is_authenticated %}
+<div class="box">
+<h1 class="welcome-title" data-translate="Welcome!">Welcome!</h1>
+<p class="welcome-text" data-translate="Studypilot is a Flask-based web application designed to help students and young professionals discover internship opportunities tailored to their preferences and skills. It provides a user-friendly interface for browsing, filtering, and applying to internships across various industries and locations.">
+  Studypilot is a Flask-based web application designed to
+               help students and young professionals discover internship opportunities
+               tailored to their preferences and skills. It provides a user-friendly
+               interface for browsing, filtering, and applying to internships across
+               various industries and locations.
+</p>
+<a href="{{ url_for('auth.register') }}" class="cta-btn" data-translate="Get Started">Get Started</a>
+</div>
+   {% else %}
+<div class="box">
+<h1 class="welcome-title" data-translate="Hello,">Hello,</h1>
+<p class="welcome-subtitle" data-translate="Learn how to work with AI!">Learn how to work with AI!</p>
+</div>
+   {% endif %}
 {% endblock %}

@@ -1,141 +1,129 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StudyPilot</title>
-  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo_transparent.png') }}">
-
-  <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="{{ url_for('static', filename='js/language.js') }}"></script>
-  {% block link %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}" />
-  {% endblock %}
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-translate="StudyPilot">StudyPilot</title>
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo_transparent.png') }}">
+<link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='js/language.js') }}"></script>
+ {% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}" />
+ {% endblock %}
 </head>
-
 <body>
-    <nav class="navbar navbar-expand-lg px-4 py-3 ">
-      <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main_bp.index') }}">
-            <img src="{{ url_for('static', filename='images/logo_transparent.png') }}" alt="Logo" width="100" height="100">
-        </a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-          aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            {% if current_user.is_authenticated %}
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                Instruments
-              </a>
-              <ul class="dropdown-menu">
-                {% if not current_user.is_admin %}
-                <li><a class="dropdown-item" href="{{ url_for('companies.show_companies') }}">✉ Apply</a></li>
-                <li><a class="dropdown-item" href="{{ url_for('companies.register_company') }}">➕ Register company</a></li>
-                <li><a class="dropdown-item" href="{{ url_for('ai.recommend') }}">🎫 View suggestions</a></li>
-                <li><a class="dropdown-item" href="{{ url_for('profile.view_chats') }}">💬 Chat with others</a></li>
-                {% else %}
-                <li><a class="dropdown-item" href="{{ url_for('companies.admin_companies') }}">➕ View Companies</a></li>
-                <li><a class="dropdown-item" href="#">🔍 Search</a></li>
-                {% endif %}
-              </ul>
-            </li>
-            {% endif %}
-          </ul>
-
-          <ul class="navbar-nav mb-2 mb-lg-0 align-items-center">
-            {% if current_user.is_authenticated %}
-                  <div style="display:flex; align-items:center; gap:12px;">
-      <div class="language-dropdown" id="language-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false" aria-label="Избор на език">
-        <img src="https://flagcdn.com/w20/bg.png" alt="Български флаг" id="selected-flag" />
-        <span id="selected-lang">Български</span>
-        <svg style="margin-left:4px;" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 1L5 5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <div class="language-options" id="language-options" role="listbox" tabindex="-1">
-          <div data-lang="bg" role="option" aria-selected="true"><img src="https://flagcdn.com/w20/bg.png" alt="Български флаг" /> Български</div>
-          <div data-lang="en" role="option" aria-selected="false"><img src="https://flagcdn.com/w20/gb.png" alt="English flag" /> English</div>
-          <div data-lang="ru" role="option" aria-selected="false"><img src="https://flagcdn.com/w20/ru.png" alt="Русский флаг" /> Русский</div>
-        </div>
-      </div>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                <img src="{{ url_for('static', filename='images/' ~ current_user.username ~ '_pfp.png') }}"
-                     onerror="this.src='{{ url_for('static', filename='images/account.png') }}'"
-                     alt="Profile Picture"
-                     style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; margin-right: 8px;">
-                {{ current_user.username }}
-              </a>
-              <ul class="dropdown-menu">
-                {% if current_user.is_admin %}
-                    <li><a class="dropdown-item" href="{{ url_for('profile.admin_view_users') }}">👤 Users</a></li>
-                {% else %}
-                <li><a class="dropdown-item" href="{{ url_for('profile.dashboard') }}">📊 Dashboard</a></li>
-                    <li><a class="dropdown-item" href="{{ url_for('profile.user_view_users') }}">👤 Users</a></li>
-                {% endif %}
-                <li><a class="dropdown-item" href="{{ url_for('profile.settings') }}">⚙ Settings</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a></li>
-              </ul>
-            </li>
-            {% else %}
-                  <div style="display:flex; align-items:center; gap:12px;">
-      <div class="language-dropdown" id="language-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false" aria-label="Избор на език">
-        <img src="https://flagcdn.com/w20/bg.png" alt="Български флаг" id="selected-flag" />
-        <span id="selected-lang">Български</span>
-        <svg style="margin-left:4px;" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 1L5 5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <div class="language-options" id="language-options" role="listbox" tabindex="-1">
-          <div data-lang="bg" role="option" aria-selected="true"><img src="https://flagcdn.com/w20/bg.png" alt="Български флаг" /> Български</div>
-          <div data-lang="en" role="option" aria-selected="false"><img src="https://flagcdn.com/w20/gb.png" alt="English flag" /> English</div>
-          <div data-lang="ru" role="option" aria-selected="false"><img src="https://flagcdn.com/w20/ru.png" alt="Русский флаг" /> Русский</div>
-        </div>
-      </div>
-            <li>
-              <a class="btn login btn-lg"
-                style=" margin: 5px 20px 0 20px; padding: 15px 25px 15px 25px;"
-                href="{{ url_for('auth.login') }}">
-                Login
-              </a>
-            </li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <main class="welcome-section">
-        <div class="video-container">
-        <video autoplay muted loop playsinline>
-            <source src="{{ url_for('static', filename='videos/background.webm') }}" type="video/webm" />
-            Your browser does not support the video tag.
-        </video>
-
-        <div class="overlay-text" style="position: relative; z-index: 2; color: white; padding: 2rem;">
-            {% block content %}Hi{% endblock %}
-        </div>
-    </div>
-
-    {% if request.endpoint in ['companies.show_companies', 'companies.register_company', 'profile.user_view_users', 'profile.admin_view_users'] %}
-        <section id="text" class="blue-section">
-            <div class="content">
-                {% block companies %} {% endblock %}
-            </div>
-        </section>
-    {% endif %}
-    </main>
-
-    <footer class="mt-auto">
-        <div class="footer-text">© 2025 StudyPilot. All rights reserved.</div>
-    </footer>
+<nav class="navbar navbar-expand-lg px-4 py-3">
+<div class="container-fluid">
+<a class="navbar-brand d-flex align-items-center" href="{{ url_for('main_bp.index') }}">
+<img src="{{ url_for('static', filename='images/logo_transparent.png') }}" alt="Logo" width="100" height="100">
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+         aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+           {% if current_user.is_authenticated %}
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-translate="Instruments">
+               Instruments
+</a>
+<ul class="dropdown-menu">
+               {% if not current_user.is_admin %}
+<li><a class="dropdown-item" href="{{ url_for('companies.show_companies') }}" data-translate="✉ Apply">✉ Apply</a></li>
+<li><a class="dropdown-item" href="{{ url_for('companies.register_company') }}" data-translate="➕ Register company">➕ Register company</a></li>
+<li><a class="dropdown-item" href="{{ url_for('ai.recommend') }}" data-translate="🎫 View suggestions">🎫 View suggestions</a></li>
+<li><a class="dropdown-item" href="{{ url_for('profile.view_chats') }}" data-translate="💬 Chat with others">💬 Chat with others</a></li>
+               {% else %}
+<li><a class="dropdown-item" href="{{ url_for('companies.admin_companies') }}" data-translate="➕ View Companies">➕ View Companies</a></li>
+<li><a class="dropdown-item" href="#" data-translate="🔍 Search">🔍 Search</a></li>
+               {% endif %}
+</ul>
+</li>
+           {% endif %}
+</ul>
+<ul class="navbar-nav mb-2 mb-lg-0 align-items-center">
+           {% if current_user.is_authenticated %}
+<div style="display:flex; align-items:center; gap:12px;">
+<div class="language-dropdown" id="language-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false" aria-label="Language selection">
+<img src="https://flagcdn.com/w20/bg.png" alt="Bulgarian flag" id="selected-flag" />
+<span id="selected-lang">Български</span>
+<svg style="margin-left:4px;" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1L5 5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+<div class="language-options" id="language-options" role="listbox" tabindex="-1">
+<div data-lang="bg" role="option" aria-selected="true"><img src="https://flagcdn.com/w20/bg.png" alt="Bulgarian flag" /> Български</div>
+<div data-lang="en" role="option" aria-selected="false"><img src="https://flagcdn.com/w20/gb.png" alt="English flag" /> English</div>
+<div data-lang="ru" role="option" aria-selected="false"><img src="https://flagcdn.com/w20/ru.png" alt="Russian flag" /> Русский</div>
+</div>
+</div>
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+<img src="{{ url_for('static', filename='images/account.png') }}" alt="Logo">
+                       {{ current_user.username }}
+</a>
+<ul class="dropdown-menu">
+                       {% if current_user.is_admin %}
+<li><a class="dropdown-item" href="{{ url_for('profile.admin_view_users') }}" data-translate="👤 Users">👤 Users</a></li>
+                       {% else %}
+<li><a class="dropdown-item" href="{{ url_for('profile.dashboard') }}" data-translate="📊 Dashboard">📊 Dashboard</a></li>
+<li><a class="dropdown-item" href="{{ url_for('profile.user_view_users') }}" data-translate="👤 Users">👤 Users</a></li>
+                       {% endif %}
+<li><a class="dropdown-item" href="{{ url_for('profile.settings') }}" data-translate="⚙ Settings">⚙ Settings</a></li>
+<li><hr class="dropdown-divider"></li>
+<li><a class="dropdown-item" href="{{ url_for('auth.logout') }}" data-translate="Logout">Logout</a></li>
+</ul>
+</li>
+</div>
+           {% else %}
+<div style="display:flex; align-items:center; gap:12px;">
+<div class="language-dropdown" id="language-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false" aria-label="Language selection">
+<img src="https://flagcdn.com/w20/bg.png" alt="Bulgarian flag" id="selected-flag" />
+<span id="selected-lang">Български</span>
+<svg style="margin-left:4px;" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1L5 5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+<div class="language-options" id="language-options" role="listbox" tabindex="-1">
+<div data-lang="bg" role="option" aria-selected="true"><img src="https://flagcdn.com/w20/bg.png" alt="Bulgarian flag" /> Български</div>
+<div data-lang="en" role="option" aria-selected="false"><img src="https://flagcdn.com/w20/gb.png" alt="English flag" /> English</div>
+<div data-lang="ru" role="option" aria-selected="false"><img src="https://flagcdn.com/w20/ru.png" alt="Russian flag" /> Русский</div>
+</div>
+</div>
+<li>
+<a class="btn login btn-lg" style="margin: 5px 20px 0 20px; padding: 15px 25px 15px 25px;"
+                      href="{{ url_for('auth.login') }}" data-translate="Login">
+                       Login
+</a>
+</li>
+</div>
+           {% endif %}
+</ul>
+</div>
+</div>
+</nav>
+<main class="welcome-section">
+<div class="video-container">
+<video autoplay muted loop playsinline>
+<source src="{{ url_for('static', filename='videos/background.webm') }}" type="video/webm" />
+<span data-translate="Your browser does not support the video tag">Your browser does not support the video tag</span>
+</video>
+<div class="overlay-text" style="position: relative; z-index: 2; color: white; padding: 2rem;">
+               {% block content %}Hi{% endblock %}
+</div>
+</div>
+       {% if request.endpoint in ['companies.show_companies', 'companies.register_company', 'profile.user_view_users', 'profile.admin_view_users'] %}
+<section id="text" class="blue-section">
+<div class="content">
+                   {% block companies %} {% endblock %}
+</div>
+</section>
+       {% endif %}
+</main>
+<footer class="mt-auto">
+<div class="footer-text" data-translate="© 2025 StudyPilot. All rights reserved.">© 2025 StudyPilot. All rights reserved.</div>
+</footer>
 </body>
 </html>
