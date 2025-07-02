@@ -6,7 +6,7 @@
 {% endblock %}
 {% block content %}
 <div class="container mt-4">
-    <h3 class="mb-4">Chat with {{ user.username }}</h3>
+    <h3 class="mb-4" data-translate="Chat with">Chat with {{ user.username }}</h3>
     <div class="card">
         <div class="card-body chat-box" style="height: 400px; overflow-y: auto; background-color: #f8f9fa;">
             {% for message in messages %}
@@ -26,8 +26,8 @@
     </div>
 
     <form method="POST" action="{{ url_for('profile.send_message', user_id=user.id) }}" class="d-flex mt-3">
-        <input type="text" name="message" class="form-control me-2" placeholder="Type your message..." required>
-        <button class="btn btn-primary" type="submit">Send</button>
+        <input type="text" name="message" class="form-control me-2" data-translate="Type your message..." placeholder="Type your message..." required>
+        <button class="btn btn-primary" type="submit" data-translate="Send">Send</button>
     </form>
 </div>
 

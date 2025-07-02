@@ -9,15 +9,15 @@
 
 {% block content %}
 <div class="box text-center">
-  <h1 class="welcome-title">Welcome!</h1>
-  <p class="welcome-subtitle">Find your perfect company here!</p>
-  <a href="#internships" class="scroll-button">See More ↓</a>
+  <h1 class="welcome-title" data-translate="Welcome">Welcome!</h1>
+  <p class="welcome-subtitle" data-translate="Find your perfect company here!">Find your perfect company here!</p>
+  <a href="#internships" class="scroll-button" data-translate="See More ↓">See More ↓</a>
 </div>
 {% endblock %}
 
 {% block companies %}
 <div id="internships" class="container-fluid py-5">
-  <h2 class="text-center fw-bold mb-5" style="font-family: 'Poetsen One', sans-serif; font-size: 2.5rem;">
+  <h2 class="text-center fw-bold mb-5" style="font-family: 'Poetsen One', sans-serif; font-size: 2.5rem;" data-translate="Available Internship Companies">
     Available Internship Companies
   </h2>
 
@@ -32,7 +32,7 @@
           <li><strong>Format:</strong> {{ company.format|capitalize }}</li>
         </ul>
         <form method="GET" action="{{ url_for('companies.apply_to_company', company_name=company.company_name) }}">
-          <button type="submit" class="btn btn-primary w-100">Apply</button>
+          <button type="submit" class="btn btn-primary w-100" data-translate="Apply">Apply</button>
         </form>
       </div>
     </div>

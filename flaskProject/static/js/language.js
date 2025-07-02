@@ -84,6 +84,7 @@ const translations = {
         "Top 3 Recommended Companies": "Top 3 Recommended Companies",
         "Loading chart...": "Loading chart...",
         "Explore More Companies": "Explore More Companies",
+        "Visual match overview": "Visual match overview",
 
         // Register_company.html
         "Welcome to our register form for companies!": "Welcome to our register form for companies!",
@@ -97,6 +98,7 @@ const translations = {
         "Duration:": "Duration:",
         "Format:": "Format:",
         "Skills:": "Skills:",
+        "Apply": "Apply",
 
         // Login.html
         "Enter the 6-digit verification code sent to your email": "Enter the 6-digit verification code sent to your email",
@@ -189,6 +191,7 @@ const translations = {
         "Top 3 Recommended Companies": "Топ 3 препоръчани компании",
         "Loading chart...": "Зареждане на графика...",
         "Explore More Companies": "Разгледайте още компании",
+        "Visual match overview": "Графика на резултатите",
 
         // Register_company.html
         "Welcome to our register form for companies!": "Добре дошли в нашия регистрационен формуляр за компании!",
@@ -202,6 +205,7 @@ const translations = {
         "Duration:": "Продължителност:",
         "Format:": "Формат:",
         "Skills:": "Умения:",
+        "Apply": "Кандидатствай",
 
         // Login.html
         "Enter the 6-digit verification code sent to your email": "Въведете 6-цифрения код за потвърждение, изпратен на имейла ви",
@@ -294,6 +298,7 @@ const translations = {
         "Top 3 Recommended Companies": "Топ 3 рекомендуемые компании",
         "Loading chart...": "Загрузка графика...",
         "Explore More Companies": "Исследовать больше компаний",
+        "Visual match overview": "График результатов",
 
         // Register_company.html
         "Welcome to our register form for companies!": "Добро пожаловать в нашу регистрационную форму для компаний!",
@@ -307,6 +312,7 @@ const translations = {
         "Duration:": "Продолжительность:",
         "Format:": "Формат:",
         "Skills:": "Навыки:",
+        "Apply": "Применять",
 
         // Login.html
         "Enter the 6-digit verification code sent to your email": "Введите 6-значный код подтверждения, отправленный на вашу почту",

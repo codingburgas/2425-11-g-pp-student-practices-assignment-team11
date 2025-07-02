@@ -3,25 +3,25 @@
 {% block link %}
   <link rel="stylesheet" href="../../static/css/admin.css">
   <link rel="stylesheet" href="../../static/css/base.css">
-    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/language.js') }}"></script>
 {% endblock %}
 
 {% block content %}
 <div class="companies-requests mt-5">
-    <h1 class="mb-4">Pending Companies</h1>
+    <h1 class="mb-4" data-translate="Pending Companies">Pending Companies</h1>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Internship One</th>
-                <th>Internship Two</th>
-                <th>Internship Three</th>
-                <th>Duration</th>
-                <th>Format</th>
-                <th>Requirements</th>
-                <th>Actions</th>
+                <th data-translate="ID">ID</th>
+                <th data-translate="Name">Name</th>
+                <th data-translate="Type">Type</th>
+                <th data-translate="Internship One">Internship One</th>
+                <th data-translate="Internship Two">Internship Two</th>
+                <th data-translate="Internship Three">Internship Three</th>
+                <th data-translate="Duration">Duration</th>
+                <th data-translate="Format">Format</th>
+                <th data-translate="Requirements">Requirements</th>
+                <th data-translate="Actions">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -37,22 +37,22 @@
             <td>{{ company.format }}</td>
             <td>{{ company.requirements }}</td>
             <td>
-                <form method="POST" action="{{ url_for('companies.admin_company_action',company_id=company.id, action='approve') }}" style="display:inline;">
-                <button class="btn btn-success btn-sm">Approve</button>
+                <form method="POST" action="{{ url_for('companies.admin_company_action', company_id=company.id, action='approve') }}" style="display:inline;">
+                    <button class="btn btn-success btn-sm" data-translate="Approve">Approve</button>
                 </form>
-                <form method="POST" action="{{ url_for('companies.admin_company_action',company_id=company.id, action='reject') }}" style="display:inline;">
-                <button class="btn btn-danger btn-sm">Reject</button>
+                <form method="POST" action="{{ url_for('companies.admin_company_action', company_id=company.id, action='reject') }}" style="display:inline;">
+                    <button class="btn btn-danger btn-sm" data-translate="Reject">Reject</button>
                 </form>
             </td>
         </tr>
         {% endfor %}
         </tbody>
     </table>
+
     <div class="container">
       {% for message in get_flashed_messages() %}
         <div class="alert alert-warning">{{ message }}</div>
       {% endfor %}
     </div>
 </div>
-
 {% endblock %}
